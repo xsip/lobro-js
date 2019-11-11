@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="" />
+    <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/core/base.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/base.controller.ts" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -52,7 +54,7 @@
           <entry key="js" value="200" />
           <entry key="json" value="101" />
           <entry key="scss" value="50" />
-          <entry key="ts" value="11409" />
+          <entry key="ts" value="11669" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -61,7 +63,7 @@
           <entry key="JSON" value="101" />
           <entry key="JavaScript" value="200" />
           <entry key="SCSS" value="50" />
-          <entry key="TypeScript" value="11356" />
+          <entry key="TypeScript" value="11616" />
         </counts>
       </usages-collector>
     </session>
@@ -77,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="139" column="66" selection-start-line="139" selection-start-column="66" selection-end-line="139" selection-end-column="66" />
+            <state relative-caret-position="145">
+              <caret line="116" column="32" lean-forward="true" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -98,7 +100,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/controller.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -134,7 +136,11 @@
       <find>this['detectChanges']()</find>
       <find>onReRender</find>
       <find>restoreEventListeners</find>
+      <find>setTimeo</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -155,9 +161,9 @@
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/core/utils.class.ts" />
-        <option value="$PROJECT_DIR$/src/core/base.controller.ts" />
         <option value="$PROJECT_DIR$/src/controller/mainController.ts" />
         <option value="$PROJECT_DIR$/src/controller/controller.html" />
+        <option value="$PROJECT_DIR$/src/core/base.controller.ts" />
       </list>
     </option>
   </component>
@@ -182,6 +188,7 @@
     <option name="width" value="1680" />
     <option name="height" value="970" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -262,18 +269,18 @@
       <option name="presentableId" value="Default" />
       <updated>1573323382730</updated>
       <workItem from="1573323384205" duration="24433000" />
-      <workItem from="1573453003987" duration="1670000" />
+      <workItem from="1573453003987" duration="2436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26103000" />
+    <option name="totallyTimeSpent" value="26869000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="970" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15852924" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15852924" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -288,7 +295,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32915717" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32915717" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -442,16 +449,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="139" column="66" selection-start-line="139" selection-start-column="66" selection-end-line="139" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/mainController.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -463,6 +460,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="70" selection-start-line="3" selection-start-column="70" selection-end-line="3" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="116" column="32" lean-forward="true" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

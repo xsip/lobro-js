@@ -97,28 +97,6 @@ export const Controller = (options: ControllerOptions) => {
                 }
             };
 
-            renderTemplate() {
-                let dataToResolve = this.config.template.match(/{{([^]*?)}}/g);
-                dataToResolve = dataToResolve ? dataToResolve : [];
-                dataToResolve.map((e: string) => {
-                    this.displayTemplate = this.config.template;
-                    const hash = this.createRandomHash();
-                    this.evalFuncCollection[hash] = e;
-                    this.displayTemplate = this.displayTemplate.replace(e, `<!--${hash}!-->` + this.evalFunction(e) + `<!--${hash}!-->`);
-                });
-                this.element = this.createElementFromString(this.displayTemplate);
-                this.onAppend(document.body, () => {
-                    if (!this.onInitCalled) {
-                        this.onInitCalled = true;
-
-                        this['afterRender']();
-                    }
-                });
-                document.body.appendChild(this.element);
-
-
-            }
-
             renderTemplate2() {
                 console.log('updating template');
                 const tmp: HTMLDivElement = document.createElement('div') as HTMLDivElement;
@@ -207,6 +185,16 @@ export const Controller = (options: ControllerOptions) => {
                 // console.log(this.eventListeners);
             }
 
+            addEventListeners(ele: ExtendedElement, listeners: any) {
+                for (let key in listeners) {
+                    listeners[key].map(listener => {
+                        console.log(`Adding ${key} listener to ${ele.nodeName}`);
+                        ele.addEventListener(key, listener.listener);
+                    });
+                }
+                // console.log(this.eventListeners);
+            }
+
             updateTemplateOld() {
                 console.log('updating template');
                 this.saveEventListeners();
@@ -228,7 +216,14 @@ export const Controller = (options: ControllerOptions) => {
                     if (this.evalFuncCollection[hash]) {
                         const data = this.evalFunction(this.evalFuncCollection[hash]);
                         const el: HTMLElement = this.element.querySelector(`[watch-id="${hash}"]`);
+                        const eventListenersBackup = (el as ExtendedElement).getEventListeners();
                         el.innerHTML = el.innerHTML.replace(new RegExp(`<!--${hash}!-->([^]*?)<!--${hash}!-->`, 'g'), `<!--${hash}!-->` + data + `<!--${hash}!-->`);
+                        if (eventListenersBackup && !(el as ExtendedElement).getEventListeners()) {
+                            console.log('had eventlisteners which are missing now!!');
+                        } else {
+                            console.log(eventListenersBackup);
+                            console.log((el as ExtendedElement).getEventListeners());
+                        }
 
                     }
                 }
