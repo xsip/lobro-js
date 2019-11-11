@@ -61,7 +61,7 @@ export class State {
 }
 
 type Constructor<T = {}> = new(...args: any[]) => T;
-export const Controller2 = (options: ControllerOptions) => {
+export const Controller = (options: ControllerOptions) => {
     // return (target) => {
     return <T extends Constructor>(target: T) => {
         Object.assign(target.prototype, {

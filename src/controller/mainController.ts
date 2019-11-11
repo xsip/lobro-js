@@ -1,10 +1,10 @@
-import {Controller2} from "../core/base.controller";
+import {Controller} from "../core/base.controller";
 
 
 import './controller.scss';
 import tmpl from './controller.html';
 
-@Controller2({
+@Controller({
     template: tmpl,
     name: 'controller'
 })
