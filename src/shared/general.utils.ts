@@ -1,4 +1,4 @@
-export class Util {
+export class GeneralUtils {
     static createRandomHash = (length: number = 10): string => {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

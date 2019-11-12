@@ -1,8 +1,8 @@
 import {Controller} from "../core/base.controller";
 
 
-import './controller.scss';
-import tmpl from './controller.html';
+import './demo-controller.scss';
+import tmpl from './demo-controller.html';
 import * as path from "path";
 // console.log(require('./controller.scss'));
 @Controller({
@@ -10,11 +10,12 @@ import * as path from "path";
     name: 'controller',
     // stylesheet: 'src/controller/controller.scss',
 })
-export class MainController {
+export class DemoController {
     version: any = 'version1';
     version2: any = 'version2';
 
     constructor() {
+        console.log('MAIN CONTROLLER INIT');
     }
 
     addEventListeners = () => {
