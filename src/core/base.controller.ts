@@ -46,13 +46,14 @@ export class State {
     }
 
     reduceMappings = (replaceHashInDom: (hash: string, newHash: string) => void) => {
+        console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
         const tmpEvalForHash: any = {};
         const toIgnore: string[] = [];
         for (let hash in this.evalForHash) {
             // console.log(hash);
             for (let hash2 in this.evalForHash) {
                 if (hash2 !== hash && toIgnore.indexOf(hash2) === -1 && toIgnore.indexOf(hash) === -1 && this.evalForHash[hash2] === this.evalForHash[hash]) {
-                    console.log(`${hash} has same eval as ${hash2} ( ${this.evalForHash[hash]} ).. reducing!`);
+                    // console.log(`${hash} has same eval as ${hash2} ( ${this.evalForHash[hash]} ).. reducing!`);
                     toIgnore.push(hash2);
                     replaceHashInDom(hash2, hash);
                 }
@@ -60,6 +61,7 @@ export class State {
         }
         toIgnore.map(i => delete this.evalForHash[i]).filter(i => i !== null && i !== undefined);
         this.generateHashForEvalList();
+        console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
     };
 
     getHashForEval(hash: string): string | undefined {
@@ -125,7 +127,6 @@ export const Controller = (options: ControllerOptions) => {
                     this.updateTemplate();
                 }
             }
-
             renderEvalInElement(curE: HTMLElement, evalMatch: string) {
                 console.log(DomUtils.getDirectInnerText(curE));
                 let shouldReplace: boolean = true;
@@ -139,9 +140,13 @@ export const Controller = (options: ControllerOptions) => {
                     }
                 } else {
                     let hash = this.state.getHashForEval(evalMatch);
+                    let newHash: string;
                     if (curE.getAttribute('watch-id')) {
+                        newHash = Util.createRandomHash();
+                        this.state.saveEvalForHash(newHash, evalMatch);
+                        hash = curE.getAttribute('watch-id') + ' ' + newHash;
                         console.log('allready has watch id..');
-                        return;
+                        // return;
                         // MAKE WATCH ID A LIST!!
                         // hash = curE.getAttribute('watch-id');
                         // return;
@@ -153,15 +158,15 @@ export const Controller = (options: ControllerOptions) => {
 
                     if (!hash) {
                         hash = Util.createRandomHash();
-                        this.state.saveEvalForHash(hash, evalMatch);
+                        this.state.saveEvalForHash(newHash ? newHash : hash, evalMatch);
                         // this.state.hashForEval[evalMatch] = hash;
                     }
 
 
                     const data = this.evalTemplateFunction(evalMatch);
-                    this.state.setLastValueForHash(hash, data);
+                    this.state.setLastValueForHash(newHash ? newHash : hash, data);
 
-                    curE.innerHTML = curE.innerHTML.replace(evalMatch, `<!--${hash}!-->` + data + `<!--${hash}!-->`);
+                    curE.innerHTML = curE.innerHTML.replace(evalMatch, `<!--${newHash ? newHash : hash}!-->` + data + `<!--${newHash ? newHash : hash}!-->`);
                     curE.setAttribute('watch-id', hash);
 
                 }
@@ -183,7 +188,7 @@ export const Controller = (options: ControllerOptions) => {
                         console.log('eval matches', evalMatches);
                         let log = true;
                         evalMatches.map((evalMatch: string) => {
-                            if(log) {
+                            if (log) {
                                 console.log('REPLACING REPLACING, ', evalMatch);
                             }
 
@@ -225,10 +230,14 @@ export const Controller = (options: ControllerOptions) => {
             }
 
             replaceHashInDom = (hash: string, newHash: string) => {
-                const el = this.element.querySelector(`[watch-id="${hash}"]`);
+
+                const el = this.element.querySelector(`[watch-id~="${hash}"]`);
+
+                const hashList = el.getAttribute('watch-id');
+                console.log(hashList);
                 const eventListenersBackup = (el as ExtendedElement).getEventListeners();
                 el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
-                el.setAttribute('watch-id', newHash);
+                el.setAttribute('watch-id', hashList.replace(hash, newHash));
                 if (eventListenersBackup && !(el as ExtendedElement).getEventListeners()) {
                     console.log('had eventlisteners which are missing now!!');
                     this.addEventListeners(el as ExtendedElement, eventListenersBackup);
@@ -249,7 +258,7 @@ export const Controller = (options: ControllerOptions) => {
                     if (this.state.getEvalForHash(hash)) {
 
                         const data = this.evalTemplateFunction(this.state.getEvalForHash(hash));
-                        const elList: HTMLElement[] = Array.prototype.slice.call(this.element.querySelectorAll(`[watch-id="${hash}"]`));
+                        const elList: HTMLElement[] = Array.prototype.slice.call(this.element.querySelectorAll(`[watch-id~="${hash}"]`));
 
                         // query selector all since we are using a hash mutliple times if possible!!
                         elList.map(el => {

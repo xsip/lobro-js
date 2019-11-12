@@ -9,8 +9,8 @@ import tmpl from './controller.html';
     name: 'controller'
 })
 export class MainController {
-    version: any = 'ok lol';
-    version2: any = 'ok lols';
+    version: any = 'version1';
+    version2: any = 'version2';
 
     constructor() {
     }
