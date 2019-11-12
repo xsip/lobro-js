@@ -36,8 +36,31 @@ export class State {
 
     saveEvalForHash(hash: string, evalData: string): void {
         this.evalForHash[hash] = evalData;
-        this.hashForEval[evalData] = hash;
+        // this.hashForEval[evalData] = hash;
     }
+
+    generateHashForEvalList() {
+        for (let hash in this.evalForHash) {
+            this.hashForEval[this.evalForHash[hash]] = hash;
+        }
+    }
+
+    reduceMappings = (replaceHashInDom: (hash: string, newHash: string) => void) => {
+        const tmpEvalForHash: any = {};
+        const toIgnore: string[] = [];
+        for (let hash in this.evalForHash) {
+            // console.log(hash);
+            for (let hash2 in this.evalForHash) {
+                if (hash2 !== hash && toIgnore.indexOf(hash2) === -1 && toIgnore.indexOf(hash) === -1 && this.evalForHash[hash2] === this.evalForHash[hash]) {
+                    console.log(`${hash} has same eval as ${hash2} ( ${this.evalForHash[hash]} ).. reducing!`);
+                    toIgnore.push(hash2);
+                    replaceHashInDom(hash2, hash);
+                }
+            }
+        }
+        toIgnore.map(i  => delete this.evalForHash[i]).filter(i => i !== null && i !== undefined);
+        this.generateHashForEvalList();
+    };
 
     getHashForEval(hash: string): string | undefined {
         return this.evalForHash[hash];
@@ -90,12 +113,10 @@ export const Controller = (options: ControllerOptions) => {
 
             detectChanges() {
                 let shouldUpdate: boolean = false;
-                console.log(this['version']);
                 for (let e in this) {
                     if (this.state.getOldControllerProperty(e) !== this[e]) {
                         this.state.setOldControllerProperty(e, this[e]);
                         shouldUpdate = true;
-
                     }
 
                 }
@@ -153,10 +174,10 @@ export const Controller = (options: ControllerOptions) => {
                 templateChildren.map((templateChild: HTMLElement) => {
                     let evalMatches = templateChild.innerText.match(/{{([^]*?)}}/g);
                     // evalMatches = evalMatches ? evalMatches : [];
-                    if(evalMatches) {
+                    if (evalMatches) {
                         console.log('eval matches', evalMatches);
                         // evalMatches.map((evalMatch: string) => {
-                            this.renderEvalInElement(templateChild, evalMatches[0]);
+                        this.renderEvalInElement(templateChild, evalMatches[0]);
                         // });
                     }
 
@@ -173,6 +194,8 @@ export const Controller = (options: ControllerOptions) => {
                 // firstChild = actual template
                 this.element = templateContainer.firstChild as HTMLElement;
                 document.body.appendChild(this.element);
+                // this.state.generateHashForEvalList();
+                this.state.reduceMappings(this.replaceHashInDom);
                 window['state'] = this.state;
                 console.log(this.state);
             }
@@ -185,11 +208,26 @@ export const Controller = (options: ControllerOptions) => {
                     console.log('had eventlisteners which are missing now!!');
                     this.addEventListeners(el as ExtendedElement, eventListenersBackup);
                 } else {
-                    console.log(eventListenersBackup);
-                    console.log((el as ExtendedElement).getEventListeners());
+                    // console.log(eventListenersBackup);
+                    // console.log((el as ExtendedElement).getEventListeners());
                 }
 
             }
+
+            replaceHashInDom = (hash: string, newHash: string) => {
+                const el = this.element.querySelector(`[watch-id="${hash}"]`);
+                const eventListenersBackup = (el as ExtendedElement).getEventListeners();
+                el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
+                el.setAttribute('watch-id', newHash);
+                if (eventListenersBackup && !(el as ExtendedElement).getEventListeners()) {
+                    console.log('had eventlisteners which are missing now!!');
+                    this.addEventListeners(el as ExtendedElement, eventListenersBackup);
+                } else {
+                    // console.log(eventListenersBackup);
+                    // console.log((el as ExtendedElement).getEventListeners());
+                }
+
+            };
 
             updateTemplate() {
 
@@ -217,8 +255,8 @@ export const Controller = (options: ControllerOptions) => {
             evalTemplateFunction = (funcStr: string): any => {
                 const funcToEval: string = funcStr.replace('{{', '').replace('}}', '');
                 // .replace(/this/g, 'this.controller');
-                console.log(funcToEval);
-                console.log(eval(funcToEval));
+                //console.log(funcToEval);
+                // console.log(eval(funcToEval));
                 // @ts-ignore
                 return eval(funcToEval);
             };
@@ -238,7 +276,7 @@ export const Controller = (options: ControllerOptions) => {
                 DomUtils.walkThroughAllChilds(this.element, (ele) => {
                     this.eventListeners[DomUtils.createDeepSelectorString(ele)] = (ele as ExtendedElement).getEventListeners();
                 });
-                console.log(this.eventListeners);
+                // console.log(this.eventListeners);
             }
 
             restoreEventListeners() {
