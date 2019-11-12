@@ -58,7 +58,7 @@ export class State {
                 }
             }
         }
-        toIgnore.map(i  => delete this.evalForHash[i]).filter(i => i !== null && i !== undefined);
+        toIgnore.map(i => delete this.evalForHash[i]).filter(i => i !== null && i !== undefined);
         this.generateHashForEvalList();
     };
 
@@ -127,24 +127,29 @@ export const Controller = (options: ControllerOptions) => {
             }
 
             renderEvalInElement(curE: HTMLElement, evalMatch: string) {
-
+                console.log(DomUtils.getDirectInnerText(curE));
                 let shouldReplace: boolean = true;
                 //if children also matches the same eval, don't replace value in template!
-                if (curE.children.length > 0 && (curE.children[0] as HTMLElement).innerText.match(evalMatch)) {
+                // if (curE.children.length > 0 && (curE.children[0] as HTMLElement).innerText.match(evalMatch)) {
+                if (curE.children.length > 0 && DomUtils.getDirectInnerText(curE.children[0] as HTMLElement).match(evalMatch)) {
                     shouldReplace = false;
                     if (!curE.children[0].getAttribute('watch-id')) {
                         this.renderEvalInElement(curE.children[0] as any, evalMatch);
                         // console.log('recrusive', curE.children[0]);
                     }
                 } else {
+                    let hash = this.state.getHashForEval(evalMatch);
                     if (curE.getAttribute('watch-id')) {
                         console.log('allready has watch id..');
                         return;
+                        // MAKE WATCH ID A LIST!!
+                        // hash = curE.getAttribute('watch-id');
+                        // return;
                     }
                     console.log('going on..');
                     // this.displayTemplate = this.config.template;
                     // same eval can use the same hash!! UPDATE TO QUERYSELECTOR ALL
-                    let hash = this.state.getHashForEval(evalMatch);
+
 
                     if (!hash) {
                         hash = Util.createRandomHash();
@@ -172,13 +177,18 @@ export const Controller = (options: ControllerOptions) => {
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
 
                 templateChildren.map((templateChild: HTMLElement) => {
-                    let evalMatches = templateChild.innerText.match(/{{([^]*?)}}/g);
+                    let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
                     // evalMatches = evalMatches ? evalMatches : [];
                     if (evalMatches) {
                         console.log('eval matches', evalMatches);
-                        // evalMatches.map((evalMatch: string) => {
-                        this.renderEvalInElement(templateChild, evalMatches[0]);
-                        // });
+                        let log = true;
+                        evalMatches.map((evalMatch: string) => {
+                            if(log) {
+                                console.log('REPLACING REPLACING, ', evalMatch);
+                            }
+
+                            this.renderEvalInElement(templateChild, evalMatch);
+                        });
                     }
 
                     // }

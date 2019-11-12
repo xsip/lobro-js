@@ -66,7 +66,7 @@ export class DomUtils {
         [].forEach.call(ele.childNodes, (v: any) => {
             if (v.nodeType == 3) txt = v.textContent.replace(/^\W*\n/, '');
         });
-        return txt;
+        return txt ? txt : '';
     }
 
 }
