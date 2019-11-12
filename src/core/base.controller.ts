@@ -223,6 +223,7 @@ export const Controller = (options: ControllerOptions) => {
                     console.log('had eventlisteners which are missing now!!');
                     this.addEventListeners(el as ExtendedElement, eventListenersBackup);
                 } else {
+                    // test
                     // console.log(eventListenersBackup);
                     // console.log((el as ExtendedElement).getEventListeners());
                 }

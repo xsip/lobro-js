@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/controller/mainController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/mainController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/base.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/base.controller.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -55,7 +55,7 @@
           <entry key="js" value="200" />
           <entry key="json" value="101" />
           <entry key="scss" value="50" />
-          <entry key="ts" value="16807" />
+          <entry key="ts" value="16816" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -64,7 +64,7 @@
           <entry key="JSON" value="101" />
           <entry key="JavaScript" value="200" />
           <entry key="SCSS" value="50" />
-          <entry key="TypeScript" value="16754" />
+          <entry key="TypeScript" value="16763" />
         </counts>
       </usages-collector>
     </session>
@@ -83,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+            <state relative-caret-position="383">
+              <caret line="225" column="27" selection-start-line="225" selection-start-column="27" selection-end-line="225" selection-end-column="27" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -345,12 +345,12 @@
       <option name="presentableId" value="Default" />
       <updated>1573323382730</updated>
       <workItem from="1573323384205" duration="24433000" />
-      <workItem from="1573453003987" duration="18427000" />
+      <workItem from="1573453003987" duration="18601000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42860000" />
+    <option name="totallyTimeSpent" value="43034000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -592,8 +592,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+        <state relative-caret-position="383">
+          <caret line="225" column="27" selection-start-line="225" selection-start-column="27" selection-end-line="225" selection-end-column="27" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
