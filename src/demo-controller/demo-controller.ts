@@ -4,6 +4,7 @@ import {Controller} from "../core/base.controller";
 import './demo-controller.scss';
 import tmpl from './demo-controller.html';
 import * as path from "path";
+
 // console.log(require('./controller.scss'));
 @Controller({
     template: tmpl,
@@ -13,6 +14,10 @@ import * as path from "path";
 export class DemoController {
     version: any = 1;
     version2: any = 2;
+    versions: any = {
+        version: 1,
+        version2: 2,
+    };
 
     constructor() {
         // console.log('MAIN CONTROLLER INIT');
@@ -26,9 +31,10 @@ export class DemoController {
                 .then(response => response.json())
                 .then(data => {
                     // console.log(JSON.stringify(data));
+                    // TODO: fix change detction for nested objects
                     console.log('CONTROLLER GOT DATA');
-                    this.version = data[5].id;
-                    this.version2 = data[10].id;
+                    this.versions.version = data[5].id;
+                    this.versions.version2 = data[10].id;
                 });
             // this.version++; //  = (document.getElementById('input') as HTMLInputElement).value;
             // this.version2++; //  = (document.getElementById('input2') as HTMLInputElement).value;

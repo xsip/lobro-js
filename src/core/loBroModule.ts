@@ -23,7 +23,7 @@ export class LoBroModule {
 
     }
 
-    triggerAllChangeDetections() {
+    public triggerAllChangeDetections() {
         // this.config.controller.map((c: any) => c.detectChanges());
         this.controllerInstances.map((c: any) => c.detectChanges());
     }
