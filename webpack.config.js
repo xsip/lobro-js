@@ -8,6 +8,7 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
+        modules: [__dirname, 'node_modules', '/src'],
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: [".ts", ".tsx", ".js", ".scss", ".html"]
     },

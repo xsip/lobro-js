@@ -5,6 +5,7 @@ import {DomUtils} from "./dom.utils";
 export interface ControllerOptions {
     template: string;
     name: string;
+    stylesheet?: string;
 }
 
 interface ExtendedElement extends HTMLElement {
@@ -110,6 +111,7 @@ export const Controller = (options: ControllerOptions) => {
             constructor() {
                 super();
                 this.renderTemplate();
+                // console.log(require(this.config.stylesheet));
                 // this.controller['detectChanges'] = this.detectChanges;
             }
 
@@ -122,11 +124,12 @@ export const Controller = (options: ControllerOptions) => {
                     }
 
                 }
-                console.log('shouldUpdate', shouldUpdate);
+                // console.log('shouldUpdate', shouldUpdate);
                 if (shouldUpdate) {
                     this.updateTemplate();
                 }
             }
+
             renderEvalInElement(curE: HTMLElement, evalMatch: string) {
                 console.log(DomUtils.getDirectInnerText(curE));
                 let shouldReplace: boolean = true;
@@ -141,7 +144,9 @@ export const Controller = (options: ControllerOptions) => {
                 } else {
                     let hash = this.state.getHashForEval(evalMatch);
                     let newHash: string;
+                    // element allready has some template variable replaced
                     if (curE.getAttribute('watch-id')) {
+
                         newHash = Util.createRandomHash();
                         this.state.saveEvalForHash(newHash, evalMatch);
                         hash = curE.getAttribute('watch-id') + ' ' + newHash;
@@ -172,6 +177,22 @@ export const Controller = (options: ControllerOptions) => {
                 }
             }
 
+            handleBinding(element: HTMLElement) {
+                (element as HTMLInputElement).value = eval(element.getAttribute('bind'));
+                element.addEventListener('input', (event: any) => {
+                    eval(element.getAttribute('bind') + ' = event.target.value;');
+                    // this.updateTemplate();
+                    // this.version = (document.getElementById('input') as HTMLInputElement).value;
+                    // this.version2 = (document.getElementById('input2') as HTMLInputElement).value;
+                });
+            }
+
+            hookInputForChangeDetection(element: HTMLElement) {
+                element.addEventListener('input', (event: any) => {
+                    // only for change detection
+                });
+            }
+
             renderTemplate() {
                 console.log('rendering template');
 
@@ -182,6 +203,14 @@ export const Controller = (options: ControllerOptions) => {
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
 
                 templateChildren.map((templateChild: HTMLElement) => {
+
+                    if (templateChild.hasAttribute('bind')) {
+                        console.log('adding binding for ', templateChild.id);
+                        this.handleBinding(templateChild);
+                    }
+                    if (templateChild.nodeName.toLowerCase() === 'input') {
+
+                    }
                     let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
                     // evalMatches = evalMatches ? evalMatches : [];
                     if (evalMatches) {

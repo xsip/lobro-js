@@ -3,10 +3,12 @@ import {Controller} from "../core/base.controller";
 
 import './controller.scss';
 import tmpl from './controller.html';
-
+import * as path from "path";
+// console.log(require('./controller.scss'));
 @Controller({
     template: tmpl,
-    name: 'controller'
+    name: 'controller',
+    // stylesheet: 'src/controller/controller.scss',
 })
 export class MainController {
     version: any = 'version1';
@@ -21,9 +23,13 @@ export class MainController {
             console.log('clicked!!');
             this.version = (document.getElementById('input') as HTMLInputElement).value;
             this.version2 = (document.getElementById('input2') as HTMLInputElement).value;
-            // this.version++;
-            this['detectChanges']();
         });
+        /*document.getElementById('input').addEventListener('input', (event: any) => {
+            this.version = event[0].target.value;
+            console.log(event[0].target.value);
+            // this.version = (document.getElementById('input') as HTMLInputElement).value;
+            // this.version2 = (document.getElementById('input2') as HTMLInputElement).value;
+        });*/
     };
 
     afterRender = () => {
