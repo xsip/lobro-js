@@ -60,5 +60,13 @@ export class DomUtils {
             return ele.nodeName;
         }
     };
+    
+    public static getDirectInnerText(ele: HTMLElement) {
+        let txt = null;
+        [].forEach.call(ele.childNodes, (v: any) => {
+            if (v.nodeType == 3) txt = v.textContent.replace(/^\W*\n/, '');
+        });
+        return txt;
+    }
 
 }
