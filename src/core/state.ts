@@ -28,7 +28,7 @@ export class State {
     }
 
     reduceMappings = (replaceHashInDom: (hash: string, newHash: string) => void) => {
-        console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
+        // console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
         const tmpEvalForHash: any = {};
         const toIgnore: string[] = [];
         for (let hash in this.evalForHash) {
@@ -43,7 +43,7 @@ export class State {
         }
         toIgnore.map(i => delete this.evalForHash[i]).filter(i => i !== null && i !== undefined);
         this.generateHashForEvalList();
-        console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
+        // console.log('REDUCE MAPPINGS REDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGSREDUCE MAPPINGS');
     };
 
     getHashForEval(hash: string): string | undefined {

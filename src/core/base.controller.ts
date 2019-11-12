@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import {GeneralUtils} from "../shared/general.utils";
 import {DomUtils} from "../shared/dom.utils";
 import {State} from "./state";
+import {InputBindings} from "./bindings/input.bindings";
 
 export interface ControllerOptions {
     template: string;
@@ -38,9 +39,10 @@ export const Controller = (options: ControllerOptions) => {
             eventListeners: {} = {};
             // oldData: any = {};
             config: ControllerOptions;
-
+            inputBindings: InputBindings;
             constructor() {
                 super();
+                this.inputBindings = new InputBindings(this.element, this as any);
                 this.renderTemplate();
                 // console.log(require(this.config.stylesheet));
                 // this.controller['detectChanges'] = this.detectChanges;
@@ -62,7 +64,7 @@ export const Controller = (options: ControllerOptions) => {
             }
 
             renderEvalInElement(curE: HTMLElement, evalMatch: string) {
-                console.log(DomUtils.getDirectInnerText(curE));
+                // console.log(DomUtils.getDirectInnerText(curE));
                 let shouldReplace: boolean = true;
                 //if children also matches the same eval, don't replace value in template!
                 // if (curE.children.length > 0 && (curE.children[0] as HTMLElement).innerText.match(evalMatch)) {
@@ -81,13 +83,13 @@ export const Controller = (options: ControllerOptions) => {
                         newHash = GeneralUtils.createRandomHash();
                         this.state.saveEvalForHash(newHash, evalMatch);
                         hash = curE.getAttribute('watch-id') + ' ' + newHash;
-                        console.log('allready has watch id..');
+                        // console.log('allready has watch id..');
                         // return;
                         // MAKE WATCH ID A LIST!!
                         // hash = curE.getAttribute('watch-id');
                         // return;
                     }
-                    console.log('going on..');
+                    // console.log('going on..');
                     // this.displayTemplate = this.config.template;
                     // same eval can use the same hash!! UPDATE TO QUERYSELECTOR ALL
 
@@ -107,7 +109,9 @@ export const Controller = (options: ControllerOptions) => {
 
                 }
             }
-
+            evalFromView(evalData: string) {
+                return eval(evalData);
+            }
             handleBinding(element: HTMLElement) {
                 (element as HTMLInputElement).value = eval(element.getAttribute('bind'));
                 element.addEventListener('input', (event: any) => {
@@ -135,21 +139,23 @@ export const Controller = (options: ControllerOptions) => {
 
                 templateChildren.map((templateChild: HTMLElement) => {
 
-                    if (templateChild.hasAttribute('bind')) {
+                    this.inputBindings.initInputBindingsIfInputElement(templateChild);
+
+                    /*if (templateChild.hasAttribute('bind')) {
                         console.log('adding binding for ', templateChild.id);
                         this.handleBinding(templateChild);
                     }
                     if (templateChild.nodeName.toLowerCase() === 'input') {
                         this.hookInputForChangeDetection(templateChild);
-                    }
+                    }*/
                     let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
                     // evalMatches = evalMatches ? evalMatches : [];
                     if (evalMatches) {
-                        console.log('eval matches', evalMatches);
+                        // console.log('eval matches', evalMatches);
                         let log = true;
                         evalMatches.map((evalMatch: string) => {
                             if (log) {
-                                console.log('REPLACING REPLACING, ', evalMatch);
+                                // console.log('REPLACING REPLACING, ', evalMatch);
                             }
 
                             this.renderEvalInElement(templateChild, evalMatch);
@@ -172,7 +178,6 @@ export const Controller = (options: ControllerOptions) => {
                 // this.state.generateHashForEvalList();
                 this.state.reduceMappings(this.replaceHashInDom);
                 window['state'] = this.state;
-                console.log(this.state);
             }
 
             reRenderElement(el: HTMLElement, hash: string, data: any) {
@@ -195,7 +200,7 @@ export const Controller = (options: ControllerOptions) => {
                 const el = this.element.querySelector(`[watch-id~="${hash}"]`);
 
                 const hashList = el.getAttribute('watch-id');
-                console.log(hashList);
+                // console.log(hashList);
                 const eventListenersBackup = (el as ExtendedElement).getEventListeners();
                 el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
                 el.setAttribute('watch-id', hashList.replace(hash, newHash));
@@ -213,7 +218,7 @@ export const Controller = (options: ControllerOptions) => {
 
                 console.log('updating template');
                 this.saveEventListeners();
-
+                this.inputBindings.updateInputs();
                 for (let hash in this.state.getEvalForHashList()) {
 
                     if (this.state.getEvalForHash(hash)) {
@@ -265,7 +270,7 @@ export const Controller = (options: ControllerOptions) => {
                     if (this.eventListeners[deepSelectorString]) {
                         for (let key in this.eventListeners[deepSelectorString]) {
                             this.eventListeners[deepSelectorString][key].map(listener => {
-                                console.log(`Adding ${key} listener to ${deepSelectorString}`);
+                                // console.log(`Adding ${key} listener to ${deepSelectorString}`);
                                 ele.addEventListener(key, listener.listener);
                             });
                         }
@@ -277,7 +282,7 @@ export const Controller = (options: ControllerOptions) => {
             addEventListeners(ele: ExtendedElement, listeners: any) {
                 for (let key in listeners) {
                     listeners[key].map(listener => {
-                        console.log(`Adding ${key} listener to ${ele.nodeName}`);
+                        // console.log(`Adding ${key} listener to ${ele.nodeName}`);
                         ele.addEventListener(key, listener.listener);
                     });
                 }

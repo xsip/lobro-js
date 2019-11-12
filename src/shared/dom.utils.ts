@@ -7,7 +7,7 @@ export class DomUtils {
     public static addEventListeners(ele: any, listeners: any) {
         for (let key in listeners) {
             listeners[key].map(listener => {
-                console.log(`Adding ${key} listener to ${ele.nodeName}`);
+                // console.log(`Adding ${key} listener to ${ele.nodeName}`);
                 ele.addEventListener(key, listener.listener);
             });
         }

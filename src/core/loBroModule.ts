@@ -1,4 +1,6 @@
-import {EventListenerHook} from "./eventListenerHook";
+import {EventListenerHook} from "./hooks/eventListenerHook";
+// import {RequestHook} from "./hooks/requestHook";
+import {PromiseHook} from "./hooks/promiseHook";
 
 
 interface BasicControllerInstance<T = any> {
@@ -14,6 +16,7 @@ interface ModuleConfig {
 export class LoBroModule {
 
     public eventListenerHook: EventListenerHook;
+    public promiseHook: PromiseHook;
     private controllerInstances: any[] = [];
 
     constructor(private config: ModuleConfig) {
@@ -25,16 +28,20 @@ export class LoBroModule {
         this.controllerInstances.map((c: any) => c.detectChanges());
     }
 
-    private initModules() {
+    private initController() {
         this.config.controller.map(c => {
-            console.log('INIT CONTROLLERS!!');
             this.controllerInstances.push(new c());
         });
     }
 
     bootStrap() {
+
         this.eventListenerHook = new EventListenerHook();
         this.eventListenerHook.setModule(this);
-        this.initModules();
+
+        this.promiseHook = new PromiseHook();
+        this.promiseHook.setModule(this);
+
+        this.initController();
     }
 }

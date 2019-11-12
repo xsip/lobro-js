@@ -11,19 +11,27 @@ import * as path from "path";
     // stylesheet: 'src/controller/controller.scss',
 })
 export class DemoController {
-    version: any = 'version1';
-    version2: any = 'version2';
+    version: any = 1;
+    version2: any = 2;
 
     constructor() {
-        console.log('MAIN CONTROLLER INIT');
+        // console.log('MAIN CONTROLLER INIT');
     }
 
     addEventListeners = () => {
-        console.log('adding eventlisteners');
+        // console.log('adding eventlisteners');
         document.getElementById('reloadSelected').addEventListener('click', () => {
             console.log('clicked!!');
-            this.version = (document.getElementById('input') as HTMLInputElement).value;
-            this.version2 = (document.getElementById('input2') as HTMLInputElement).value;
+            fetch('https://jsonplaceholder.typicode.com/todos')
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(JSON.stringify(data));
+                    console.log('CONTROLLER GOT DATA');
+                    this.version = data[5].id;
+                    this.version2 = data[10].id;
+                });
+            // this.version++; //  = (document.getElementById('input') as HTMLInputElement).value;
+            // this.version2++; //  = (document.getElementById('input2') as HTMLInputElement).value;
         });
         /*document.getElementById('input').addEventListener('input', (event: any) => {
             this.version = event[0].target.value;

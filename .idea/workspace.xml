@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/controller.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/mainController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/base.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/base.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/dom.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/dom.utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/eventListenerHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/eventListenerHook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/polyfills.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/general.utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utils.class.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/eventListenerHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/loBroModule.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/loBroModule.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shared/dom.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/dom.utils.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,20 +33,20 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="babelrc" value="1" />
-          <entry key="html" value="12" />
+          <entry key="html" value="14" />
           <entry key="js" value="10" />
           <entry key="json" value="7" />
           <entry key="scss" value="6" />
-          <entry key="ts" value="46" />
+          <entry key="ts" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="12" />
+          <entry key="HTML" value="14" />
           <entry key="JSON" value="6" />
           <entry key="JavaScript" value="10" />
           <entry key="SCSS" value="6" />
-          <entry key="TypeScript" value="46" />
+          <entry key="TypeScript" value="54" />
           <entry key="tsconfig" value="2" />
         </counts>
       </usages-collector>
@@ -60,20 +57,20 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="389" />
+          <entry key="html" value="390" />
           <entry key="js" value="280" />
           <entry key="json" value="101" />
           <entry key="scss" value="76" />
-          <entry key="ts" value="19434" />
+          <entry key="ts" value="22204" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="442" />
+          <entry key="HTML" value="443" />
           <entry key="JSON" value="101" />
           <entry key="JavaScript" value="280" />
           <entry key="SCSS" value="76" />
-          <entry key="TypeScript" value="19381" />
+          <entry key="TypeScript" value="22151" />
         </counts>
       </usages-collector>
     </session>
@@ -83,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+            <state relative-caret-position="69">
+              <caret line="218" column="22" lean-forward="true" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -101,11 +98,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/state.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="979">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/loBroModule.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="12" column="27" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="27" />
+            <state relative-caret-position="167">
+              <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -114,81 +129,59 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/state.ts">
+        <entry file="file://$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="177">
+              <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
+        <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="68" column="28" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
+            <state relative-caret-position="167">
+              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/loBroModule.ts">
+        <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+            <state relative-caret-position="187">
+              <caret line="1429" column="108" lean-forward="true" selection-start-line="1429" selection-start-column="27" selection-end-line="1429" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/core/hooks/promiseHook.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/eventListenerHook.ts">
+        <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-445">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="179">
+              <caret line="19943" column="81" lean-forward="true" selection-start-line="19943" selection-start-column="24" selection-end-line="19943" selection-end-column="81" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <element signature="e#1#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/polyfills.ts">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>saveEventListeners</find>
-      <find>eva</find>
-      <find>this.hashForEval</find>
-      <find>lastValueCollection</find>
       <find>this.lastValueCollection</find>
       <find>this.oldData</find>
       <find>onApp</find>
       <find>onAppend</find>
       <find>currentValueForHash</find>
-      <find>eval</find>
       <find>controller</find>
       <find>afterRender</find>
       <find>curE.setAttribute</find>
@@ -209,6 +202,11 @@
       <find>watch-</find>
       <find>same</find>
       <find>updat</find>
+      <find>eval</find>
+      <find>going on</find>
+      <find>Added Ev</find>
+      <find>update</find>
+      <find>hashList</find>
     </findStrings>
     <replaceStrings>
       <replace>this.state.hashForEval</replace>
@@ -249,11 +247,17 @@
         <option value="$PROJECT_DIR$/src/core/polyfills.ts" />
         <option value="$PROJECT_DIR$/src/core/eventListenerHook.ts" />
         <option value="$PROJECT_DIR$/src/controller/mainController.ts" />
-        <option value="$PROJECT_DIR$/src/core/loBroModule.ts" />
         <option value="$PROJECT_DIR$/src/core/state.ts" />
-        <option value="$PROJECT_DIR$/src/core/base.controller.ts" />
         <option value="$PROJECT_DIR$/src/core/general.utils.ts" />
         <option value="$PROJECT_DIR$/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.html" />
+        <option value="$PROJECT_DIR$/src/core/base.controller.ts" />
+        <option value="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" />
+        <option value="$PROJECT_DIR$/src/core/hooks/requestHook.ts" />
+        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" />
+        <option value="$PROJECT_DIR$/src/core/loBroModule.ts" />
+        <option value="$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts" />
+        <option value="$PROJECT_DIR$/src/core/hooks/promiseHook.ts" />
       </list>
     </option>
   </component>
@@ -301,6 +305,19 @@
               <item name="build-me-an-api-v2" type="b2602c69:ProjectViewProjectNode" />
               <item name="build-me-an-api-v2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="build-me-an-api-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="build-me-an-api-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="hooks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="build-me-an-api-v2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="build-me-an-api-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="demo-controller" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -323,6 +340,7 @@
       <recent name="$PROJECT_DIR$/src/controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/core/hooks" />
       <recent name="$PROJECT_DIR$/src/shared" />
       <recent name="$PROJECT_DIR$/src/types" />
       <recent name="$PROJECT_DIR$/src/controller" />
@@ -351,12 +369,12 @@
       <option name="presentableId" value="Default" />
       <updated>1573323382730</updated>
       <workItem from="1573323384205" duration="24433000" />
-      <workItem from="1573453003987" duration="26126000" />
+      <workItem from="1573453003987" duration="31812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50559000" />
+    <option name="totallyTimeSpent" value="56245000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -369,10 +387,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1680" height="970" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21639542" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4991511" visible="true" weight="0.21639542" />
+      <window_info id="Structure" order="1" sideWeight="0.5008489" side_tool="true" visible="true" weight="0.21639542" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -555,13 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="81" lean-forward="true" selection-start-line="6" selection-start-column="81" selection-end-line="6" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
@@ -575,48 +585,10 @@
     <entry file="file://$PROJECT_DIR$/src/core/polyfills.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/eventListenerHook.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-445">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/loBroModule.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/state.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/utils.class.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/shared/general.utils.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -630,13 +602,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/state.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="979">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shared/general.utils.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="19943" column="81" lean-forward="true" selection-start-line="19943" selection-start-column="24" selection-end-line="19943" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="1429" column="108" lean-forward="true" selection-start-line="1429" selection-start-column="27" selection-end-line="1429" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/hooks/requestHook.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="72" column="12" selection-end-line="93" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="27" />
+        <state relative-caret-position="167">
+          <caret line="29" column="46" lean-forward="true" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/loBroModule.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="31" column="41" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="218" column="22" lean-forward="true" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/hooks/promiseHook.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
         </state>
       </provider>
     </entry>
