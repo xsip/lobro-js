@@ -2,9 +2,10 @@ import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {State} from "../state";
 import {ExtendedElement} from "../../shared/dom.utils";
+import {BaseBinding} from "./base.binding";
 
 
-export class InputBindings<T = any> {
+export class InputBindings implements BaseBinding<InputBindings> {
     state: State = new State();
     bindingKey: string = 'input-bind';
     identifyKey: string = 'bind';
@@ -13,7 +14,7 @@ export class InputBindings<T = any> {
 
     }
 
-    public initInputBindingsINeccesary(templateChild: HTMLElement) {
+    public initBinding(templateChild: HTMLElement) {
 
         if (templateChild.hasAttribute(this.identifyKey)) {
             // console.log('adding binding for ', templateChild.id);
@@ -59,7 +60,7 @@ export class InputBindings<T = any> {
         }
     }
 
-    public updateInputs() {
+    public updateSchedule() {
 
 
         for (let hash in this.state.getEvalForHashList()) {

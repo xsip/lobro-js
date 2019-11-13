@@ -6,6 +6,7 @@ import {InputBindings} from "./bindings/input.bindings";
 import {ElementBindings} from "./bindings/element.bindings";
 import * as path from "path";
 import {IfBindings} from "./bindings/if.bindings";
+import {BaseBinding} from "./bindings/base.binding";
 
 export interface ControllerOptions {
     template: string;
@@ -22,7 +23,8 @@ export const CONTROLLER_DECORATOR_KEY = 'ControllerData';
 const newState = (): State => new State();
 
 type Constructor<T = {}> = new(...args: any[]) => T;
-export const Controller = (options: ControllerOptions) => {
+
+export const Controller = (options: ControllerOptions): any => {
     // return (target) => {
     return <T extends Constructor>(target: T) => {
         Object.assign(target.prototype, {
@@ -31,7 +33,7 @@ export const Controller = (options: ControllerOptions) => {
 
         // @ts-ignore
         return class extends target {
-
+            public static options: ControllerOptions = options;
             state: State = newState();
             element: HTMLElement;
             updateInterval: number = 10000;
@@ -46,11 +48,9 @@ export const Controller = (options: ControllerOptions) => {
             inputBindings: InputBindings;
             elementBindings: ElementBindings;
             ifBindings: IfBindings;
-            constructor() {
+            constructor(private renderInElement?: HTMLElement, private bindings: BaseBinding<any>[] = []) {
                 super();
-                this.inputBindings = new InputBindings(this.element, this as any);
-                this.elementBindings = new ElementBindings(this.element, this as any);
-                this.ifBindings = new IfBindings(this.element, this as any);
+
                 // require('demo-controller/demo-controller.scss');
                 // require( this.config.stylesheet);
                 this.renderTemplate();
@@ -82,35 +82,59 @@ export const Controller = (options: ControllerOptions) => {
             }
 
             addToDom(elementToAppend: HTMLElement) {
+                // window.onload = () => {
+                /*const res = Array.prototype.slice.call(document.querySelectorAll(this.config.name.toUpperCase()));
+                console.log(res);
+                res.map(e => {
+                    e.id = GeneralUtils.createRandomHash(10);
+                    console.log('appending first element');
+                    e.appendChild(elementToAppend.cloneNode(true));
+                });
+                // }*/
                 this.element = elementToAppend;
-                document.body.appendChild(this.element);
+                // document.body
+                this.renderInElement.appendChild(this.element);
                 // this.state.generateHashForEvalList();
-                this.elementBindings.reduceMappings();
+                this.bindingInstances.map((binding: BaseBinding) => {
+                    binding.reduceMappings;
+                });
+                /*this.elementBindings.reduceMappings();
                 this.inputBindings.reduceMappings();
-                this.ifBindings.reduceMappings();
+                this.ifBindings.reduceMappings();*/
                 window['state'] = this.state;
             }
-
+            bindingInstances: BaseBinding<any>[] = [];
             renderTemplate() {
                 console.log('rendering template');
                 const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
                 templateContainer.innerHTML = this.config.template;
+                this.element = templateContainer.firstChild as any;
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-
+                this.bindings.map((binding: BaseBinding) => {
+                    // @ts-ignore
+                    this.bindingInstances.push(new binding(this.element,this));
+                });
+                /*this.inputBindings = new InputBindings(this.element, this as any);
+                this.elementBindings = new ElementBindings(this.element, this as any);
+                this.ifBindings = new IfBindings(this.element, this as any);*/
                 templateChildren.map((templateChild: HTMLElement) => {
 
-                    this.inputBindings.initInputBindingsINeccesary(templateChild);
-                    this.elementBindings.initElementBindingsIfNeccesary(templateChild);
-                    this.ifBindings.initIfBindingsIfNeccessary(templateChild);
+                    /*this.inputBindings.initBinding(templateChild);
+                    this.elementBindings.initBinding(templateChild);
+                    this.ifBindings.initBinding(templateChild);*/
+                    this.bindingInstances.map((binding: BaseBinding) => {
+                        binding.initBinding(templateChild);
+                    });
                 });
 
-                DomUtils.onAppend(document.body, () => {
+                /*DomUtils.onAppend(document.body, () => {
                     if (!this.onInitCalled) {
                         this.onInitCalled = true;
                         this['afterRender']();
                     }
-                });
+                });*/
                 this.addToDom(templateContainer.firstChild as HTMLElement);
+                this['afterRender']();
                 // firstChild = actual template
 
             }
@@ -119,9 +143,14 @@ export const Controller = (options: ControllerOptions) => {
 
                 console.log('updating template');
 //                this.saveEventListeners();
-                this.inputBindings.updateInputs();
-                this.elementBindings.updateElements();
-                this.ifBindings.updateIfElements();
+                /*
+                this.inputBindings.updateSchedule();
+                this.elementBindings.updateSchedule();
+                this.ifBindings.updateSchedule();
+                */
+                this.bindingInstances.map((binding: BaseBinding) => {
+                    binding.updateSchedule();
+                });
                 // this.restoreEventListeners();
             }
 

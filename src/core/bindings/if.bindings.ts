@@ -2,24 +2,25 @@ import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {State} from "../state";
 import {ExtendedElement} from "../../shared/dom.utils";
+import {BaseBinding} from "./base.binding";
 
 
-export class IfBindings<T = any> {
+export class IfBindings<T = any> implements BaseBinding {
     state: State = new State();
     bindingKey: string = 'if-bind';
     identifyKey: string = 'if';
-    elementCopyForHash: any = {};
 
     constructor(private viewElement: HTMLElement, private view: View) {
 
     }
 
-    public initIfBindingsIfNeccessary(templateChild: HTMLElement) {
+    public initBinding(templateChild: HTMLElement) {
 
         if (templateChild.hasAttribute(this.identifyKey)) {
             // console.log('adding binding for ', templateChild.id);
             this.handleBinding(templateChild);
         }
+        // TODO: implement view property watcher to trigger change detection/ rerendering
     }
 
     private handleBinding(element: HTMLElement) {
@@ -42,7 +43,7 @@ export class IfBindings<T = any> {
 
     }
 
-    public updateIfElements() {
+    public updateSchedule() {
 
 
         for (let hash in this.state.getEvalForHashList()) {

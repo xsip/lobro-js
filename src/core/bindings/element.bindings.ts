@@ -2,8 +2,9 @@ import {View} from "./interfaces";
 import {DomUtils, ExtendedElement} from "../../shared/dom.utils";
 import {GeneralUtils} from "../../shared/general.utils";
 import {State} from "../state";
+import {BaseBinding} from "./base.binding";
 
-export class ElementBindings {
+export class ElementBindings implements BaseBinding {
     bindingKey: string = 'element-bind';
     state: State = new State();
     eventListeners: {} = {};
@@ -12,7 +13,7 @@ export class ElementBindings {
 
     }
 
-    public initElementBindingsIfNeccesary(templateChild: HTMLElement) {
+    public initBinding(templateChild: HTMLElement) {
         let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
         // evalMatches = evalMatches ? evalMatches : [];
         if (evalMatches) {
@@ -85,7 +86,7 @@ export class ElementBindings {
         return this.view.evalFromView(funcToEval);
     };
 
-    updateElements() {
+    updateSchedule() {
         for (let hash in this.state.getEvalForHashList()) {
 
             if (this.state.getEvalForHash(hash)) {
