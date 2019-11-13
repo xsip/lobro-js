@@ -1,3 +1,7 @@
+export interface ExtendedElement extends HTMLElement {
+    getEventListeners: () => { [index: string]: any[] }
+}
+
 export class DomUtils {
 
     public static createDeepSelectorString(ele: HTMLElement) {
@@ -40,6 +44,7 @@ export class DomUtils {
             }
         }
     }
+
     public static onAppend = (elem: HTMLElement, f: any) => {
         let observer = new MutationObserver(function (mutations) {
             mutations.forEach((m) => {
@@ -60,7 +65,7 @@ export class DomUtils {
             return ele.nodeName;
         }
     };
-    
+
     public static getDirectInnerText(ele: HTMLElement) {
         let txt = null;
         [].forEach.call(ele.childNodes, (v: any) => {

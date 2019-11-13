@@ -33,8 +33,8 @@ export class DemoController {
                     // console.log(JSON.stringify(data));
                     // TODO: fix change detction for nested objects
                     console.log('CONTROLLER GOT DATA');
-                    this.versions.version = data[5].id;
-                    this.versions.version2 = data[10].id;
+                    this.version = data[5].id;
+                    this.version2 = data[10].id;
                 });
             // this.version++; //  = (document.getElementById('input') as HTMLInputElement).value;
             // this.version2++; //  = (document.getElementById('input2') as HTMLInputElement).value;

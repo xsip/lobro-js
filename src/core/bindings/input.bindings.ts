@@ -1,20 +1,18 @@
 import {GeneralUtils} from "../../shared/general.utils";
-
-interface View {
-    evalFromView: (evalData: any) => any;
-    element: HTMLElement;
-}
+import {View} from "./interfaces";
+import {State} from "../state";
+import {ExtendedElement} from "../../shared/dom.utils";
 
 
 export class InputBindings<T = any> {
-    evalForHash: any = {};
-    bindHashKey: string = 'bind-hash';
+    state: State = new State();
+    bindingKey: string = 'input-bind';
 
     constructor(private viewElement: HTMLElement, private view: View) {
 
     }
 
-    public initInputBindingsIfInputElement(templateChild: HTMLElement) {
+    public initInputBindingsINeccesary(templateChild: HTMLElement) {
 
         if (templateChild.hasAttribute('bind')) {
             // console.log('adding binding for ', templateChild.id);
@@ -30,9 +28,9 @@ export class InputBindings<T = any> {
             const elementHash: string = GeneralUtils.createRandomHash(5);
 
             (element as HTMLInputElement).value = this.view.evalFromView(element.getAttribute('bind'));
-            element.setAttribute(this.bindHashKey, elementHash);
-            this.evalForHash[elementHash] = element.getAttribute('bind');
-
+            element.setAttribute(this.bindingKey, elementHash);
+            // this.evalForHash[elementHash] = element.getAttribute('bind');
+            this.state.saveEvalForHash(elementHash, element.getAttribute('bind'));
             element.addEventListener('input', (/*event: any*/) => {
                 this.view.evalFromView(element.getAttribute('bind') + ' = event.target.value;');
                 // this.updateTemplate();
@@ -46,7 +44,8 @@ export class InputBindings<T = any> {
     }
 
     private emptyInputHookForChangeDetectionTrigger(element: HTMLElement) {
-        if (!element.getAttribute(this.bindHashKey)) {
+        // TODO: add check if there allready is any input listener!!
+        if (!element.getAttribute(this.bindingKey)) {
             element.addEventListener('input', (/*event: any*/) => {
                 // only for change detection
             });
@@ -55,19 +54,19 @@ export class InputBindings<T = any> {
 
     private reavalInputValue(templateChild: HTMLInputElement, hash: string) {
         if (hash) {
-            (templateChild as HTMLInputElement).value = this.view.evalFromView(this.evalForHash[hash]);
+            (templateChild as HTMLInputElement).value = this.view.evalFromView(this.state.getEvalForHash(hash));
         }
     }
 
     public updateInputs() {
 
 
-        for (let hash in this.evalForHash) {
+        for (let hash in this.state.getEvalForHashList()) {
 
-            if (this.evalForHash[hash]) {
+            if (this.state.getEvalForHash(hash)) {
 
                 const elList: HTMLElement[] =
-                    Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.bindHashKey}="${hash}"]`));
+                    Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.bindingKey}="${hash}"]`));
 
                 // query selector all since we are using a hash mutliple times if possible!!
                 elList.map(el => {
@@ -78,4 +77,12 @@ export class InputBindings<T = any> {
         }
     }
 
+    replaceHashInDom = (hash: string, newHash: string) => {
+        const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
+        const hashList = el.getAttribute(this.bindingKey);
+        el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
+    };
+    reduceMappings() {
+        this.state.reduceMappings(this.replaceHashInDom);
+    }
 }
