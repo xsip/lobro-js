@@ -23,10 +23,15 @@ export class DemoController {
         // console.log('MAIN CONTROLLER INIT');
     }
 
-    buttonClick() {
+    async buttonClick() {
         console.log('BUTTON CLICK FUNC!!');
         this.showElement = !this.showElement;
-        fetch('https://jsonplaceholder.typicode.com/todos')
+        const res: any = await fetch('https://jsonplaceholder.typicode.com/todos');
+        const data: any = await res.json();
+        console.log(data);
+        this.version = data[5].id;
+        this.version2 = data[10].id;
+        /*fetch('https://jsonplaceholder.typicode.com/todos')
             .then(response => response.json())
             .then(data => {
                 // console.log(JSON.stringify(data));
@@ -35,7 +40,7 @@ export class DemoController {
                 console.log('CONTROLLER GOT DATA');
                 this.version = data[5].id;
                 this.version2 = data[10].id;
-            });
+            });*/
     }
 
     addEventListeners = () => {
