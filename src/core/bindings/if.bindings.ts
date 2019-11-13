@@ -4,22 +4,21 @@ import {State} from "../state";
 import {ExtendedElement} from "../../shared/dom.utils";
 
 
-export class InputBindings<T = any> {
+export class IfBindings<T = any> {
     state: State = new State();
-    bindingKey: string = 'input-bind';
-    identifyKey: string = 'bind';
+    bindingKey: string = 'if-bind';
+    identifyKey: string = 'if';
+    elementCopyForHash: any = {};
 
     constructor(private viewElement: HTMLElement, private view: View) {
 
     }
 
-    public initInputBindingsINeccesary(templateChild: HTMLElement) {
+    public initIfBindingsIfNeccessary(templateChild: HTMLElement) {
 
         if (templateChild.hasAttribute(this.identifyKey)) {
             // console.log('adding binding for ', templateChild.id);
             this.handleBinding(templateChild);
-        } else if (templateChild.nodeName.toLowerCase() === 'input') {
-            this.emptyInputHookForChangeDetectionTrigger(templateChild);
         }
     }
 
@@ -28,38 +27,22 @@ export class InputBindings<T = any> {
         if (!element.getAttribute(this.bindingKey)) {
             const elementHash: string = GeneralUtils.createRandomHash(5);
 
-            (element as HTMLInputElement).value = this.view.evalFromView(element.getAttribute(this.identifyKey));
+            // (element as HTMLElement).value = this.view.evalFromView(element.getAttribute(this.identifyKey));
             element.setAttribute(this.bindingKey, elementHash);
-            // this.evalForHash[elementHash] = element.getAttribute('bind');
             this.state.saveEvalForHash(elementHash, element.getAttribute(this.identifyKey));
-            element.addEventListener('input', (/*event: any*/) => {
-                this.view.evalFromView(element.getAttribute(this.identifyKey) + ' = event.target.value;');
-                // this.updateTemplate();
-                // this.version = (document.getElementById('input') as HTMLInputElement).value;
-                // this.version2 = (document.getElementById('input2') as HTMLInputElement).value;
-            });
+            if (!this.view.evalFromView(this.state.getEvalForHash(elementHash))) {
+                element.hidden = true;
+            } else {
+                element.hidden = false;
+            }
+            // this.view[element.getAttribute(this.identifyKey)].watch()
         } else {
             // element allready bound
         }
 
     }
 
-    private emptyInputHookForChangeDetectionTrigger(element: HTMLElement) {
-        // TODO: add check if there allready is any input listener!!
-        if (!element.getAttribute(this.bindingKey)) {
-            element.addEventListener('input', (/*event: any*/) => {
-                // only for change detection
-            });
-        }
-    }
-
-    private reavalInputValue(templateChild: HTMLInputElement, hash: string) {
-        if (hash) {
-            (templateChild as HTMLInputElement).value = this.view.evalFromView(this.state.getEvalForHash(hash));
-        }
-    }
-
-    public updateInputs() {
+    public updateIfElements() {
 
 
         for (let hash in this.state.getEvalForHashList()) {
@@ -71,7 +54,11 @@ export class InputBindings<T = any> {
 
                 // query selector all since we are using a hash mutliple times if possible!!
                 elList.map(el => {
-                    this.reavalInputValue(el as HTMLInputElement, hash);
+                    if (!this.view.evalFromView(this.state.getEvalForHash(hash))) {
+                        el.hidden = true;
+                    } else {
+                        el.hidden = false;
+                    }
                 });
 
             }

@@ -12,7 +12,7 @@ export class ElementBindings {
 
     }
 
-    public initElementBindingIfNeccesary(templateChild: HTMLElement) {
+    public initElementBindingsIfNeccesary(templateChild: HTMLElement) {
         let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
         // evalMatches = evalMatches ? evalMatches : [];
         if (evalMatches) {

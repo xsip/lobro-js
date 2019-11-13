@@ -4,6 +4,8 @@ import {DomUtils} from "../shared/dom.utils";
 import {State} from "./state";
 import {InputBindings} from "./bindings/input.bindings";
 import {ElementBindings} from "./bindings/element.bindings";
+import * as path from "path";
+import {IfBindings} from "./bindings/if.bindings";
 
 export interface ControllerOptions {
     template: string;
@@ -43,12 +45,18 @@ export const Controller = (options: ControllerOptions) => {
             config: ControllerOptions;
             inputBindings: InputBindings;
             elementBindings: ElementBindings;
-
+            ifBindings: IfBindings;
             constructor() {
                 super();
                 this.inputBindings = new InputBindings(this.element, this as any);
                 this.elementBindings = new ElementBindings(this.element, this as any);
+                this.ifBindings = new IfBindings(this.element, this as any);
+                // require('demo-controller/demo-controller.scss');
+                // require( this.config.stylesheet);
                 this.renderTemplate();
+                // let getStyle =
+                // drequire(this.config.stylesheet);
+                // eval(`require('${this.config.stylesheet}'(;`);
             }
 
             detectChanges() {
@@ -79,6 +87,7 @@ export const Controller = (options: ControllerOptions) => {
                 // this.state.generateHashForEvalList();
                 this.elementBindings.reduceMappings();
                 this.inputBindings.reduceMappings();
+                this.ifBindings.reduceMappings();
                 window['state'] = this.state;
             }
 
@@ -91,7 +100,8 @@ export const Controller = (options: ControllerOptions) => {
                 templateChildren.map((templateChild: HTMLElement) => {
 
                     this.inputBindings.initInputBindingsINeccesary(templateChild);
-                    this.elementBindings.initElementBindingIfNeccesary(templateChild);
+                    this.elementBindings.initElementBindingsIfNeccesary(templateChild);
+                    this.ifBindings.initIfBindingsIfNeccessary(templateChild);
                 });
 
                 DomUtils.onAppend(document.body, () => {
@@ -105,40 +115,15 @@ export const Controller = (options: ControllerOptions) => {
 
             }
 
-            reRenderElement(el: HTMLElement, hash: string, data: any) {
-                const eventListenersBackup = (el as ExtendedElement).getEventListeners();
-                el.innerHTML = el.innerHTML.replace(new RegExp(`<!--${hash}!-->([^]*?)<!--${hash}!-->`, 'g'), `<!--${hash}!-->` + data + `<!--${hash}!-->`);
-
-                if (eventListenersBackup && !(el as ExtendedElement).getEventListeners()) {
-                    console.log('had eventlisteners which are missing now!!');
-                    this.addEventListeners(el as ExtendedElement, eventListenersBackup);
-                } else {
-                    // test
-                    // console.log(eventListenersBackup);
-                    // console.log((el as ExtendedElement).getEventListeners());
-                }
-
-            }
-
-
             updateTemplate() {
 
                 console.log('updating template');
 //                this.saveEventListeners();
                 this.inputBindings.updateInputs();
                 this.elementBindings.updateElements();
+                this.ifBindings.updateIfElements();
                 // this.restoreEventListeners();
             }
-
-
-            evalTemplateFunction = (funcStr: string): any => {
-                const funcToEval: string = funcStr.replace('{{', '').replace('}}', '');
-                // .replace(/this/g, 'this.controller');
-                //console.log(funcToEval);
-                // console.log(eval(funcToEval));
-                // @ts-ignore
-                return eval(funcToEval);
-            };
 
             /*afterRender() {
                 //@ts-ignore

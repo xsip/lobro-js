@@ -4,10 +4,13 @@
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/base.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/base.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/bindings/element.bindings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/element.bindings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/dom.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/dom.utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -31,21 +34,21 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="babelrc" value="1" />
-          <entry key="html" value="18" />
-          <entry key="js" value="10" />
-          <entry key="json" value="7" />
-          <entry key="scss" value="6" />
-          <entry key="ts" value="61" />
+          <entry key="html" value="21" />
+          <entry key="js" value="11" />
+          <entry key="json" value="8" />
+          <entry key="scss" value="8" />
+          <entry key="ts" value="66" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="18" />
+          <entry key="HTML" value="21" />
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="10" />
-          <entry key="SCSS" value="6" />
-          <entry key="TypeScript" value="61" />
-          <entry key="tsconfig" value="2" />
+          <entry key="JavaScript" value="11" />
+          <entry key="SCSS" value="8" />
+          <entry key="TypeScript" value="66" />
+          <entry key="tsconfig" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -55,20 +58,21 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="400" />
-          <entry key="js" value="280" />
-          <entry key="json" value="101" />
-          <entry key="scss" value="76" />
-          <entry key="ts" value="23379" />
+          <entry key="html" value="432" />
+          <entry key="js" value="455" />
+          <entry key="json" value="105" />
+          <entry key="scss" value="113" />
+          <entry key="ts" value="24165" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="453" />
+          <entry key="HTML" value="485" />
           <entry key="JSON" value="101" />
-          <entry key="JavaScript" value="280" />
-          <entry key="SCSS" value="76" />
-          <entry key="TypeScript" value="23326" />
+          <entry key="JavaScript" value="455" />
+          <entry key="SCSS" value="113" />
+          <entry key="TypeScript" value="24112" />
+          <entry key="tsconfig" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -81,8 +85,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+            <state relative-caret-position="215">
+              <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -91,30 +95,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
+        <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/loBroModule.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/bindings/element.bindings.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="136" column="12" lean-forward="true" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="12" />
+            <state relative-caret-position="288">
+              <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
               <folding>
-                <element signature="e#0#34#0" expanded="true" />
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,26 +109,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+            <state relative-caret-position="300">
+              <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="72" column="29" selection-start-line="72" selection-start-column="29" selection-end-line="72" selection-end-column="29" />
+            <state relative-caret-position="210">
+              <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
+        <entry file="file://$PROJECT_DIR$/src/core/bindings/if.bindings.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="84" column="18" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="18" />
+            <state relative-caret-position="407">
+              <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -151,10 +137,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/state.ts">
+        <entry file="file://$PROJECT_DIR$/src/index.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+            <state relative-caret-position="30">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="e#0#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/bindings/element.bindings.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="33" column="89" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="89" />
+              <folding>
+                <element signature="e#0#56#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -168,23 +190,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/hooks/promiseHook.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.innerHTML.match</find>
-      <find>reRenderElement</find>
-      <find>evalForHash</find>
-      <find>reduceMappings</find>
       <find>console.log</find>
       <find>QUERYSELEC</find>
       <find>UPDATE</find>
@@ -210,7 +219,11 @@
       <find>this.eleme</find>
       <find>watch-id</find>
       <find>Extended</find>
+      <find>evalTemplate</find>
+      <find>evalTemplateFunction</find>
+      <find>restoreEventListeners</find>
       <find>replaceHa</find>
+      <find>reduce</find>
     </findStrings>
     <replaceStrings>
       <replace>this.state.hashForEval</replace>
@@ -246,24 +259,27 @@
         <option value="$PROJECT_DIR$/src/core/injector.ts" />
         <option value="$PROJECT_DIR$/src/core/module.ts" />
         <option value="$PROJECT_DIR$/src/controller/controller.html" />
-        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/controller/controller.scss" />
         <option value="$PROJECT_DIR$/src/core/polyfills.ts" />
         <option value="$PROJECT_DIR$/src/core/eventListenerHook.ts" />
         <option value="$PROJECT_DIR$/src/controller/mainController.ts" />
         <option value="$PROJECT_DIR$/src/core/general.utils.ts" />
-        <option value="$PROJECT_DIR$/src/index.ts" />
         <option value="$PROJECT_DIR$/src/core/hooks/requestHook.ts" />
         <option value="$PROJECT_DIR$/src/core/hooks/eventListenerHook.ts" />
         <option value="$PROJECT_DIR$/src/core/hooks/promiseHook.ts" />
         <option value="$PROJECT_DIR$/src/core/loBroModule.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/interfaces.ts" />
-        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" />
         <option value="$PROJECT_DIR$/src/core/state.ts" />
         <option value="$PROJECT_DIR$/src/shared/dom.utils.ts" />
-        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.html" />
-        <option value="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/element.bindings.ts" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/src/index.ts" />
+        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.scss" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" />
+        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" />
+        <option value="$PROJECT_DIR$/src/core/bindings/if.bindings.ts" />
+        <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.html" />
         <option value="$PROJECT_DIR$/src/core/base.controller.ts" />
       </list>
     </option>
@@ -389,12 +405,12 @@
       <option name="presentableId" value="Default" />
       <updated>1573323382730</updated>
       <workItem from="1573323384205" duration="24433000" />
-      <workItem from="1573453003987" duration="34648000" />
+      <workItem from="1573453003987" duration="37490000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59081000" />
+    <option name="totallyTimeSpent" value="61923000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -409,10 +425,10 @@
     <frame x="0" y="24" width="1680" height="970" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8761792" visible="true" weight="0.2188065" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.875" visible="true" weight="0.2188065" />
       <window_info id="Structure" order="1" sideWeight="0.12393888" side_tool="true" weight="0.4225437" />
       <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" sideWeight="0.12382075" side_tool="true" visible="true" weight="0.2188065" />
+      <window_info id="Favorites" order="3" sideWeight="0.125" side_tool="true" visible="true" weight="0.2188065" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32915717" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -424,7 +440,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32915717" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.034168564" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.34396356" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -466,13 +482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="33" selection-start-column="33" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -576,22 +585,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/bootstrap.ts">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/create.module.ts">
       <provider selected="true" editor-type-id="text-editor" />
@@ -600,16 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#1#60#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -665,16 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -689,13 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/bindings/interfaces.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -703,30 +671,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="84" column="18" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="18" />
+        <state relative-caret-position="165">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
           <folding>
-            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#0#65#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/bindings/element.bindings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="136" column="12" lean-forward="true" selection-start-line="136" selection-start-column="12" selection-end-line="136" selection-end-column="12" />
+        <state relative-caret-position="215">
+          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/bindings/input.bindings.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="33" column="89" selection-start-line="33" selection-start-column="78" selection-end-line="33" selection-end-column="89" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/bindings/if.bindings.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/demo-controller/demo-controller.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/base.controller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+        <state relative-caret-position="215">
+          <caret line="89" column="16" selection-start-line="89" selection-start-column="16" selection-end-line="89" selection-end-column="16" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

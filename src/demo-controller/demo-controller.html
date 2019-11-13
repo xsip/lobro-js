@@ -17,6 +17,7 @@
     </div>
     <input id="input" bind="this.version" type="text"/>
     <input id="input" bind="this.version" type="text"/>
-    <input id="input" type="text"/>
+    <input id="input" if="this.version > 4" type="text"/>
+    <input id="input" if="this.version > 4" type="text"/>
     <input id="input2" bind="this.version2" type="text"/>
 </div>

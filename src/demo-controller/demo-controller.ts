@@ -1,19 +1,18 @@
 import {Controller} from "../core/base.controller";
 
-
-import './demo-controller.scss';
 import tmpl from './demo-controller.html';
 import * as path from "path";
+import 'demo-controller/demo-controller.scss';
 
-// console.log(require('./controller.scss'));
 @Controller({
     template: tmpl,
     name: 'controller',
-    // stylesheet: 'src/controller/controller.scss',
+    stylesheet: 'demo-controller/demo-controller.scss',
 })
 export class DemoController {
     version: any = 1;
     version2: any = 2;
+    showElement = true;
     versions: any = {
         version: 1,
         version2: 2,
@@ -27,6 +26,7 @@ export class DemoController {
         // console.log('adding eventlisteners');
         document.getElementById('reloadSelected').addEventListener('click', () => {
             console.log('clicked!!');
+            this.showElement = !this.showElement;
             fetch('https://jsonplaceholder.typicode.com/todos')
                 .then(response => response.json())
                 .then(data => {

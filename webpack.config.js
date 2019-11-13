@@ -1,4 +1,5 @@
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 module.exports = {
     mode: "production",
     devtool: "inline-source-map",
@@ -8,7 +9,11 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
-        modules: [__dirname, 'node_modules', '/src'],
+        modules: ['node_modules', path.resolve(__dirname, 'src/')],
+        alias: {
+            controller: path.resolve(__dirname, 'src/'),
+            // '': path.resolve(__dirname, 'src/'),
+        },
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: [".ts", ".tsx", ".js", ".scss", ".html"]
     },
