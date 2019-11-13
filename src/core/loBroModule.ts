@@ -7,6 +7,7 @@ import {BaseBinding} from "./bindings/base.binding";
 import {ElementBindings} from "./bindings/element.bindings";
 import {IfBindings} from "./bindings/if.bindings";
 import {InputBindings} from "./bindings/input.bindings";
+import {ClickBinding} from "./bindings/click.binding";
 
 
 interface BasicControllerInstance<T = any> {
@@ -35,7 +36,8 @@ export class LoBroModule {
             ...config.bindings,
             ElementBindings,
             IfBindings,
-            InputBindings
+            InputBindings,
+            ClickBinding,
         ] as any;
     }
 
