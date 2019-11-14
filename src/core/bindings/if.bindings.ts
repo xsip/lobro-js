@@ -29,7 +29,6 @@ export class IfBindings implements BindingClassPublic {
         } else {
             templateChild.hidden = false;
         }
-
         // TODO: implement view property watcher to trigger change detection/ rerendering
     }
 

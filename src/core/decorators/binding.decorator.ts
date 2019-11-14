@@ -105,7 +105,8 @@ export const Binding = (options: BindingOptions): any => {
                         super.initBinding(templateChild);
                     }
                 }
-
+                // TODO: remove on error ases with other bindings!!
+                templateChild.removeAttribute(this.propKey);
             }
 
             reduceMappings(): void {
