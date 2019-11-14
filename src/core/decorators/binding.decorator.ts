@@ -36,7 +36,7 @@ export abstract class BindingClass {
     viewElement: HTMLElement;
     state: State;
     propKey: string;
-
+    bindingKey: string;
     public initBinding(templateChild: HTMLElement): void {
     };
 
@@ -56,7 +56,8 @@ export abstract class BindingClassPublic {
     viewElement: HTMLElement;
     state: State;
     propKey: string;
-
+    bindingKey: string;
+    config: BindingOptions;
     public initBinding(templateChild: HTMLElement): void {
     };
 
@@ -89,7 +90,9 @@ export const Binding = (options: BindingOptions): any => {
 
             constructor(...args: any[]) {
                 super(...args);
-
+                this.config.passMatchingElementsOnly = true;
+                this.propKey = this.config.propKey;
+                this.bindingKey = this.config.propKey + '-bind';
             }
 
             hasBinding(element: HTMLElement) {
@@ -98,9 +101,7 @@ export const Binding = (options: BindingOptions): any => {
 
             initBinding(templateChild: HTMLElement): void {
                 if (!this.hasBinding(templateChild)) {
-                    if (this.config.passMatchingElementsOnly && (templateChild.hasAttribute(this.config.propKey))) {
-                        super.initBinding(templateChild);
-                    } else if (!this.config.passMatchingElementsOnly) {
+                    if (templateChild.getAttribute(this.config.propKey)) {
                         super.initBinding(templateChild);
                     }
                 }

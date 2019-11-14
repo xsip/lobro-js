@@ -1,73 +1,31 @@
 import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {State} from "../state";
-import {ExtendedElement} from "../../shared/dom.utils";
-import {BaseBinding} from "./base.binding";
+import {Binding, BindingClassPublic, BindingOptions} from "../decorators/binding.decorator";
 
-
-export class ClickBinding implements BaseBinding {
+@Binding({
+    propKey: 'click',
+})
+export class ClickBinding implements BindingClassPublic {
     state: State = new State();
-    bindingKey: string = 'click-bind';
-    identifyKey: string = 'click';
-    eventListenerForHash: any = {};
+    config: BindingOptions;
 
-    constructor(private viewElement: HTMLElement, private view: View) {
+    constructor(public viewElement: HTMLElement, public view: View) {
 
     }
 
     public initBinding(templateChild: HTMLElement) {
+        const elementHash: string = GeneralUtils.createRandomHash(5);
+        templateChild.setAttribute(this.bindingKey, elementHash);
 
-        if (templateChild.hasAttribute(this.identifyKey)) {
-            // console.log('adding binding for ', templateChild.id);
-            this.handleBinding(templateChild);
-        }
-    }
+        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.propKey));
+        console.log(this.state.getEvalForHashList());
+        templateChild.addEventListener('click', async () => {
+            // added await for try catch block!!
+            await this.view.evalFromView(this.state.getEvalForHash(elementHash));
+        });
+        console.log((templateChild as any).getEventListeners('click')[0].listener.toString());
 
-    private handleBinding(element: HTMLElement) {
-
-        if (!element.getAttribute(this.bindingKey)) {
-            const elementHash: string = GeneralUtils.createRandomHash(5);
-
-            // (element as HTMLElement).value = this.view.evalFromView(element.getAttribute(this.identifyKey));
-            element.setAttribute(this.bindingKey, elementHash);
-
-            this.state.saveEvalForHash(elementHash, element.getAttribute(this.identifyKey));
-
-            element.addEventListener('click', async () => {
-                // added await for try catch block!!
-                await this.view.evalFromView(this.state.getEvalForHash(elementHash));
-                // this.view.detectChanges();
-
-            });
-            console.log((element as any).getEventListeners('click')[0].listener.toString());
-            // this.view[element.getAttribute(this.identifyKey)].watch()
-        } else {
-            // element allready bound
-        }
-
-    }
-
-    public updateSchedule() {
-
-
-        /*for (let hash in this.state.getEvalForHashList()) {
-
-            if (this.state.getEvalForHash(hash)) {
-
-                const elList: HTMLElement[] =
-                    Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.bindingKey}="${hash}"]`));
-
-                // query selector all since we are using a hash mutliple times if possible!!
-                elList.map(el => {
-                    if (!this.view.evalFromView(this.state.getEvalForHash(hash))) {
-                        el.hidden = true;
-                    } else {
-                        el.hidden = false;
-                    }
-                });
-
-            }
-        }*/
     }
 
     replaceHashInDom = (hash: string, newHash: string) => {
@@ -78,5 +36,12 @@ export class ClickBinding implements BaseBinding {
 
     reduceMappings() {
         this.state.reduceMappings(this.replaceHashInDom);
+    }
+
+    propKey: string;
+    bindingKey: string;
+
+    updateElement(templateChild: HTMLElement, hash: string, evalStr: string): void {
+        // no update needed..
     }
 }

@@ -3,20 +3,17 @@ import {View} from "./interfaces";
 import {State} from "../state";
 import {ExtendedElement} from "../../shared/dom.utils";
 import {BaseBinding} from "./base.binding";
-import {Binding, BindingClass, BindingClassPublic} from "../decorators/binding.decorator";
+import {Binding, BindingClass, BindingClassPublic, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
     propKey: 'if',
-    passMatchingElementsOnly: true
 })
 export class IfBindings implements BindingClassPublic {
 
     state: State = new State();
-    bindingKey: string = 'if-bind';
-    identifyKey: string = 'if';
-    i: number = 0;
+    bindingKey: string;
     propKey: string;
-
+    config: BindingOptions;
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
@@ -25,7 +22,7 @@ export class IfBindings implements BindingClassPublic {
         const elementHash: string = GeneralUtils.createRandomHash(5);
         templateChild.setAttribute(this.bindingKey, elementHash);
 
-        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.identifyKey));
+        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.propKey));
 
         if (!this.view.evalFromView(this.state.getEvalForHash(elementHash))) {
             templateChild.hidden = true;
