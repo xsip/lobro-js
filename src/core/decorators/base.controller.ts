@@ -6,7 +6,7 @@ import {InputBindings} from "../bindings/input.bindings";
 import {ElementBindings} from "../bindings/element.bindings";
 import * as path from "path";
 import {IfBindings} from "../bindings/if.bindings";
-import {BaseBinding} from "../bindings/base.binding";
+import {_BindingClass} from "./binding.decorator";
 
 export interface ControllerOptions {
     template: string;
@@ -48,7 +48,8 @@ export const Controller = (options: ControllerOptions): any => {
             inputBindings: InputBindings;
             elementBindings: ElementBindings;
             ifBindings: IfBindings;
-            constructor(private renderInElement?: HTMLElement, private bindings: BaseBinding<any>[] = []) {
+
+            constructor(private renderInElement?: HTMLElement, private bindings: _BindingClass[] = []) {
                 super();
 
                 // require('demo-controller/demo-controller.scss');
@@ -95,24 +96,26 @@ export const Controller = (options: ControllerOptions): any => {
                 // document.body
                 this.renderInElement.appendChild(this.element);
                 // this.state.generateHashForEvalList();
-                this.bindingInstances.map((binding: BaseBinding) => {
-                    binding.reduceMappings;
+                this.bindingInstances.map((binding: _BindingClass) => {
+                    binding.reduceMappings();
                 });
                 /*this.elementBindings.reduceMappings();
                 this.inputBindings.reduceMappings();
                 this.ifBindings.reduceMappings();*/
                 window['state'] = this.state;
             }
-            bindingInstances: BaseBinding<any>[] = [];
+
+            bindingInstances: _BindingClass[] = [];
+
             renderTemplate() {
                 console.log('rendering template');
                 const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
                 templateContainer.innerHTML = this.config.template;
                 this.element = templateContainer.firstChild as any;
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-                this.bindings.map((binding: BaseBinding) => {
+                this.bindings.map((binding: _BindingClass) => {
                     // @ts-ignore
-                    this.bindingInstances.push(new binding(this.element,this));
+                    this.bindingInstances.push(new binding(this.element, this));
                 });
                 /*this.inputBindings = new InputBindings(this.element, this as any);
                 this.elementBindings = new ElementBindings(this.element, this as any);
@@ -122,7 +125,7 @@ export const Controller = (options: ControllerOptions): any => {
                     /*this.inputBindings.initBinding(templateChild);
                     this.elementBindings.initBinding(templateChild);
                     this.ifBindings.initBinding(templateChild);*/
-                    this.bindingInstances.map((binding: BaseBinding) => {
+                    this.bindingInstances.map((binding: _BindingClass) => {
                         binding.initBinding(templateChild);
                     });
                 });
@@ -148,7 +151,7 @@ export const Controller = (options: ControllerOptions): any => {
                 this.elementBindings.updateSchedule();
                 this.ifBindings.updateSchedule();
                 */
-                this.bindingInstances.map((binding: BaseBinding) => {
+                this.bindingInstances.map((binding: _BindingClass) => {
                     binding.updateSchedule();
                 });
                 // this.restoreEventListeners();

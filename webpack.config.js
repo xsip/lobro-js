@@ -9,7 +9,8 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
-        modules: ['node_modules', path.resolve(__dirname, 'src/')],
+        modules: ['node_modules', 'src', path.resolve(__dirname, 'src/')],
+
         alias: {
             controller: path.resolve(__dirname, 'src/'),
             // '': path.resolve(__dirname, 'src/'),

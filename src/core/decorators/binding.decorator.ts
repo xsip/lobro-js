@@ -1,10 +1,10 @@
 import {ControllerOptions} from "./base.controller";
 import {View} from "../bindings/interfaces";
 import {State} from "../state";
+import {GeneralUtils} from "../../shared/general.utils";
 
 export interface BindingOptions {
-    propKey: string;
-    passMatchingElementsOnly?: boolean;
+    selector: string;
 }
 
 type Constructor<T = {}> = new(...args: any[]) => T;
@@ -31,12 +31,13 @@ export interface BaseBinding<T = any> extends _any {
 }
  */
 
-export abstract class BindingClass {
+export abstract class _BindingClass {
     view: View;
     viewElement: HTMLElement;
     state: State;
-    propKey: string;
+    selector: string;
     bindingKey: string;
+
     public initBinding(templateChild: HTMLElement): void {
     };
 
@@ -51,14 +52,16 @@ export abstract class BindingClass {
 
 }
 
-export abstract class BindingClassPublic {
+export abstract class BindingClass {
     view: View;
     viewElement: HTMLElement;
     state: State;
-    propKey: string;
-    bindingKey: string;
+    selector: string;
+    // bindingKey: string;
+    bindingKey?: string;
     config: BindingOptions;
-    public initBinding(templateChild: HTMLElement): void {
+
+    public initBinding(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
     };
 
     /*public updateSchedule(): void {
@@ -70,43 +73,58 @@ export abstract class BindingClassPublic {
     protected constructor(viewElement: HTMLElement, view: View) {
     }
 
-    public updateElement(templateChild: HTMLElement, hash: string, evalStr: string): void {
+    public updateElement(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
     };
 }
 
 export const Binding = (options: BindingOptions): any => {
     // return (target) => {
-    return <TClass extends new (...args: any[]) => BindingClassPublic>(target: TClass): any => {
+    return <TClass extends new (...args: any[]) => BindingClass>(target: TClass): any => {
         Object.assign(target.prototype, {
             config: options,
         });
 
 
-        class BindingDec extends target implements BindingClass {
+        class BindingDec extends target implements _BindingClass {
             view: View;
             viewElement: HTMLElement;
             state: State;
             config: BindingOptions;
-
+            fixedSelector: string;
+            bidingKey: string;
             constructor(...args: any[]) {
                 super(...args);
-                this.config.passMatchingElementsOnly = true;
-                this.propKey = this.config.propKey;
-                this.bindingKey = this.config.propKey + '-bind';
+                this.selector = this.config.selector;
+                this.fixedSelector = this.selector.replace(/[^\w\s]/gi, '');
+                this.bindingKey = this.fixedSelector + '-bind';
+
             }
 
             hasBinding(element: HTMLElement) {
-                return element.getAttribute(this.config.propKey + '-bind');
+                /*if (this.config.isSelectorBinding) {
+                    return element.nodeName.toLowerCase() === this.config.propKey;
+                }*/
+                return element.getAttribute(this.fixedSelector + '-bind');
             }
 
             initBinding(templateChild: HTMLElement): void {
                 if (!this.hasBinding(templateChild)) {
-                    if (templateChild.getAttribute(this.config.propKey)) {
-                        super.initBinding(templateChild);
+                    // if (templateChild.getAttribute(this.propKey)) {
+                    // console.log(templateChild.matches(this.selector));
+                    if (templateChild.matches(this.selector)) {
+                        console.log(templateChild.matches(this.selector));
+                        const elementHash: string = GeneralUtils.createRandomHash(5);
+                        templateChild.setAttribute(this.bindingKey, elementHash);
+                        console.log('setting ' + this.bindingKey + ' to ', elementHash);
+                        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.fixedSelector));
+                        console.log(templateChild.getAttribute(this.selector));
+                        console.log(this.state.getEvalForHashList());
+                        super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
                     }
                 }
                 // TODO: remove on error ases with other bindings!!
-                templateChild.removeAttribute(this.propKey);
+                templateChild.removeAttribute(this.selector);
+
             }
 
             reduceMappings(): void {
@@ -119,7 +137,7 @@ export const Binding = (options: BindingOptions): any => {
                     if (evalStr) {
 
                         const elList: HTMLElement[] =
-                            Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.config.propKey}-bind="${hash}"]`));
+                            Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.fixedSelector}-bind="${hash}"]`));
 
                         // query selector all since we are using a hash mutliple times if possible!!
                         elList.map(el => {
@@ -130,6 +148,9 @@ export const Binding = (options: BindingOptions): any => {
                 }
 
             }
+
+            bindingKey: string;
+            selector: string;
 
         }
 

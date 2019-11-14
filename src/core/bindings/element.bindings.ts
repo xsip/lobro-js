@@ -2,14 +2,15 @@ import {View} from "./interfaces";
 import {DomUtils, ExtendedElement} from "../../shared/dom.utils";
 import {GeneralUtils} from "../../shared/general.utils";
 import {State} from "../state";
-import {BaseBinding} from "./base.binding";
+import {_BindingClass} from "../decorators/binding.decorator";
 
-export class ElementBindings implements BaseBinding {
+export class ElementBindings implements _BindingClass{
     bindingKey: string = 'element-bind';
     state: State = new State();
     eventListeners: {} = {};
+    selector: string;
 
-    constructor(private viewElement: HTMLElement, private view: View) {
+    constructor(public viewElement: HTMLElement, public view: View) {
 
     }
 

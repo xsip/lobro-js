@@ -1,28 +1,25 @@
-import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {State} from "../state";
-import {ExtendedElement} from "../../shared/dom.utils";
-import {BaseBinding} from "./base.binding";
-import {Binding, BindingClass, BindingClassPublic, BindingOptions} from "../decorators/binding.decorator";
+import {Binding, _BindingClass, BindingClass, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
-    propKey: 'if',
+    selector: '[if]',
 })
-export class IfBindings implements BindingClassPublic {
+export class IfBindings implements BindingClass {
 
     state: State = new State();
     bindingKey: string;
-    propKey: string;
+    selector: string;
     config: BindingOptions;
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
 
-    public initBinding(templateChild: HTMLElement) {
+    /*public initBinding(templateChild: HTMLElement) {
         const elementHash: string = GeneralUtils.createRandomHash(5);
         templateChild.setAttribute(this.bindingKey, elementHash);
 
-        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.propKey));
+        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.selector));
 
         if (!this.view.evalFromView(this.state.getEvalForHash(elementHash))) {
             templateChild.hidden = true;
@@ -30,7 +27,7 @@ export class IfBindings implements BindingClassPublic {
             templateChild.hidden = false;
         }
         // TODO: implement view property watcher to trigger change detection/ rerendering
-    }
+    }*/
 
 
     replaceHashInDom = (hash: string, newHash: string) => {
@@ -49,6 +46,14 @@ export class IfBindings implements BindingClassPublic {
             el.hidden = true;
         } else {
             el.hidden = false;
+        }
+    }
+
+    initBinding(templateChild: HTMLElement, hash: string, evalStr: string): void {
+        if (!this.view.evalFromView(evalStr)) {
+            templateChild.hidden = true;
+        } else {
+            templateChild.hidden = false;
         }
     }
 }

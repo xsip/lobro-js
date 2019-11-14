@@ -1,12 +1,12 @@
 import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {State} from "../state";
-import {Binding, BindingClassPublic, BindingOptions} from "../decorators/binding.decorator";
+import {Binding, BindingClass, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
-    propKey: 'click',
+    selector: '[click]',
 })
-export class ClickBinding implements BindingClassPublic {
+export class ClickBinding implements BindingClass {
     state: State = new State();
     config: BindingOptions;
 
@@ -14,15 +14,10 @@ export class ClickBinding implements BindingClassPublic {
 
     }
 
-    public initBinding(templateChild: HTMLElement) {
-        const elementHash: string = GeneralUtils.createRandomHash(5);
-        templateChild.setAttribute(this.bindingKey, elementHash);
-
-        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.propKey));
-        console.log(this.state.getEvalForHashList());
+    public initBinding(templateChild: HTMLElement, hash: string, evalSt: string) {
         templateChild.addEventListener('click', async () => {
             // added await for try catch block!!
-            await this.view.evalFromView(this.state.getEvalForHash(elementHash));
+            await this.view.evalFromView(this.state.getEvalForHash(hash));
         });
         console.log((templateChild as any).getEventListeners('click')[0].listener.toString());
 
@@ -38,7 +33,7 @@ export class ClickBinding implements BindingClassPublic {
         this.state.reduceMappings(this.replaceHashInDom);
     }
 
-    propKey: string;
+    selector: string;
     bindingKey: string;
 
     updateElement(templateChild: HTMLElement, hash: string, evalStr: string): void {

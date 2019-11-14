@@ -3,11 +3,11 @@ import {EventListenerHook} from "./hooks/eventListenerHook";
 import {PromiseHook} from "./hooks/promiseHook";
 import {ControllerOptions} from "./decorators/base.controller";
 import {GeneralUtils} from "../shared/general.utils";
-import {BaseBinding} from "./bindings/base.binding";
 import {ElementBindings} from "./bindings/element.bindings";
 import {IfBindings} from "./bindings/if.bindings";
 import {InputBindings} from "./bindings/input.bindings";
 import {ClickBinding} from "./bindings/click.binding";
+import {_BindingClass, BindingClass} from "./decorators/binding.decorator";
 
 
 interface BasicControllerInstance<T = any> {
@@ -19,7 +19,7 @@ interface BasicControllerInstance<T = any> {
 // export type BasicControllerInstance<T = any> = BasicControllerInstance_ extends T;
 interface ModuleConfig {
     controller: any[];
-    bindings?: BaseBinding<any>[];
+    bindings?: _BindingClass[];
 }
 
 export class LoBroModule {
