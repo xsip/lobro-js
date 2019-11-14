@@ -33,9 +33,13 @@ export class ClickBinding implements BaseBinding {
 
             this.state.saveEvalForHash(elementHash, element.getAttribute(this.identifyKey));
 
-            element.addEventListener('click', () => {
-                this.view.evalFromView(this.state.getEvalForHash(elementHash));
-            })
+            element.addEventListener('click', async () => {
+                // added await for try catch block!!
+                await this.view.evalFromView(this.state.getEvalForHash(elementHash));
+                // this.view.detectChanges();
+
+            });
+            console.log((element as any).getEventListeners('click')[0].listener.toString());
             // this.view[element.getAttribute(this.identifyKey)].watch()
         } else {
             // element allready bound

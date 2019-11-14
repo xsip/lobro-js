@@ -1,12 +1,12 @@
 import 'reflect-metadata'
-import {GeneralUtils} from "../shared/general.utils";
-import {DomUtils} from "../shared/dom.utils";
-import {State} from "./state";
-import {InputBindings} from "./bindings/input.bindings";
-import {ElementBindings} from "./bindings/element.bindings";
+import {GeneralUtils} from "../../shared/general.utils";
+import {DomUtils} from "../../shared/dom.utils";
+import {State} from "../state";
+import {InputBindings} from "../bindings/input.bindings";
+import {ElementBindings} from "../bindings/element.bindings";
 import * as path from "path";
-import {IfBindings} from "./bindings/if.bindings";
-import {BaseBinding} from "./bindings/base.binding";
+import {IfBindings} from "../bindings/if.bindings";
+import {BaseBinding} from "../bindings/base.binding";
 
 export interface ControllerOptions {
     template: string;

@@ -3,68 +3,39 @@ import {View} from "./interfaces";
 import {State} from "../state";
 import {ExtendedElement} from "../../shared/dom.utils";
 import {BaseBinding} from "./base.binding";
+import {Binding, BindingClass, BindingClassPublic} from "../decorators/binding.decorator";
 
+@Binding({
+    propKey: 'if',
+    passMatchingElementsOnly: true
+})
+export class IfBindings implements BindingClassPublic {
 
-export class IfBindings<T = any> implements BaseBinding {
     state: State = new State();
     bindingKey: string = 'if-bind';
     identifyKey: string = 'if';
+    i: number = 0;
+    propKey: string;
 
-    constructor(private viewElement: HTMLElement, private view: View) {
+    constructor(public viewElement: HTMLElement, public view: View) {
 
     }
 
     public initBinding(templateChild: HTMLElement) {
+        const elementHash: string = GeneralUtils.createRandomHash(5);
+        templateChild.setAttribute(this.bindingKey, elementHash);
 
-        if (templateChild.hasAttribute(this.identifyKey)) {
-            // console.log('adding binding for ', templateChild.id);
-            this.handleBinding(templateChild);
+        this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.identifyKey));
+
+        if (!this.view.evalFromView(this.state.getEvalForHash(elementHash))) {
+            templateChild.hidden = true;
+        } else {
+            templateChild.hidden = false;
         }
+
         // TODO: implement view property watcher to trigger change detection/ rerendering
     }
 
-    private handleBinding(element: HTMLElement) {
-
-        if (!element.getAttribute(this.bindingKey)) {
-            const elementHash: string = GeneralUtils.createRandomHash(5);
-
-            // (element as HTMLElement).value = this.view.evalFromView(element.getAttribute(this.identifyKey));
-            element.setAttribute(this.bindingKey, elementHash);
-            this.state.saveEvalForHash(elementHash, element.getAttribute(this.identifyKey));
-            if (!this.view.evalFromView(this.state.getEvalForHash(elementHash))) {
-                element.hidden = true;
-            } else {
-                element.hidden = false;
-            }
-            // this.view[element.getAttribute(this.identifyKey)].watch()
-        } else {
-            // element allready bound
-        }
-
-    }
-
-    public updateSchedule() {
-
-
-        for (let hash in this.state.getEvalForHashList()) {
-
-            if (this.state.getEvalForHash(hash)) {
-
-                const elList: HTMLElement[] =
-                    Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.bindingKey}="${hash}"]`));
-
-                // query selector all since we are using a hash mutliple times if possible!!
-                elList.map(el => {
-                    if (!this.view.evalFromView(this.state.getEvalForHash(hash))) {
-                        el.hidden = true;
-                    } else {
-                        el.hidden = false;
-                    }
-                });
-
-            }
-        }
-    }
 
     replaceHashInDom = (hash: string, newHash: string) => {
         const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
@@ -74,5 +45,14 @@ export class IfBindings<T = any> implements BaseBinding {
 
     reduceMappings() {
         this.state.reduceMappings(this.replaceHashInDom);
+    }
+
+    updateElement(el: HTMLElement, hash: string, evalStr: string): void {
+
+        if (!this.view.evalFromView(this.state.getEvalForHash(hash))) {
+            el.hidden = true;
+        } else {
+            el.hidden = false;
+        }
     }
 }

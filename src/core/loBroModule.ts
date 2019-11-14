@@ -1,7 +1,7 @@
 import {EventListenerHook} from "./hooks/eventListenerHook";
 // import {RequestHook} from "./hooks/requestHook";
 import {PromiseHook} from "./hooks/promiseHook";
-import {ControllerOptions} from "./base.controller";
+import {ControllerOptions} from "./decorators/base.controller";
 import {GeneralUtils} from "../shared/general.utils";
 import {BaseBinding} from "./bindings/base.binding";
 import {ElementBindings} from "./bindings/element.bindings";

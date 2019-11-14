@@ -1,4 +1,4 @@
-import {Controller} from "../core/base.controller";
+import {Controller} from "../core/decorators/base.controller";
 
 import tmpl from './demo-controller.html';
 import * as path from "path";
@@ -26,6 +26,7 @@ export class DemoController {
     async buttonClick() {
         console.log('BUTTON CLICK FUNC!!');
         this.showElement = !this.showElement;
+        try {
         const res: any = await fetch('https://jsonplaceholder.typicode.com/todos');
         const data: any = await res.json();
         console.log(data);
@@ -41,6 +42,10 @@ export class DemoController {
                 this.version = data[5].id;
                 this.version2 = data[10].id;
             });*/
+        } catch (e) {
+            this.version = -1;
+            this.version = -2;
+        }
     }
 
     addEventListeners = () => {
