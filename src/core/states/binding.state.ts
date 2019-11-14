@@ -1,4 +1,4 @@
-export class State {
+export class BindingState {
     private evalForHash: any[] = [];
     private hashForEval: any[] = [];
     private lastValueForHash: any[] = [];

@@ -1,7 +1,8 @@
-import {Controller} from "../core/decorators/base.controller";
+
 
 import tmpl from './demo-controller.html';
 import * as path from "path";
+import {Controller} from "../core/decorators/controller.decorator";
 
 require('demo-controller/demo-controller.scss');
 
@@ -77,6 +78,7 @@ export class DemoController {
     afterRender = () => {
         console.log('after render called');
         this.addEventListeners();
+        this.buttonClick();
     };
 
 

@@ -1,12 +1,12 @@
 import {View} from "./interfaces";
 import {DomUtils, ExtendedElement} from "../../shared/dom.utils";
 import {GeneralUtils} from "../../shared/general.utils";
-import {State} from "../state";
+import {BindingState} from "../states/binding.state";
 import {_BindingClass} from "../decorators/binding.decorator";
 
-export class ElementBindings implements _BindingClass{
-    bindingKey: string = 'element-bind';
-    state: State = new State();
+export class ContentBindings implements _BindingClass{
+    bindingKey: string = 'content-bind';
+    state: BindingState = new BindingState();
     eventListeners: {} = {};
     selector: string;
 

@@ -1,6 +1,6 @@
-import {ControllerOptions} from "./base.controller";
+import {ControllerOptions} from "./controller.decorator";
 import {View} from "../bindings/interfaces";
-import {State} from "../state";
+import {BindingState} from "../states/binding.state";
 import {GeneralUtils} from "../../shared/general.utils";
 
 export interface BindingOptions {
@@ -13,28 +13,11 @@ interface ExtendedElement extends HTMLElement {
     getEventListeners: () => { [index: string]: any[] }
 }
 
-/*
-export interface BaseBinding<T = any> extends _any {
-    // new(viewElement: HTMLElement, view: View): T;
-
-    state: State;
-    initBinding: (templateChild: HTMLElement) => void;
-    updateSchedule: () => void;
-    reduceMappings: () => void;
-    bindingKey: string;
-    identifyKey?: string;
-    // viewElement?: HTMLElement,
-    // view?: View;
-    // constructor: (viewElement: HTMLElement, view: View) => any;
-    // view: View;
-    // viewElement: HTMLElement;
-}
- */
 
 export abstract class _BindingClass {
     view: View;
     viewElement: HTMLElement;
-    state: State;
+    state: BindingState;
     selector: string;
     bindingKey: string;
 
@@ -55,7 +38,7 @@ export abstract class _BindingClass {
 export abstract class BindingClass {
     view: View;
     viewElement: HTMLElement;
-    state: State;
+    state: BindingState;
     selector: string;
     // bindingKey: string;
     bindingKey?: string;
@@ -88,7 +71,7 @@ export const Binding = (options: BindingOptions): any => {
         class BindingDec extends target implements _BindingClass {
             view: View;
             viewElement: HTMLElement;
-            state: State;
+            state: BindingState;
             config: BindingOptions;
             fixedSelector: string;
             bidingKey: string;

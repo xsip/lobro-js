@@ -1,5 +1,5 @@
 import {View} from "./interfaces";
-import {State} from "../state";
+import {BindingState} from "../states/binding.state";
 import {Binding, _BindingClass, BindingClass, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
@@ -7,7 +7,7 @@ import {Binding, _BindingClass, BindingClass, BindingOptions} from "../decorator
 })
 export class IfBindings implements BindingClass {
 
-    state: State = new State();
+    state: BindingState = new BindingState();
     bindingKey: string;
     selector: string;
     config: BindingOptions;

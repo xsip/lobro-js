@@ -1,12 +1,13 @@
 import 'reflect-metadata'
 import {GeneralUtils} from "../../shared/general.utils";
 import {DomUtils} from "../../shared/dom.utils";
-import {State} from "../state";
+import {BindingState} from "../states/binding.state";
 import {InputBindings} from "../bindings/input.bindings";
-import {ElementBindings} from "../bindings/element.bindings";
+import {ContentBindings} from "../bindings/content.bindings";
 import * as path from "path";
 import {IfBindings} from "../bindings/if.bindings";
 import {_BindingClass} from "./binding.decorator";
+import {ControllerState} from "../states/controller.state";
 
 export interface ControllerOptions {
     template: string;
@@ -20,7 +21,7 @@ interface ExtendedElement extends HTMLElement {
 
 export const CONTROLLER_DECORATOR_KEY = 'ControllerData';
 
-const newState = (): State => new State();
+const newState = (): BindingState => new BindingState();
 
 type Constructor<T = {}> = new(...args: any[]) => T;
 
@@ -32,22 +33,16 @@ export const Controller = (options: ControllerOptions): any => {
         });
 
         // @ts-ignore
-        return class extends target {
+        class Controller extends target {
             public static options: ControllerOptions = options;
-            state: State = newState();
+            state: ControllerState = new ControllerState();
             element: HTMLElement;
             updateInterval: number = 10000;
             updateScheduler: any;
-            // evalForHash: any[] = [];
-            // hashForEval: any[] = [];
-            // lastValueCollection: any[] = [];
             onInitCalled = false;
             eventListeners: {} = {};
             // oldData: any = {};
             config: ControllerOptions;
-            inputBindings: InputBindings;
-            elementBindings: ElementBindings;
-            ifBindings: IfBindings;
 
             constructor(private renderInElement?: HTMLElement, private bindings: _BindingClass[] = []) {
                 super();
@@ -194,6 +189,8 @@ export const Controller = (options: ControllerOptions): any => {
             }
 
         }
+
+        return Controller;
     }
 };
 

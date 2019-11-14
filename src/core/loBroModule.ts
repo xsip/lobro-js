@@ -1,9 +1,9 @@
 import {EventListenerHook} from "./hooks/eventListenerHook";
 // import {RequestHook} from "./hooks/requestHook";
 import {PromiseHook} from "./hooks/promiseHook";
-import {ControllerOptions} from "./decorators/base.controller";
+import {ControllerOptions} from "./decorators/controller.decorator";
 import {GeneralUtils} from "../shared/general.utils";
-import {ElementBindings} from "./bindings/element.bindings";
+import {ContentBindings} from "./bindings/content.bindings";
 import {IfBindings} from "./bindings/if.bindings";
 import {InputBindings} from "./bindings/input.bindings";
 import {ClickBinding} from "./bindings/click.binding";
@@ -34,7 +34,7 @@ export class LoBroModule {
         }
         config.bindings = [
             ...config.bindings,
-            ElementBindings,
+            ContentBindings,
             IfBindings,
             InputBindings,
             ClickBinding,

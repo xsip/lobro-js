@@ -1,13 +1,13 @@
 import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
-import {State} from "../state";
+import {BindingState} from "../states/binding.state";
 import {Binding, BindingClass, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
     selector: 'input'
 })
 export class InputBindings implements BindingClass {
-    state: State = new State();
+    state: BindingState = new BindingState();
     bindingKey: string;
     constructor(public viewElement: HTMLElement, public view: View) {
 
