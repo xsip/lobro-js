@@ -1,11 +1,11 @@
 import {View} from "./interfaces";
 import {BindingState} from "../states/binding.state";
-import {Binding, _BindingClass, BindingClass, BindingOptions} from "../decorators/binding.decorator";
+import {Binding, DecoratedBinding, CBinding, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
     selector: '[if]',
 })
-export class IfBindings implements BindingClass {
+export class IfBindings implements CBinding {
 
     state: BindingState = new BindingState();
     bindingKey: string;

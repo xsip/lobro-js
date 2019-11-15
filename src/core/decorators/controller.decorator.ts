@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import {DomUtils} from "../../shared/dom.utils";
 import {BindingState} from "../states/binding.state";
-import {_BindingClass} from "./binding.decorator";
+import {CBinding, DecoratedBinding} from "./binding.decorator";
 import {ControllerState} from "../states/controller.state";
 
 export interface ControllerOptions {
@@ -38,8 +38,8 @@ export const Controller = (options: ControllerOptions): any => {
             eventListeners: {} = {};
             // oldData: any = {};
             config: ControllerOptions;
-
-            constructor(private renderInElement?: HTMLElement, private bindings: _BindingClass[] = []) {
+            static template: string = options.template;
+            constructor(private renderInElement?: HTMLElement, private bindings: DecoratedBinding[] = []) {
                 super();
 
                 // require('demo-controller/demo-controller.scss');
@@ -51,10 +51,10 @@ export const Controller = (options: ControllerOptions): any => {
             }
 
             setupBindings() {
-                this.bindings.map((binding: _BindingClass) => {
+                this.bindings.map((binding: DecoratedBinding) => {
                     // @ts-ignore
                     const b =  new binding(this.element, this);
-                    this.bindingInstances[b.name] = b;
+                    this.bindingInstances[(binding as any).bindingName] = b;
                 });
             }
 
@@ -104,7 +104,7 @@ export const Controller = (options: ControllerOptions): any => {
             }
 
             // bindingInstances: _BindingClass[] = [];
-            bindingInstances: { [index: string]: _BindingClass } = {};
+            bindingInstances: { [index: string]: DecoratedBinding } = {};
 
             renderTemplate() {
                 console.log('rendering template');
@@ -117,7 +117,7 @@ export const Controller = (options: ControllerOptions): any => {
                     this.bindingInstances.push(new binding(this.element, this));
                 });*/
                 this.setupBindings();
-                console.log(this.bindingInstances);
+                // console.log(this.bindingInstances);
                 /*this.inputBindings = new InputBindings(this.element, this as any);
                 this.elementBindings = new ElementBindings(this.element, this as any);
                 this.ifBindings = new IfBindings(this.element, this as any);*/

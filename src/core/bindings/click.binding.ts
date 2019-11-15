@@ -1,12 +1,12 @@
 import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {BindingState} from "../states/binding.state";
-import {Binding, BindingClass, BindingOptions} from "../decorators/binding.decorator";
+import {Binding, CBinding, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
     selector: '[click]',
 })
-export class ClickBinding implements BindingClass {
+export class ClickBinding implements CBinding {
     state: BindingState = new BindingState();
     config: BindingOptions;
 
@@ -19,7 +19,7 @@ export class ClickBinding implements BindingClass {
             // added await for try catch block!!
             await this.view.evalFromView(this.state.getEvalForHash(hash));
         });
-        console.log((templateChild as any).getEventListeners('click')[0].listener.toString());
+        // console.log((templateChild as any).getEventListeners('click')[0].listener.toString());
 
     }
 

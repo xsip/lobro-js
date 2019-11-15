@@ -1,8 +1,15 @@
+export interface IState {
+    evalForHash: {};
+    hashForEval: {};
+    lastValueForHash: {};
+    oldControllerData: {};
+}
+
 export class BindingState {
-    private evalForHash: any[] = [];
-    private hashForEval: any[] = [];
-    private lastValueForHash: any[] = [];
-    private oldControllerData: any = {};
+    private evalForHash: {} = {};
+    private hashForEval: {} = {};
+    private lastValueForHash: {} = {};
+    private oldControllerData: {} = {};
 
     constructor() {
 
@@ -12,7 +19,7 @@ export class BindingState {
         return this.evalForHash[hash];
     }
 
-    getEvalForHashList(): any[] {
+    getEvalForHashList(): {} {
         return this.evalForHash;
     }
 
@@ -64,5 +71,14 @@ export class BindingState {
 
     setLastValueForHash(hash: string, val: any): void {
         this.lastValueForHash[hash] = val;
+    }
+
+    getObject(): IState {
+        return {
+            evalForHash: this.evalForHash,
+            hashForEval: this.hashForEval,
+            lastValueForHash: this.lastValueForHash,
+            oldControllerData: this.oldControllerData,
+        }
     }
 }

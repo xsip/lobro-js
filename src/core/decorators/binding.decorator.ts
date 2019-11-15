@@ -13,14 +13,18 @@ interface ExtendedElement extends HTMLElement {
     getEventListeners: () => { [index: string]: any[] }
 }
 
+export interface DecoratedBindingByIndex {
+    [index: string]: DecoratedBinding
+};
 
-export abstract class _BindingClass {
+export abstract class DecoratedBinding {
     view: View;
     viewElement: HTMLElement;
     state: BindingState;
     selector: string;
     bindingKey: string;
     name: string;
+    static bindingName: string;
 
     public initBinding(templateChild: HTMLElement): void {
     };
@@ -36,7 +40,7 @@ export abstract class _BindingClass {
 
 }
 
-export abstract class BindingClass {
+export abstract class CBinding {
     view: View;
     viewElement: HTMLElement;
     state: BindingState;
@@ -44,6 +48,7 @@ export abstract class BindingClass {
     // bindingKey: string;
     bindingKey?: string;
     config: BindingOptions;
+
 
     public initBinding(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
     };
@@ -63,13 +68,13 @@ export abstract class BindingClass {
 
 export const Binding = (options: BindingOptions): any => {
     // return (target) => {
-    return <TClass extends new (...args: any[]) => BindingClass>(target: TClass): any => {
+    return <TClass extends new (...args: any[]) => CBinding>(target: TClass): any => {
         Object.assign(target.prototype, {
             config: options,
         });
 
 
-        class BindingDec extends target implements _BindingClass {
+        class BindingDec extends target implements DecoratedBinding {
             view: View;
             viewElement: HTMLElement;
             state: BindingState;
@@ -77,6 +82,7 @@ export const Binding = (options: BindingOptions): any => {
             fixedSelector: string;
             bidingKey: string;
             name: string;
+            public static bindingName: string;
 
             constructor(...args: any[]) {
                 super(...args);
@@ -84,6 +90,7 @@ export const Binding = (options: BindingOptions): any => {
                 this.fixedSelector = this.selector.replace(/[^\w\s]/gi, '');
                 this.name = this.fixedSelector;
                 this.bindingKey = this.fixedSelector + '-bind';
+                BindingDec.bindingName = this.fixedSelector;
 
             }
 
@@ -99,13 +106,13 @@ export const Binding = (options: BindingOptions): any => {
                     // if (templateChild.getAttribute(this.propKey)) {
                     // console.log(templateChild.matches(this.selector));
                     if (templateChild.matches(this.selector)) {
-                        console.log(templateChild.matches(this.selector));
+                        // console.log(templateChild.matches(this.selector));
                         const elementHash: string = GeneralUtils.createRandomHash(5);
                         templateChild.setAttribute(this.bindingKey, elementHash);
-                        console.log('setting ' + this.bindingKey + ' to ', elementHash);
+                        // console.log('setting ' + this.bindingKey + ' to ', elementHash);
                         this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.fixedSelector));
-                        console.log(templateChild.getAttribute(this.selector));
-                        console.log(this.state.getEvalForHashList());
+                        // console.log(templateChild.getAttribute(this.selector));
+                        // console.log(this.state.getEvalForHashList());
                         super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
                         // TODO: remove on error ases with other bindings!!
                         templateChild.removeAttribute(this.fixedSelector);

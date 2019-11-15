@@ -2,14 +2,15 @@ import {View} from "./interfaces";
 import {DomUtils, ExtendedElement} from "../../shared/dom.utils";
 import {GeneralUtils} from "../../shared/general.utils";
 import {BindingState} from "../states/binding.state";
-import {_BindingClass} from "../decorators/binding.decorator";
+import {DecoratedBinding} from "../decorators/binding.decorator";
 
-export class ContentBindings implements _BindingClass {
+export class ContentBindings implements DecoratedBinding {
     bindingKey: string = 'content-bind';
     state: BindingState = new BindingState();
     eventListeners: {} = {};
     selector: string;
     name: string = 'content';
+    static bindingName = 'content';
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }

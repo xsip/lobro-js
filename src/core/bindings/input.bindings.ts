@@ -1,12 +1,12 @@
 import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {BindingState} from "../states/binding.state";
-import {Binding, BindingClass, BindingOptions} from "../decorators/binding.decorator";
+import {Binding, CBinding, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
     selector: 'input'
 })
-export class InputBindings implements BindingClass {
+export class InputBindings implements CBinding {
     state: BindingState = new BindingState();
     bindingKey: string;
     config: BindingOptions;

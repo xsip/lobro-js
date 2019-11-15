@@ -7,21 +7,22 @@ import {ContentBindings} from "./bindings/content.bindings";
 import {IfBindings} from "./bindings/if.bindings";
 import {InputBindings} from "./bindings/input.bindings";
 import {ClickBinding} from "./bindings/click.binding";
-import {_BindingClass, BindingClass} from "./decorators/binding.decorator";
+import {DecoratedBinding, CBinding} from "./decorators/binding.decorator";
+import {Compiler} from "./build/compiler";
 
 
 interface BasicControllerInstance<T = any> {
     updateTemplate: () => void;
     detectChanges: () => void;
     setBindings: (bindings: BasicControllerInstance<any>[]) => void;
-    bindingInstances: { [index: string]: _BindingClass };
+    bindingInstances: { [index: string]: DecoratedBinding };
     element: HTMLElement;
 }
 
 // export type BasicControllerInstance<T = any> = BasicControllerInstance_ extends T;
 interface ModuleConfig {
     controller: any[];
-    bindings?: _BindingClass[];
+    bindings?: DecoratedBinding[];
 }
 
 export class LoBroModule {
@@ -67,16 +68,28 @@ export class LoBroModule {
 
         this.promiseHook = new PromiseHook();
         this.promiseHook.setModule(this);
-
+        this.compilerTest();
         this.initController();
-        this.dumpPreCompiled();
+        // this.dumpPreCompiled();
+    }
+
+    compilerTest() {
+
+        this.config.controller.map(c => {
+
+            const compiler: Compiler = new Compiler(c.template, this.config.bindings);
+            const res = compiler.compile();
+            window['bds'] = res.bindingStates;
+            window['oht'] = res.element.outerHTML;
+        })
+
     }
 
     dumpPreCompiled() {
         console.log('DUMPING');
         this.controllerInstances.map((c: BasicControllerInstance<any>) => {
-            console.log(c.bindingInstances);
-            console.log(c.element.outerHTML);
+            //console.log(c.bindingInstances);
+            // console.log(c.element.outerHTML);
         });
     }
 }
