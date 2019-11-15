@@ -4,6 +4,8 @@
     </div>
     <div class="content">
         <p class="test">Welcome to LobroJs version {{this.version}}</p>
+        <p class="test">Fix Regex so that match is generated even when there is a br after a match{{this.version}}<br>Content2
+        </p>
         <p>Currently we support:
         </p>
         <ul>
@@ -13,8 +15,14 @@
             <li>Input Two way binding</li>
             <li>Click event binding</li>
         </ul>
-        <input id="input" input="this.version" type="text"/>
-        <input id="input" input="this.version2" type="text"/>
+        <div class="updater-v1">
+            <span> Update version 1 ({{this.version}})</span>
+            <input id="input1" input="this.version" type="text"/>
+        </div>
+        <div class="updater-v2">
+            <span> Update version 2 ({{this.version2}})</span>
+        <input id="input2" input="this.version2" type="text"/>
+        </div>
     </div>
     <!--<div class="content3">
         CHANGES. {{this.version}}
