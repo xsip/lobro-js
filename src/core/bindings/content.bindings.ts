@@ -4,7 +4,7 @@ import {GeneralUtils} from "../../shared/general.utils";
 import {BindingState} from "../states/binding.state";
 import {_BindingClass} from "../decorators/binding.decorator";
 
-export class ContentBindings implements _BindingClass{
+export class ContentBindings implements _BindingClass {
     bindingKey: string = 'content-bind';
     state: BindingState = new BindingState();
     eventListeners: {} = {};

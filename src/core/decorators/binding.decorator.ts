@@ -75,6 +75,7 @@ export const Binding = (options: BindingOptions): any => {
             config: BindingOptions;
             fixedSelector: string;
             bidingKey: string;
+
             constructor(...args: any[]) {
                 super(...args);
                 this.selector = this.config.selector;
@@ -103,10 +104,12 @@ export const Binding = (options: BindingOptions): any => {
                         console.log(templateChild.getAttribute(this.selector));
                         console.log(this.state.getEvalForHashList());
                         super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
+                        // TODO: remove on error ases with other bindings!!
+                        templateChild.removeAttribute(this.fixedSelector);
                     }
                 }
-                // TODO: remove on error ases with other bindings!!
-                templateChild.removeAttribute(this.selector);
+
+
 
             }
 
