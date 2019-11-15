@@ -79,8 +79,7 @@ export class LoBroModule {
 
             const compiler: Compiler = new Compiler(c.options.template, this.config.bindings);
             const res = compiler.compile();
-            window['bds'] = res.bindingStates;
-            window['oht'] = res.element.outerHTML;
+            console.log(c.options.name, res);
         })
 
     }

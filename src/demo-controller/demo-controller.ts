@@ -6,7 +6,7 @@ require('demo-controller/demo-controller.scss');
 
 @Controller({
     template: tmpl,
-    name: 'controller',
+    name: 'main-controller',
     stylesheet: 'demo-controller/demo-controller.scss',
 })
 export class DemoController {

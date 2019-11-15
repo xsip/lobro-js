@@ -1,5 +1,5 @@
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 module.exports = {
     mode: "production",
     devtool: "inline-source-map",
@@ -18,7 +18,8 @@ module.exports = {
         // Add `.ts` and `.tsx` as a resolvable extension.
         extensions: [".ts", ".tsx", ".js", ".scss", ".html"]
     },
-    // plugins: [new HtmlWebpackPlugin({template: './src/index.html'})],
+    plugins: [],
+    // new HtmlWebpackPlugin({template: './src/index.html'}), new webpack.optimize.ModuleConcatenationPlugin()
     module: {
         rules: [
             // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
