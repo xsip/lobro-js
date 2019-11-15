@@ -15,16 +15,23 @@ export class ContentBindings implements _BindingClass {
     }
 
     public initBinding(templateChild: HTMLElement) {
-        let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
+        const log: boolean = templateChild.className === 'test';
+        let evalMatches = null // DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
+        if (!evalMatches) {
+            evalMatches = templateChild.innerText.match(/{{([^]*?)}}/g);
+        }
+        if (log) {
+            console.log(evalMatches);
+        }
         // evalMatches = evalMatches ? evalMatches : [];
         if (evalMatches) {
-            // console.log('eval matches', evalMatches);
-            let log = true;
+            if (log) {
+                console.log('eval matches', evalMatches);
+            }
             evalMatches.map((evalMatch: string) => {
                 if (log) {
-                    // console.log('REPLACING REPLACING, ', evalMatch);
+                    console.log('REPLACING REPLACING, ', evalMatch);
                 }
-
                 this.renderEvalInElement(templateChild, evalMatch);
             });
         }
@@ -32,17 +39,24 @@ export class ContentBindings implements _BindingClass {
     }
 
     renderEvalInElement(curE: HTMLElement, evalMatch: string) {
+        const log: boolean = curE.className === 'test';
+
         // console.log(DomUtils.getDirectInnerText(curE));
         let shouldReplace: boolean = true;
         //if children also matches the same eval, don't replace value in template!
         // if (curE.children.length > 0 && (curE.children[0] as HTMLElement).innerText.match(evalMatch)) {
-        if (curE.children.length > 0 && DomUtils.getDirectInnerText(curE.children[0] as HTMLElement).match(evalMatch)) {
+        if (curE.children.length > 0 && (DomUtils.getDirectInnerText(curE.children[0] as HTMLElement).match(evalMatch))){ //||
+            //(curE.children[0] as HTMLElement).innerText.match(evalMatch)) {
             shouldReplace = false;
             if (!curE.children[0].getAttribute(this.bindingKey)) {
                 this.renderEvalInElement(curE.children[0] as any, evalMatch);
-                // console.log('recrusive', curE.children[0]);
+                console.log('recrusive', curE.children[0]);
             }
         } else {
+            if (log) {
+                console.log('going to replace');
+            }
+
             let hash = this.state.getHashForEval(evalMatch);
             let newHash: string;
             // element allready has some template variable replaced
@@ -64,12 +78,18 @@ export class ContentBindings implements _BindingClass {
 
             if (!hash) {
                 hash = GeneralUtils.createRandomHash();
+                if (log) {
+                    console.log('creating new hash!!');
+                }
                 this.state.saveEvalForHash(newHash ? newHash : hash, evalMatch);
                 // this.state.hashForEval[evalMatch] = hash;
             }
 
 
             const data = this.evalTemplateFunction(evalMatch);
+            if (log) {
+                console.log('replacing with ', data);
+            }
             this.state.setLastValueForHash(newHash ? newHash : hash, data);
 
             curE.innerHTML = curE.innerHTML.replace(evalMatch, `<!--${newHash ? newHash : hash}!-->` + data + `<!--${newHash ? newHash : hash}!-->`);
@@ -156,6 +176,6 @@ export class ContentBindings implements _BindingClass {
     };
 
     reduceMappings() {
-        this.state.reduceMappings(this.replaceHashInDom);
+        // this.state.reduceMappings(this.replaceHashInDom);
     }
 }

@@ -23,16 +23,6 @@ export class ClickBinding implements BindingClass {
 
     }
 
-    replaceHashInDom = (hash: string, newHash: string) => {
-        const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
-        const hashList = el.getAttribute(this.bindingKey);
-        el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
-    };
-
-    reduceMappings() {
-        this.state.reduceMappings(this.replaceHashInDom);
-    }
-
     selector: string;
     bindingKey: string;
 

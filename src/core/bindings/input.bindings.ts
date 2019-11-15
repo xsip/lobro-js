@@ -9,18 +9,19 @@ import {Binding, BindingClass, BindingOptions} from "../decorators/binding.decor
 export class InputBindings implements BindingClass {
     state: BindingState = new BindingState();
     bindingKey: string;
+    config: BindingOptions;
+    selector: string;
+
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
 
     initBinding(templateChild: HTMLElement, hash: string, evalStr: string): void {
-        // has value binding
         if (evalStr) {
-            // this.handleBinding(templateChild);
             const elementHash: string = GeneralUtils.createRandomHash(5);
-            (templateChild as HTMLInputElement).value = this.view.evalFromView(evalStr); //templateChild.getAttribute(this.identifyKey)
+            (templateChild as HTMLInputElement).value = this.view.evalFromView(evalStr);
             templateChild.addEventListener('input', (/*event: any*/) => {
-                this.view.evalFromView(/*templateChild.getAttribute(this.identifyKey)*/ evalStr + ' = event.target.value;');
+                this.view.evalFromView(evalStr + ' = event.target.value;');
             });
         } else {
             // TODO: enable selector bindings and move to selector binding since input
@@ -35,8 +36,7 @@ export class InputBindings implements BindingClass {
     private emptyInputHookForChangeDetectionTrigger(element: HTMLElement) {
         // TODO: add check if there allready is any input listener!!
         element.addEventListener('input', (/*event: any*/) => {
-            this.noop();
-            // only for change detection
+            this.noop(); // only for change detection
         });
     }
 
@@ -45,19 +45,6 @@ export class InputBindings implements BindingClass {
             (templateChild as HTMLInputElement).value = this.view.evalFromView(this.state.getEvalForHash(hash));
         }
     }
-
-    replaceHashInDom = (hash: string, newHash: string) => {
-        const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
-        const hashList = el.getAttribute(this.bindingKey);
-        el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
-    };
-
-    reduceMappings() {
-        this.state.reduceMappings(this.replaceHashInDom);
-    }
-
-    config: BindingOptions;
-    selector: string;
 
     updateElement(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
         this.reavalInputValue(templateChild as HTMLInputElement, hash);

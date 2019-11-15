@@ -34,6 +34,7 @@ export class LoBroModule {
         }
         config.bindings = [
             ...config.bindings,
+            // basic bindings, needed to make lobro-js Work
             ContentBindings,
             IfBindings,
             InputBindings,
@@ -48,24 +49,12 @@ export class LoBroModule {
 
     private initController() {
         this.config.controller.map(c => {
-            const res = Array.prototype.slice.call(document.querySelectorAll((c as {options: ControllerOptions}).options.name));
+            const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
             res.map(e => {
                 e.id = GeneralUtils.createRandomHash(10);
-                console.log('appending element');
-                const instance: {config: ControllerOptions} = new c(e,this.config.bindings);
+                const instance: { config: ControllerOptions } = new c(e, this.config.bindings);
                 this.controllerInstances.push(instance);
-                // e.appendChild(elementToAppend.cloneNode(true));
             });
-            /*
-             const res = Array.prototype.slice.call(document.querySelectorAll(this.config.name.toUpperCase()));
-                console.log(res);
-                res.map(e => {
-                    e.id = GeneralUtils.createRandomHash(10);
-                    console.log('appending first element');
-                    e.appendChild(elementToAppend.cloneNode(true));
-                });
-             */
-
         });
     }
 

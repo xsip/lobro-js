@@ -1,11 +1,6 @@
 import 'reflect-metadata'
-import {GeneralUtils} from "../../shared/general.utils";
 import {DomUtils} from "../../shared/dom.utils";
 import {BindingState} from "../states/binding.state";
-import {InputBindings} from "../bindings/input.bindings";
-import {ContentBindings} from "../bindings/content.bindings";
-import * as path from "path";
-import {IfBindings} from "../bindings/if.bindings";
 import {_BindingClass} from "./binding.decorator";
 import {ControllerState} from "../states/controller.state";
 

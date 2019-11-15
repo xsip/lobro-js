@@ -48,10 +48,10 @@ export abstract class BindingClass {
     };
 
     /*public updateSchedule(): void {
-    };*/
+    };
 
     public reduceMappings(): void {
-    };
+    };*/
 
     protected constructor(viewElement: HTMLElement, view: View) {
     }
@@ -110,12 +110,17 @@ export const Binding = (options: BindingOptions): any => {
                 }
 
 
-
             }
 
             reduceMappings(): void {
-                super.reduceMappings();
+                this.state.reduceMappings(this.replaceHashInDom);
             }
+
+            replaceHashInDom = (hash: string, newHash: string) => {
+                const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
+                const hashList = el.getAttribute(this.bindingKey);
+                el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
+            };
 
             updateSchedule(): void {
                 for (let hash in this.state.getEvalForHashList()) {
