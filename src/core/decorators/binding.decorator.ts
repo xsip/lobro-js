@@ -7,7 +7,7 @@ export interface BindingOptions {
     selector: string;
 }
 
-type Constructor<T = {}> = new(...args: any[]) => T;
+export type Constructor<T = {}> = new(...args: any[]) => T;
 
 interface ExtendedElement extends HTMLElement {
     getEventListeners: () => { [index: string]: any[] }

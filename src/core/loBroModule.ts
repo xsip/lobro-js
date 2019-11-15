@@ -77,7 +77,7 @@ export class LoBroModule {
 
         this.config.controller.map(c => {
 
-            const compiler: Compiler = new Compiler(c.template, this.config.bindings);
+            const compiler: Compiler = new Compiler(c.options.template, this.config.bindings);
             const res = compiler.compile();
             window['bds'] = res.bindingStates;
             window['oht'] = res.element.outerHTML;
