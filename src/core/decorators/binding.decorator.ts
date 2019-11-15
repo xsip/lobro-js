@@ -20,6 +20,7 @@ export abstract class _BindingClass {
     state: BindingState;
     selector: string;
     bindingKey: string;
+    name: string;
 
     public initBinding(templateChild: HTMLElement): void {
     };
@@ -75,11 +76,13 @@ export const Binding = (options: BindingOptions): any => {
             config: BindingOptions;
             fixedSelector: string;
             bidingKey: string;
+            name: string;
 
             constructor(...args: any[]) {
                 super(...args);
                 this.selector = this.config.selector;
                 this.fixedSelector = this.selector.replace(/[^\w\s]/gi, '');
+                this.name = this.fixedSelector;
                 this.bindingKey = this.fixedSelector + '-bind';
 
             }

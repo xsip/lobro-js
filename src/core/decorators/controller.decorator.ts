@@ -50,6 +50,14 @@ export const Controller = (options: ControllerOptions): any => {
                 // eval(`require('${this.config.stylesheet}'(;`);
             }
 
+            setupBindings() {
+                this.bindings.map((binding: _BindingClass) => {
+                    // @ts-ignore
+                    const b =  new binding(this.element, this);
+                    this.bindingInstances[b.name] = b;
+                });
+            }
+
             detectChanges() {
                 let shouldUpdate: boolean = false;
                 for (let e in this) {
@@ -86,16 +94,17 @@ export const Controller = (options: ControllerOptions): any => {
                 // document.body
                 this.renderInElement.appendChild(this.element);
                 // this.state.generateHashForEvalList();
-                this.bindingInstances.map((binding: _BindingClass) => {
-                    binding.reduceMappings();
-                });
+                for ( let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
+                    this.bindingInstances[key].reduceMappings();
+                };
                 /*this.elementBindings.reduceMappings();
                 this.inputBindings.reduceMappings();
                 this.ifBindings.reduceMappings();*/
                 window['state'] = this.state;
             }
 
-            bindingInstances: _BindingClass[] = [];
+            // bindingInstances: _BindingClass[] = [];
+            bindingInstances: { [index: string]: _BindingClass } = {};
 
             renderTemplate() {
                 console.log('rendering template');
@@ -103,10 +112,12 @@ export const Controller = (options: ControllerOptions): any => {
                 templateContainer.innerHTML = this.config.template;
                 this.element = templateContainer.firstChild as any;
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-                this.bindings.map((binding: _BindingClass) => {
+                /*this.bindings.map((binding: _BindingClass) => {
                     // @ts-ignore
                     this.bindingInstances.push(new binding(this.element, this));
-                });
+                });*/
+                this.setupBindings();
+                console.log(this.bindingInstances);
                 /*this.inputBindings = new InputBindings(this.element, this as any);
                 this.elementBindings = new ElementBindings(this.element, this as any);
                 this.ifBindings = new IfBindings(this.element, this as any);*/
@@ -115,9 +126,12 @@ export const Controller = (options: ControllerOptions): any => {
                     /*this.inputBindings.initBinding(templateChild);
                     this.elementBindings.initBinding(templateChild);
                     this.ifBindings.initBinding(templateChild);*/
-                    this.bindingInstances.map((binding: _BindingClass) => {
+                    /*this.bindingInstances.map((binding: _BindingClass) => {
                         binding.initBinding(templateChild);
-                    });
+                    });*/
+                    for ( let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
+                        this.bindingInstances[key].initBinding(templateChild);
+                    };
                 });
 
                 /*DomUtils.onAppend(document.body, () => {
@@ -141,9 +155,12 @@ export const Controller = (options: ControllerOptions): any => {
                 this.elementBindings.updateSchedule();
                 this.ifBindings.updateSchedule();
                 */
-                this.bindingInstances.map((binding: _BindingClass) => {
+                /*this.bindingInstances.map((binding: _BindingClass) => {
                     binding.updateSchedule();
-                });
+                });*/
+                for ( let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
+                    this.bindingInstances[key].updateSchedule();
+                };
                 // this.restoreEventListeners();
             }
 

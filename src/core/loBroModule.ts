@@ -14,6 +14,8 @@ interface BasicControllerInstance<T = any> {
     updateTemplate: () => void;
     detectChanges: () => void;
     setBindings: (bindings: BasicControllerInstance<any>[]) => void;
+    bindingInstances: { [index: string]: _BindingClass };
+    element: HTMLElement;
 }
 
 // export type BasicControllerInstance<T = any> = BasicControllerInstance_ extends T;
@@ -67,5 +69,14 @@ export class LoBroModule {
         this.promiseHook.setModule(this);
 
         this.initController();
+        this.dumpPreCompiled();
+    }
+
+    dumpPreCompiled() {
+        console.log('DUMPING');
+        this.controllerInstances.map((c: BasicControllerInstance<any>) => {
+            console.log(c.bindingInstances);
+            console.log(c.element.outerHTML);
+        });
     }
 }

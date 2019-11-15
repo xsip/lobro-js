@@ -9,7 +9,7 @@ export class ContentBindings implements _BindingClass {
     state: BindingState = new BindingState();
     eventListeners: {} = {};
     selector: string;
-
+    name: string = 'content';
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
