@@ -1,11 +1,20 @@
 import {CompiledTemplate} from "./compiler";
+import {ControllerClass} from "../decorators/controller.decorator";
+import {DecoratedBinding} from "../decorators/binding.decorator";
 
 export class Instanciator {
     constructor() {
 
     }
 
-    compiledTemplateToInstance(compiledTemplate: CompiledTemplate) {
+    compiledTemplateToInstance(compiledTemplate: CompiledTemplate, controller: typeof ControllerClass, bindings: typeof DecoratedBinding[], appendTo: HTMLElement): ControllerClass {
+        let instance: ControllerClass;
+        if (compiledTemplate.controllerName === controller.options.name) {
+            instance = new controller(bindings);
+            instance.createInstance(compiledTemplate, appendTo);
+        }
+
+        return instance;
 
     }
 }

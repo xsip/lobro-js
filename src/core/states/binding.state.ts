@@ -81,4 +81,12 @@ export class BindingState {
             oldControllerData: this.oldControllerData,
         }
     }
+
+    setState(state: IState) {
+        this.evalForHash = state.evalForHash;
+        this.hashForEval = state.hashForEval;
+        this.lastValueForHash = state.lastValueForHash;
+        this.oldControllerData = state.oldControllerData;
+
+    }
 }

@@ -3,6 +3,7 @@ import {DomUtils} from "../../shared/dom.utils";
 import {BindingState} from "../states/binding.state";
 import {CBinding, DecoratedBinding} from "./binding.decorator";
 import {ControllerState} from "../states/controller.state";
+import {CompiledTemplate} from "../build/compiler";
 
 export interface ControllerOptions {
     template: string;
@@ -20,7 +21,7 @@ const newState = (): BindingState => new BindingState();
 
 type Constructor<T = {}> = new(...args: any[]) => T;
 
-abstract class ControllerClass {
+export class ControllerClass {
     public static options: ControllerOptions;
 
     private renderInElement: HTMLElement;
@@ -28,9 +29,36 @@ abstract class ControllerClass {
     private state: ControllerState;
     public element: HTMLElement;
 
-    constructor(renderInElement: HTMLElement, bindings: DecoratedBinding[]) {
+    constructor(bindings: typeof DecoratedBinding[]) {
 
     }
+
+    public setupBindings() {
+    };
+
+    public detectChanges() {
+    };
+
+    public evalFromView(evalData: string) {
+    };
+
+    public addToDom(elementToAppend: HTMLElement, appendTo: HTMLElement) {
+    };
+
+    public renderTemplate(appendTo: HTMLElement) {
+    };
+
+    public addEventListeners(ele: ExtendedElement, listeners: any) {
+    };
+
+    public restoreEventListeners() {
+    };
+
+    public updateTemplate() {
+    }
+
+    public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
+    };
 }
 
 export class UpdateScheduler {
@@ -50,7 +78,8 @@ export class UpdateScheduler {
 
 export const Controller = (options: ControllerOptions): any => {
     // return (target) => {
-    return <T extends Constructor>(target: T) => {
+    // return <T extends Constructor>(target: T) => {
+    return <TClass extends new (...args: any[]) => ControllerClass>(target: TClass): any => {
         Object.assign(target.prototype, {
             config: options,
         });
@@ -68,16 +97,16 @@ export const Controller = (options: ControllerOptions): any => {
 
             bindingInstances: { [index: string]: DecoratedBinding } = {};
 
-            constructor(private renderInElement?: HTMLElement, private bindings: DecoratedBinding[] = []) {
+            constructor(private bindings: typeof DecoratedBinding[] = []) {
                 super();
-                this.renderTemplate();
+                // this.renderTemplate();
             }
 
             setupBindings() {
-                this.bindings.map((binding: DecoratedBinding) => {
+                this.bindings.map((binding: typeof DecoratedBinding) => {
                     // @ts-ignore
                     const b = new binding(this.element, this);
-                    this.bindingInstances[(binding as any).bindingName] = b;
+                    this.bindingInstances[binding.bindingName] = b;
                 });
             }
 
@@ -103,9 +132,9 @@ export const Controller = (options: ControllerOptions): any => {
                 return eval(evalData);
             }
 
-            addToDom(elementToAppend: HTMLElement) {
+            addToDom(elementToAppend: HTMLElement, appendTo: HTMLElement) {
                 this.element = elementToAppend;
-                this.renderInElement.appendChild(this.element);
+                appendTo.appendChild(this.element);
                 for (let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
                     this.bindingInstances[key].reduceMappings();
                 }
@@ -113,19 +142,23 @@ export const Controller = (options: ControllerOptions): any => {
             }
 
 
-            renderTemplate() {
+            renderTemplate(appendTo: HTMLElement) {
+                this.setupBindings();
                 console.log('rendering template');
                 const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
+
                 templateContainer.innerHTML = Controller.options.template;
+
                 this.element = templateContainer.firstChild as any;
+
                 let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-                this.setupBindings();
+
                 templateChildren.map((templateChild: HTMLElement) => {
                     for (let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
                         this.bindingInstances[key].initBinding(templateChild);
                     }
                 });
-                this.addToDom(templateContainer.firstChild as HTMLElement);
+                this.addToDom(this.element, appendTo);
                 this['afterRender']();
             }
 
@@ -158,6 +191,25 @@ export const Controller = (options: ControllerOptions): any => {
                 }
             }
 
+            public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
+
+                // const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
+                // templateContainer.innerHTML = Controller.options.template;
+                this.element = compiledTemplate.element; // templateContainer.firstChild as any;
+                this.setupBindings();
+                for (let key in this.bindingInstances) {
+                    if (compiledTemplate.bindingStates[key]) {
+                        this.bindingInstances[key].state.setState(compiledTemplate.bindingStates[key]);
+                    } else {
+                        console.log('no state saved for ', key);
+                    }
+
+                }
+
+                this.addToDom(this.element, appendTo);
+                this['afterRender']();
+                this.detectChanges();
+            }
         }
 
         return Controller;

@@ -22,7 +22,7 @@
         <div class="updater-v2">
             <span> Update version 2 ({{this.version2}})</span>
         <input id="input2" input="this.version2" type="text"/>
-            <input id="input3" if="this.version2 > 2" type="text"/>
+            <input id="input3" if="this.version2 === 2 " type="text"/>
         </div>
         <button id="reloadSelected" click="this.buttonClick()">Fetch data for version {{this.version}}</button>
     </div>

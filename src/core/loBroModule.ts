@@ -1,7 +1,7 @@
 import {EventListenerHook} from "./hooks/eventListenerHook";
 // import {RequestHook} from "./hooks/requestHook";
 import {PromiseHook} from "./hooks/promiseHook";
-import {ControllerOptions} from "./decorators/controller.decorator";
+import {ControllerClass, ControllerOptions} from "./decorators/controller.decorator";
 import {GeneralUtils} from "../shared/general.utils";
 import {ContentBindings} from "./bindings/content.bindings";
 import {IfBindings} from "./bindings/if.bindings";
@@ -9,6 +9,7 @@ import {InputBindings} from "./bindings/input.bindings";
 import {ClickBinding} from "./bindings/click.binding";
 import {DecoratedBinding, CBinding} from "./decorators/binding.decorator";
 import {Compiler} from "./build/compiler";
+import {Instanciator} from "./build/instanciator";
 
 
 interface BasicControllerInstance<T = any> {
@@ -22,7 +23,7 @@ interface BasicControllerInstance<T = any> {
 // export type BasicControllerInstance<T = any> = BasicControllerInstance_ extends T;
 interface ModuleConfig {
     controller: any[];
-    bindings?: DecoratedBinding[];
+    bindings?: typeof DecoratedBinding[];
 }
 
 export class LoBroModule {
@@ -50,12 +51,14 @@ export class LoBroModule {
         this.controllerInstances.map((c: any) => c.detectChanges());
     }
 
+
     private initController() {
-        this.config.controller.map(c => {
+        this.config.controller.map((c: typeof ControllerClass) => {
             const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
             res.map(e => {
                 e.id = GeneralUtils.createRandomHash(10);
-                const instance: { config: ControllerOptions } = new c(e, this.config.bindings);
+                const instance: ControllerClass = new c(this.config.bindings);
+                instance.renderTemplate(e);
                 this.controllerInstances.push(instance);
             });
         });
@@ -68,18 +71,33 @@ export class LoBroModule {
 
         this.promiseHook = new PromiseHook();
         this.promiseHook.setModule(this);
-        this.compilerTest();
+        // this.compilerTest();
         this.initController();
         // this.dumpPreCompiled();
     }
 
     compilerTest() {
 
-        this.config.controller.map(c => {
+        this.config.controller.map((c: typeof ControllerClass) => {
 
-            const compiler: Compiler = new Compiler(c.options.template, this.config.bindings);
-            const res = compiler.compile();
-            console.log(c.options.name, res);
+            const compiler: Compiler = new Compiler();
+
+            const compilatiionResult = compiler.compile(c, this.config.bindings);
+            // console.log(res.controllerName, res);
+            const instanciator: Instanciator = new Instanciator();
+
+
+            const elements = Array.prototype.slice.call(document.querySelectorAll((c.options.name)));
+            elements.map(e => {
+                e.id = GeneralUtils.createRandomHash(10);
+                const instance = instanciator.compiledTemplateToInstance(compilatiionResult, c, this.config.bindings, e);
+                window['instance'] = instance;
+                instance.updateTemplate();
+                console.log(compilatiionResult.controllerName, compilatiionResult);
+                // const instance: ControllerClass = new c(this.config.bindings);
+                // instance.createInstance(res, e);
+                this.controllerInstances.push(instance);
+            });
         })
 
     }

@@ -1,51 +1,54 @@
 import {DecoratedBinding, DecoratedBindingByIndex} from "../decorators/binding.decorator";
 import {BindingState, IState} from "../states/binding.state";
+import {ControllerClass} from "../decorators/controller.decorator";
+import {ControllerState} from "../states/controller.state";
 
 export interface CompiledTemplate {
     element: HTMLElement;
+    controllerName: string;
     bindingStates: { [index: string]: IState };
 }
 
 export class Compiler {
-    private bindingsByIndex: DecoratedBindingByIndex = {};
-    private bindings: DecoratedBinding[] = [];
+    private bindings: typeof DecoratedBinding[] = [];
     private bindingStates: { [index: string]: BindingState };
-    private template: string;
-    private element: HTMLElement;
-    private compiledTemplate: CompiledTemplate = {element: undefined, bindingStates: {}};
 
-    constructor(template, bindings: DecoratedBinding[]) {
-        this.template = template;
-        this.bindings = bindings;
+    constructor() {
     }
 
-    compile(): CompiledTemplate {
-        this.setupBindings();
+    compile(controller: typeof ControllerClass, bindings: typeof DecoratedBinding[]): CompiledTemplate {
+
+        const compiledTemplate: CompiledTemplate = {element: undefined, bindingStates: {}, controllerName: ''};
         const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
-        templateContainer.innerHTML = this.template;
-        this.element = templateContainer.firstChild as any;
+        templateContainer.innerHTML = controller.options.template;
+        const element: HTMLElement = templateContainer.firstChild as any;
+
+        const bindingsByIndex: DecoratedBindingByIndex = this.setupBindings(element, bindings);
 
         let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-        this.compiledTemplate.element = this.element;
-        templateChildren.map((templateChild: HTMLElement) => {
-            for (let key in this.bindingsByIndex) { // .map((binding: _BindingClass) => {
-                this.bindingsByIndex[key].initBinding(templateChild);
-                this.bindingsByIndex[key].reduceMappings();
-                this.compiledTemplate.bindingStates[key] = this.bindingsByIndex[key].state.getObject();
+        compiledTemplate.element = element;
 
-                    // this.bindingsByIndex[key].state;
+        templateChildren.map((templateChild: HTMLElement) => {
+            for (let key in bindingsByIndex) { // .map((binding: _BindingClass) => {
+                bindingsByIndex[key].initBinding(templateChild);
+                bindingsByIndex[key].reduceMappings();
+                compiledTemplate.bindingStates[key] = bindingsByIndex[key].state.getObject();
+
+                // this.bindingsByIndex[key].state;
             }
         });
-        return this.compiledTemplate;
+        compiledTemplate.controllerName = controller.options.name;
+        return compiledTemplate;
     }
 
-    setupBindings() {
-        this.bindings.map((binding: DecoratedBinding) => {
+    setupBindings(element: HTMLElement, bindings: typeof DecoratedBinding[]): DecoratedBindingByIndex {
+        const bindingsByIndex: DecoratedBindingByIndex = {};
+        bindings.map((binding: typeof DecoratedBinding) => {
             // @ts-ignore
-            const b = new binding(this.element, this);
-            // @ts-ignore
-            this.bindingsByIndex[binding.bindingName] = b;
+            const b = new binding(element, {element, evalFromView: this.evalFromView});
+            bindingsByIndex[binding.bindingName] = b;
         });
+        return bindingsByIndex;
     }
 
     evalFromView() {
