@@ -33,7 +33,6 @@ export class Compiler {
                 bindingsByIndex[key].initBinding(templateChild);
                 bindingsByIndex[key].reduceMappings();
                 compiledTemplate.bindingStates[key] = bindingsByIndex[key].state.getObject();
-
                 // this.bindingsByIndex[key].state;
             }
         });

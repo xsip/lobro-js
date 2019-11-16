@@ -67,12 +67,23 @@ export class DomUtils {
     };
 
     public static getDirectInnerText(ele: HTMLElement) {
-        let txt = null;
+        /*let txt = null;
         [].forEach.call(ele.childNodes, (v: any) => {
 
             if (v.nodeType == 3) txt = v.textContent.replace(/^\W*\n/, '');
         });
-        return txt ? txt : '';
+        return txt ? txt : '';*/
+
+        var childNodes = ele.childNodes;
+        let result = '';
+
+        for (var i = 0; i < childNodes.length; i++) {
+            if(childNodes[i].nodeType == 3) {
+                result += (childNodes[i] as any).data;
+            }
+        }
+
+        return result;
     }
 
 }

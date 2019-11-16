@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/build/compiler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/build/compiler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/build/instanciator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/build/instanciator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/loBroModule.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/loBroModule.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/states/binding.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/states/binding.state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/demo-controller/demo-controller.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/shared/dom.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/dom.utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/global.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/global.d.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,7 +55,7 @@
           <entry key="js" value="549" />
           <entry key="json" value="106" />
           <entry key="scss" value="273" />
-          <entry key="ts" value="34601" />
+          <entry key="ts" value="34641" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -71,7 +64,7 @@
           <entry key="JSON" value="102" />
           <entry key="JavaScript" value="549" />
           <entry key="SCSS" value="273" />
-          <entry key="TypeScript" value="34548" />
+          <entry key="TypeScript" value="34588" />
           <entry key="tsconfig" value="4" />
         </counts>
       </usages-collector>
@@ -136,11 +129,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/build/compiler.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="33" column="51" lean-forward="true" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+            <state relative-caret-position="300">
+              <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
               <folding>
                 <element signature="e#0#90#0" expanded="true" />
               </folding>
@@ -181,11 +174,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+            <state relative-caret-position="347">
+              <caret line="76" column="40" lean-forward="true" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -283,11 +276,11 @@
         <option value="$PROJECT_DIR$/src/demo-controller/demo-controller.ts" />
         <option value="$PROJECT_DIR$/src/core/states/binding.state.ts" />
         <option value="$PROJECT_DIR$/src/core/build/instanciator.ts" />
-        <option value="$PROJECT_DIR$/src/core/build/compiler.ts" />
         <option value="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" />
         <option value="$PROJECT_DIR$/src/core/loBroModule.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/content.bindings.ts" />
         <option value="$PROJECT_DIR$/src/shared/dom.utils.ts" />
+        <option value="$PROJECT_DIR$/src/core/build/compiler.ts" />
       </list>
     </option>
   </component>
@@ -427,7 +420,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91839000" />
+    <option name="totallyTimeSpent" value="91987000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -442,7 +435,7 @@
     <frame x="0" y="23" width="1680" height="970" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8754386" visible="true" weight="0.17962629" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8754386" visible="true" weight="0.17962629" />
       <window_info id="Structure" order="1" sideWeight="0.12393888" side_tool="true" weight="0.4225437" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.12456141" side_tool="true" weight="0.2188065" />
@@ -457,7 +450,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32915717" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32915717" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32915717" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -681,16 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/build/compiler.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="33" column="51" lean-forward="true" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/states/binding.state.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
@@ -747,8 +730,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/shared/dom.utils.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="347">
+          <caret line="76" column="40" lean-forward="true" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/build/compiler.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#90#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
