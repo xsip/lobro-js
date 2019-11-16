@@ -206,6 +206,15 @@ export const Controller = (options: ControllerOptions): any => {
 
                 }
 
+                let templateChildren = Array.prototype.slice.call(this.element.querySelectorAll('*'));
+
+                templateChildren.map((templateChild: HTMLElement) => {
+                    const hash: string = templateChild.getAttribute('eventlistener-hash');
+                    if (hash) {
+                        this.addEventListeners(templateChild as ExtendedElement, compiledTemplate.eventListenerState.getEvalForHash(hash));
+                    }
+                });
+
                 this.addToDom(this.element, appendTo);
                 this['afterRender']();
                 this.detectChanges();

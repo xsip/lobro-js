@@ -87,6 +87,7 @@ export const Binding = (options: BindingOptions): any => {
             constructor(...args: any[]) {
                 super(...args);
                 this.selector = this.config.selector;
+
                 this.fixedSelector = this.selector.replace(/[^\w\s]/gi, '');
                 this.name = this.fixedSelector;
                 this.bindingKey = this.fixedSelector + '-bind';

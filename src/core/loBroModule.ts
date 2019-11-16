@@ -71,8 +71,8 @@ export class LoBroModule {
 
         this.promiseHook = new PromiseHook();
         this.promiseHook.setModule(this);
-        // this.compilerTest();
-        this.initController();
+        this.compilerTest();
+        // this.initController();
         // this.dumpPreCompiled();
     }
 
