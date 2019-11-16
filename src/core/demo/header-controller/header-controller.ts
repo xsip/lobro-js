@@ -1,15 +1,14 @@
-import tmpl from './demo-controller.html';
+import tmpl from './header-controller.html';
+import './header-controller.scss';
 import * as path from "path";
-import {Controller} from "../core/decorators/controller.decorator";
-
-require('demo-controller/demo-controller.scss');
+import {Controller} from "../../decorators/controller.decorator";
 
 @Controller({
     template: tmpl,
-    name: 'main-controller',
-    stylesheet: 'demo-controller/demo-controller.scss',
+    name: 'header-controller',
+    stylesheet: 'header-controller/header-controller.scss',
 })
-export class DemoController {
+export class HeaderController {
     version: any = 1;
     version2: any = 2;
     showElement = true;
