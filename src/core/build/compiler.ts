@@ -6,14 +6,13 @@ import {GeneralUtils} from "../../shared/general.utils";
 
 export interface CompiledTemplate {
     element: HTMLElement;
+    template?: string;
     controllerName: string;
     eventListenerState?: BindingState;
     bindingStates: { [index: string]: IState };
 }
 
 export class Compiler {
-    private bindings: typeof DecoratedBinding[] = [];
-    private bindingStates: { [index: string]: BindingState };
 
     constructor() {
     }
@@ -21,6 +20,7 @@ export class Compiler {
     compile(controller: typeof ControllerClass, bindings: typeof DecoratedBinding[]): CompiledTemplate {
 
         const compiledTemplate: CompiledTemplate = {element: undefined, bindingStates: {}, controllerName: ''};
+
         const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
         templateContainer.innerHTML = controller.options.template;
         const element: HTMLElement = templateContainer.firstChild as any;
@@ -28,7 +28,7 @@ export class Compiler {
         const bindingsByIndex: DecoratedBindingByIndex = this.setupBindings(element, bindings);
 
         let templateChildren = Array.prototype.slice.call(templateContainer.querySelectorAll('*'));
-        compiledTemplate.element = element;
+
         const eventListenerState: BindingState = new BindingState();
         templateChildren.map((templateChild: HTMLElement) => {
             for (let key in bindingsByIndex) { // .map((binding: _BindingClass) => {
@@ -43,6 +43,8 @@ export class Compiler {
                 // this.bindingsByIndex[key].state;
             }
         });
+        compiledTemplate.element = element;
+        compiledTemplate.template = compiledTemplate.element.outerHTML;
         compiledTemplate.controllerName = controller.options.name;
         compiledTemplate.eventListenerState = eventListenerState;
         window['evs'] = compiledTemplate.eventListenerState;

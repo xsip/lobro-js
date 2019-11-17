@@ -22,7 +22,7 @@ interface BasicControllerInstance<T = any> {
 
 // export type BasicControllerInstance<T = any> = BasicControllerInstance_ extends T;
 interface ModuleConfig {
-    controller: any[];
+    controller: (typeof ControllerClass & any)[];
     bindings?: typeof DecoratedBinding[];
 }
 
@@ -48,7 +48,7 @@ export class LoBroModule {
 
     public triggerAllChangeDetections() {
         // this.config.controller.map((c: any) => c.detectChanges());
-        this.controllerInstances.map((c: any) => c.detectChanges());
+        this.controllerInstances.map((c: any) => c.renderer.detectChanges());
     }
 
 
@@ -71,8 +71,9 @@ export class LoBroModule {
 
         this.promiseHook = new PromiseHook();
         this.promiseHook.setModule(this);
-        this.compilerTest();
-        // this.initController();
+        // this.compilerTest();
+
+        this.initController();
         // this.dumpPreCompiled();
     }
 
@@ -92,7 +93,7 @@ export class LoBroModule {
                 e.id = GeneralUtils.createRandomHash(10);
                 const instance = instanciator.compiledTemplateToInstance(compilatiionResult, c, this.config.bindings, e);
                 window['instance'] = instance;
-                instance.updateTemplate();
+                // instance.updateTemplate();
                 console.log(compilatiionResult.controllerName, compilatiionResult);
                 // const instance: ControllerClass = new c(this.config.bindings);
                 // instance.createInstance(res, e);

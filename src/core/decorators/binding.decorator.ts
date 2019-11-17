@@ -1,4 +1,3 @@
-import {ControllerOptions} from "./controller.decorator";
 import {View} from "../bindings/interfaces";
 import {BindingState} from "../states/binding.state";
 import {GeneralUtils} from "../../shared/general.utils";
@@ -96,31 +95,20 @@ export const Binding = (options: BindingOptions): any => {
             }
 
             hasBinding(element: HTMLElement) {
-                /*if (this.config.isSelectorBinding) {
-                    return element.nodeName.toLowerCase() === this.config.propKey;
-                }*/
                 return element.getAttribute(this.fixedSelector + '-bind');
             }
 
             initBinding(templateChild: HTMLElement): void {
                 if (!this.hasBinding(templateChild)) {
-                    // if (templateChild.getAttribute(this.propKey)) {
-                    // console.log(templateChild.matches(this.selector));
                     if (templateChild.matches(this.selector)) {
-                        // console.log(templateChild.matches(this.selector));
                         const elementHash: string = GeneralUtils.createRandomHash(5);
                         templateChild.setAttribute(this.bindingKey, elementHash);
-                        // console.log('setting ' + this.bindingKey + ' to ', elementHash);
                         this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.fixedSelector));
-                        // console.log(templateChild.getAttribute(this.selector));
-                        // console.log(this.state.getEvalForHashList());
                         super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
                         // TODO: remove on error ases with other bindings!!
                         templateChild.removeAttribute(this.fixedSelector);
                     }
                 }
-
-
             }
 
             reduceMappings(): void {
@@ -137,18 +125,13 @@ export const Binding = (options: BindingOptions): any => {
                 for (let hash in this.state.getEvalForHashList()) {
                     const evalStr = this.state.getEvalForHash(hash);
                     if (evalStr) {
-
                         const elList: HTMLElement[] =
                             Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.fixedSelector}-bind="${hash}"]`));
-
-                        // query selector all since we are using a hash mutliple times if possible!!
                         elList.map(el => {
                             super.updateElement(el, hash, evalStr);
                         });
-
                     }
                 }
-
             }
 
             bindingKey: string;
