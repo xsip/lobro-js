@@ -3,6 +3,7 @@ import {BindingState} from "../states/binding.state";
 import {Binding, DecoratedBinding, CBinding, BindingOptions} from "../decorators/binding.decorator";
 import {ContentBindings} from "./content.bindings";
 import {GeneralUtils} from "../../shared/general.utils";
+import {DomUtils} from "../../shared/dom.utils";
 
 @Binding({
     selector: '[for]',
@@ -43,6 +44,24 @@ export class ForBindings implements CBinding {
         this.initBindingProcedure(templateChild, hash, evalStr, setCstmData);
     }
 
+    addForChildAttributeToEveryChild(root: HTMLElement) {
+        for (let i = 0; i <= root.children.length; i++) {
+            if (root.children[i]) {
+                root.children[i].setAttribute('for-child', 'true');
+                this.addForChildAttributeToEveryChild(root.children[i] as HTMLElement);
+            }
+        }
+    }
+
+    removeForChildAttributeToEveryChild(root: HTMLElement) {
+        for (let i = 0; i <= root.children.length; i++) {
+            if (root.children[i]) {
+                root.children[i].removeAttribute('for-child');
+                root.children[i].removeAttribute('for');
+                this.removeForChildAttributeToEveryChild(root.children[i] as HTMLElement);
+            }
+        }
+    }
     initBindingProcedure(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
         this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
         // const nodeCpy = templateChild.cloneNode(true);
@@ -68,12 +87,20 @@ export class ForBindings implements CBinding {
         const completeEvalStr = `
         for(${evalStr}) {
             const cpy = templateChild.cloneNode(true);
-            // console.log(cpy);
             parent.append(cpy);
             const forCpy = cpy.getAttribute('for');
             cpy.removeAttribute('for');
-            cpy.innerHTML = cpy.innerText.replace(/${indexKey}\./g, 'this.${varName}[' + ${indexKey} + '].');
+            cpy.removeAttribute('for-child');
+            cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + ${indexKey} + '].');
+            this.removeForChildAttributeToEveryChild(cpy);
             this.contentBindings.initBinding(cpy);
+            for( let i = 0; i <= cpy.children.length; i++){
+                if(cpy.children[i]) {
+                    this.contentBindings.initBinding(cpy.children[i], true);
+                }
+            }
+             
+            // this.addForChildAttributeToEveryChild(cpy);
             // cpy.setAttribute('for', forCpy);
             
             // cpy.removeAttribute('for-bind');

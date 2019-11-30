@@ -16,13 +16,25 @@ export class ContentBindings implements DecoratedBinding {
 
     }
 
+    addForChildAttributeToEveryChild(root: HTMLElement) {
+        for (let i = 0; i <= root.children.length; i++) {
+            if (root.children[i]) {
+                root.children[i].setAttribute('for-child', 'true');
+                this.addForChildAttributeToEveryChild(root.children[i] as HTMLElement);
+            }
+        }
+    }
+
     public initBinding(templateChild: HTMLElement) {
+
         let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
         // evalMatches = evalMatches ? evalMatches : [];
-        if (evalMatches && !templateChild.getAttribute('for')) {
+        if (evalMatches && !templateChild.getAttribute('for') && !templateChild.getAttribute('for-child')) {
             evalMatches.map((evalMatch: string) => {
                 this.renderEvalInElement(templateChild, evalMatch);
             });
+        } else if (templateChild.getAttribute('for')) {
+            this.addForChildAttributeToEveryChild(templateChild);
         }
 
     }

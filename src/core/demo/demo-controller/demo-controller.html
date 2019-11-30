@@ -1,7 +1,9 @@
 <div class="lobroJsWelcome">
     <div class="header">
         <span class="title">LobroJs Version {{this.version}} {{this.version2}}</span>
-        <p for="let user of this.demoJson">Element {{user.id}} ( {{user.title}} )</p>
+        <!--<p for="let user of this.demoJson">Element {{user.id}} ( {{user.title}} </p>!-->
+        <div for="let user of this.demoJson">{{user.completed}}<p class="id">ID {{user.id}} </p>
+            <p class="content">{{user.title}}</p></div>
     </div>
     <div class="content">
         <p class="test">Welcome to LobroJs version {{this.version}}</p>
@@ -23,7 +25,7 @@
         </div>
         <div class="updater-v2">
             <span> Update version 2 ({{this.version2}})</span>
-        <input id="input2" input="this.version2" type="text"/>
+            <input id="input2" input="this.version2" type="text"/>
             <input id="input3" if="this.version2 === 2 " type="text"/>
         </div>
         <button id="reloadSelected" click="this.buttonClick()">Fetch data for version {{this.version}}</button>

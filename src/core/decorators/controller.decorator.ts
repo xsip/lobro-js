@@ -81,7 +81,13 @@ export const Controller = (options: ControllerOptions): any => {
 
 
             evalFromView(evalData: string) {
-                return eval(evalData);
+                try {
+                    return eval(evalData);
+                } catch (e) {
+                    console.error(e);
+                    return evalData;
+                }
+
             }
 
             renderTemplate(appendTo: HTMLElement) {
