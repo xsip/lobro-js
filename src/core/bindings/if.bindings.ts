@@ -33,4 +33,7 @@ export class IfBindings implements CBinding {
             templateChild.hidden = false;
         }
     }
+
+    lastElementUpdated(): void {
+    }
 }

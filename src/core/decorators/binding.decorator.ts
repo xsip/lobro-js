@@ -63,6 +63,9 @@ export abstract class CBinding {
 
     public updateElement(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
     };
+
+    public lastElementUpdated(): void {
+    };
 }
 
 export const Binding = (options: BindingOptions): any => {
@@ -127,8 +130,14 @@ export const Binding = (options: BindingOptions): any => {
                     if (evalStr) {
                         const elList: HTMLElement[] =
                             Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.fixedSelector}-bind="${hash}"]`));
-                        elList.map(el => {
+                        elList.map((el: HTMLElement, index: number) => {
                             super.updateElement(el, hash, evalStr);
+                            if (index === elList.length - 1) {
+                                if (super.lastElementUpdated) {
+                                    super.lastElementUpdated();
+                                }
+
+                            }
                         });
                     }
                 }

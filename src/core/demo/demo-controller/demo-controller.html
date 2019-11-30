@@ -1,6 +1,7 @@
 <div class="lobroJsWelcome">
     <div class="header">
         <span class="title">LobroJs Version {{this.version}} {{this.version2}}</span>
+        <p for="let user of this.demoJson">Element {{user.id}} ( {{user.title}} )</p>
     </div>
     <div class="content">
         <p class="test">Welcome to LobroJs version {{this.version}}</p>
@@ -26,27 +27,5 @@
         </div>
         <button id="reloadSelected" click="this.buttonClick()">Fetch data for version {{this.version}}</button>
     </div>
-    <!--<div class="content3">
-        CHANGES. {{this.version}}
-    </div>
-    <div class="title">Lowbrow Test Version {{this.version}} {{this.version2}}</div>
-    <div class="content">
-            <button id="reloadSelected" click="this.buttonClick()">Fetch data for version {{this.version}}</button>
-            <br><br>
-        <div class="content2">
-            Version 2 is {{this.version2}}
-        </div>
-        <div class="content3">
-            {{this.version2}}
-        </div>
 
-
-    </div>
-    <input id="input" input="this.version" type="text"/>
-    <input id="input" input="this.version" type="text"/>
-    <input id="input" if="this.version > 4" type="text"/>
-    <input id="input" if="this.version > 4" type="text"/>
-    <input id="input2" input="this.version2" type="text"/>
-
-    <input id="no" value="no bind" type="text"/>!-->
 </div>

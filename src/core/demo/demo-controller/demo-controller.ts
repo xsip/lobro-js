@@ -2,6 +2,7 @@ import tmpl from './demo-controller.html';
 import './demo-controller.scss';
 import * as path from "path";
 import {Controller} from "../../decorators/controller.decorator";
+import {demoJson} from "./demojson";
 
 @Controller({
     template: tmpl,
@@ -16,6 +17,7 @@ export class DemoController {
         version: 1,
         version2: 2,
     };
+    demoJson = demoJson;
 
     constructor() {
         // console.log('MAIN CONTROLLER INIT');
@@ -27,6 +29,7 @@ export class DemoController {
         try {
             const res: any = await fetch('https://jsonplaceholder.typicode.com/todos');
             const data: any = await res.json();
+            this.demoJson = data;
             console.log(data);
             this.version = data[5].id;
             this.version2 = data[10].id;

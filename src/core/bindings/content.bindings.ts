@@ -11,6 +11,7 @@ export class ContentBindings implements DecoratedBinding {
     selector: string;
     name: string = 'content';
     static bindingName = 'content';
+
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
@@ -18,14 +19,8 @@ export class ContentBindings implements DecoratedBinding {
     public initBinding(templateChild: HTMLElement) {
         let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
         // evalMatches = evalMatches ? evalMatches : [];
-        if (evalMatches) {
-            // console.log('eval matches', evalMatches);
-            let log = true;
+        if (evalMatches && !templateChild.getAttribute('for')) {
             evalMatches.map((evalMatch: string) => {
-                if (log) {
-                    // console.log('REPLACING REPLACING, ', evalMatch);
-                }
-
                 this.renderEvalInElement(templateChild, evalMatch);
             });
         }
@@ -97,7 +92,7 @@ export class ContentBindings implements DecoratedBinding {
                 const elList: HTMLElement[] = Array.prototype.slice.call(this.view.element.querySelectorAll(`[${this.bindingKey}~="${hash}"]`));
 
                 // query selector all since we are using a hash mutliple times if possible!!
-                elList.map(el => {
+                elList.map((el: HTMLElement, index: number) => {
                     this.reRenderElement(el, hash, data);
                 });
 
@@ -123,16 +118,18 @@ export class ContentBindings implements DecoratedBinding {
     }
 
     reRenderElement(el: HTMLElement, hash: string, data: any) {
-        const eventListenersBackup = (el as any /*ExtendedElement*/).getEventListeners();
-        el.innerHTML = el.innerHTML.replace(new RegExp(`<!--${hash}!-->([^]*?)<!--${hash}!-->`, 'g'), `<!--${hash}!-->` + data + `<!--${hash}!-->`);
+        if (!el.getAttribute('for')) {
+            const eventListenersBackup = (el as any /*ExtendedElement*/).getEventListeners();
+            el.innerHTML = el.innerHTML.replace(new RegExp(`<!--${hash}!-->([^]*?)<!--${hash}!-->`, 'g'), `<!--${hash}!-->` + data + `<!--${hash}!-->`);
 
-        if (eventListenersBackup && !(el as any /*ExtendedElement*/).getEventListeners()) {
-            console.log('had eventlisteners which are missing now!!');
-            this.addEventListeners(el as any /*ExtendedElement*/, eventListenersBackup);
-        } else {
-            // test
-            // console.log(eventListenersBackup);
-            // console.log((el as ExtendedElement).getEventListeners());
+            if (eventListenersBackup && !(el as any /*ExtendedElement*/).getEventListeners()) {
+                console.log('had eventlisteners which are missing now!!');
+                this.addEventListeners(el as any /*ExtendedElement*/, eventListenersBackup);
+            } else {
+                // test
+                // console.log(eventListenersBackup);
+                // console.log((el as ExtendedElement).getEventListeners());
+            }
         }
 
     }

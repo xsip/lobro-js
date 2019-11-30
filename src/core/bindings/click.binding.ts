@@ -29,4 +29,7 @@ export class ClickBinding implements CBinding {
     updateElement(templateChild: HTMLElement, hash: string, evalStr: string): void {
         // no update needed..
     }
+
+    lastElementUpdated(): void {
+    }
 }

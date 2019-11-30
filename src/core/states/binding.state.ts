@@ -3,11 +3,13 @@ export interface IState {
     hashForEval: {};
     lastValueForHash: {};
     oldControllerData: {};
+    customDataForHash?: {};
 }
 
 export class BindingState {
     private evalForHash: {} = {};
     private hashForEval: {} = {};
+    private customDataForHash: {} = {};
     private lastValueForHash: {} = {};
     private oldControllerData: {} = {};
 
@@ -71,6 +73,13 @@ export class BindingState {
 
     setLastValueForHash(hash: string, val: any): void {
         this.lastValueForHash[hash] = val;
+    }
+    getCustomDataForHash(hash: string) {
+        return this.customDataForHash[hash];
+    }
+
+    setCustomDataForHash(hash: string, val: any): void {
+        this.customDataForHash[hash] = val;
     }
 
     getObject(): IState {

@@ -10,6 +10,7 @@ import {ClickBinding} from "./bindings/click.binding";
 import {DecoratedBinding, CBinding} from "./decorators/binding.decorator";
 import {Compiler} from "./build/compiler";
 import {Instanciator} from "./build/instanciator";
+import {ForBindings} from "./bindings/for.bindings";
 
 
 interface BasicControllerInstance<T = any> {
@@ -43,6 +44,7 @@ export class LoBroModule {
             IfBindings,
             InputBindings,
             ClickBinding,
+            ForBindings
         ] as any;
     }
 

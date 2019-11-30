@@ -49,4 +49,7 @@ export class InputBindings implements CBinding {
     updateElement(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
         this.reavalInputValue(templateChild as HTMLInputElement, hash);
     }
+
+    lastElementUpdated(): void {
+    }
 }
