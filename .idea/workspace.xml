@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/build-me-an-api-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/build-me-an-api-v2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bindings/click.binding.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/click.binding.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bindings/content.bindings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/content.bindings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bindings/if.bindings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/if.bindings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/decorators/binding.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/decorators/binding.decorator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/loBroModule.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/loBroModule.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/states/binding.state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/states/binding.state.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -108,13 +97,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="90" />
+          <entry key="html" value="95" />
           <entry key="ts" value="2898" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="90" />
+          <entry key="HTML" value="95" />
           <entry key="TypeScript" value="2898" />
         </counts>
       </usages-collector>
@@ -155,10 +144,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="1050">
               <caret line="74" column="66" selection-start-line="74" selection-start-column="66" selection-end-line="74" selection-end-column="66" />
             </state>
           </provider>
@@ -194,11 +183,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="81" selection-start-line="3" selection-start-column="81" selection-end-line="3" selection-end-column="81" />
+            <state relative-caret-position="210">
+              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -317,8 +306,8 @@
         <option value="$PROJECT_DIR$/src/core/bindings/click.binding.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/input.bindings.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/if.bindings.ts" />
-        <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" />
         <option value="$PROJECT_DIR$/src/core/bindings/for.bindings.ts" />
+        <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" />
       </list>
     </option>
   </component>
@@ -467,12 +456,12 @@
       <workItem from="1574256937640" duration="710000" />
       <workItem from="1574500670982" duration="5000" />
       <workItem from="1574701382660" duration="95000" />
-      <workItem from="1574701706955" duration="9370000" />
+      <workItem from="1574701706955" duration="9717000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109565000" />
+    <option name="totallyTimeSpent" value="109912000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -809,17 +798,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
+    <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="81" selection-start-line="3" selection-start-column="81" selection-end-line="3" selection-end-column="81" />
+        <state relative-caret-position="1050">
+          <caret line="74" column="66" selection-start-line="74" selection-start-column="66" selection-end-line="74" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
+    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="74" column="66" selection-start-line="74" selection-start-column="66" selection-end-line="74" selection-end-column="66" />
+        <state relative-caret-position="210">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
         </state>
       </provider>
     </entry>
