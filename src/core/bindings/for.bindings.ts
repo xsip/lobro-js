@@ -15,9 +15,11 @@ export class ForBindings implements CBinding {
     selector: string;
     config: BindingOptions;
     contentBindings: ContentBindings;
+    instance: ForBindings;
 
     constructor(public viewElement: HTMLElement, public view: View) {
         this.contentBindings = new ContentBindings(this.viewElement, this as any);
+        this.instance = this;
     }
 
     lastUpdate(el: HTMLElement, hash: string, evalStr: string): void {
@@ -62,6 +64,7 @@ export class ForBindings implements CBinding {
             }
         }
     }
+
     initBindingProcedure(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
         this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
         // const nodeCpy = templateChild.cloneNode(true);
@@ -110,7 +113,8 @@ export class ForBindings implements CBinding {
     }
 
     evalFromView = (evalStr: any) => {
-        return eval(evalStr);
+        console.log(evalStr);
+        return this.view.evalFromView.bind({...this, ...this.view})(evalStr);
     };
 
     lastElementUpdated(): void {

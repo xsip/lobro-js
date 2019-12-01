@@ -52,10 +52,27 @@ export class ContentBindings implements DecoratedBinding {
         if (evalMatches && !toIgnoreIndexList) {
             evalMatches.map((evalMatch: string) => {
                 //  fix to make ignore index list removable
-                if (evalMatch.indexOf('this') !== -1) {
+                if (GeneralUtils.isFunction(evalMatch)) {
+                    console.log('MATCHED FUNC', evalMatch);
+                    console.log(GeneralUtils.extractFunctionParams(evalMatch));
+                    let paramsResolvable: boolean = true;
+                    const allParams: string[] = GeneralUtils.extractFunctionParams(evalMatch);
+                    allParams.map(p => {
+                        if (p.indexOf('this.') === -1) {
+                            paramsResolvable = false;
+                        }
+                    });
+                    if (paramsResolvable) {
+                        this.renderEvalInElement(templateChild, evalMatch);
+                    }
 
-                    this.renderEvalInElement(templateChild, evalMatch);
+                } else {
+                    if (evalMatch.indexOf('this') !== -1) {
+
+                        this.renderEvalInElement(templateChild, evalMatch);
+                    }
                 }
+
             });
         } else if (toIgnoreIndexList/*templateChild.getAttribute('for')*/) {
             toIgnoreIndexList.map(i => {
