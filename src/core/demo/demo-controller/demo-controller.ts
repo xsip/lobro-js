@@ -24,6 +24,7 @@ export class DemoController {
     }
 
     plusOne = (value: number) => value + 1;
+    versionPlusVersion = (v1: number, v2: number) => v1 + v2;
 
     async buttonClick() {
         console.log('BUTTON CLICK FUNC!!');

@@ -102,7 +102,6 @@ export class ForBindings implements CBinding {
                     this.contentBindings.initBinding(cpy.children[i], true);
                 }
             }
-             
             // this.addForChildAttributeToEveryChild(cpy);
             // cpy.setAttribute('for', forCpy);
             
@@ -113,7 +112,6 @@ export class ForBindings implements CBinding {
     }
 
     evalFromView = (evalStr: any) => {
-        console.log(evalStr);
         return this.view.evalFromView.bind({...this, ...this.view})(evalStr);
     };
 

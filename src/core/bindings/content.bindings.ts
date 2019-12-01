@@ -53,7 +53,7 @@ export class ContentBindings implements DecoratedBinding {
             evalMatches.map((evalMatch: string) => {
                 //  fix to make ignore index list removable
                 if (GeneralUtils.isFunction(evalMatch)) {
-                    console.log('MATCHED FUNC', evalMatch);
+                    console.log('FOUND FUNCTION', GeneralUtils.extractFunctionName(evalMatch));
                     console.log(GeneralUtils.extractFunctionParams(evalMatch));
                     let paramsResolvable: boolean = true;
                     const allParams: string[] = GeneralUtils.extractFunctionParams(evalMatch);
