@@ -37,6 +37,7 @@ export class LoBroModule {
         if (!config.bindings) {
             config.bindings = [];
         }
+
         config.bindings = [
             ...config.bindings,
             // basic bindings, needed to make lobro-js Work

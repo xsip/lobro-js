@@ -4,6 +4,11 @@ import {GeneralUtils} from "../../shared/general.utils";
 import {BindingState} from "../states/binding.state";
 import {DecoratedBinding} from "../decorators/binding.decorator";
 
+interface IgnoreWhenAttributeMatches {
+    attr: string;
+    ignoreChilds?: boolean;
+}
+
 export class ContentBindings implements DecoratedBinding {
     bindingKey: string = 'content-bind';
     state: BindingState = new BindingState();
@@ -11,30 +16,52 @@ export class ContentBindings implements DecoratedBinding {
     selector: string;
     name: string = 'content';
     static bindingName = 'content';
+    static toIgnore: IgnoreWhenAttributeMatches[] = [];
 
     constructor(public viewElement: HTMLElement, public view: View) {
-
+        ContentBindings.toIgnore = [
+            // {attr: 'for', ignoreChilds: true}
+        ]
     }
 
-    addForChildAttributeToEveryChild(root: HTMLElement) {
+    addChildAttributeToEveryChild(root: HTMLElement, attr: string) {
         for (let i = 0; i <= root.children.length; i++) {
             if (root.children[i]) {
-                root.children[i].setAttribute('for-child', 'true');
-                this.addForChildAttributeToEveryChild(root.children[i] as HTMLElement);
+                root.children[i].setAttribute(attr + '-child', 'true');
+                this.addChildAttributeToEveryChild(root.children[i] as HTMLElement, attr);
             }
         }
     }
 
-    public initBinding(templateChild: HTMLElement) {
+    isToIgnore(templateChild: HTMLElement): number[] | undefined {
+        let toIgnoreIndexList: number[] = [];
+        ContentBindings.toIgnore.map((ig, i) => {
+            if (templateChild.getAttribute(ig.attr)
+                || (ig.ignoreChilds && templateChild.getAttribute(ig.attr + '-child'))) {
+                toIgnoreIndexList.push(i);
+            }
+        });
+        return toIgnoreIndexList.length === 0 ? undefined : toIgnoreIndexList;
+    }
 
+    public initBinding(templateChild: HTMLElement) {
+        let toIgnoreIndexList: number[] | undefined = this.isToIgnore(templateChild);
         let evalMatches = DomUtils.getDirectInnerText(templateChild).match(/{{([^]*?)}}/g);
         // evalMatches = evalMatches ? evalMatches : [];
-        if (evalMatches && !templateChild.getAttribute('for') && !templateChild.getAttribute('for-child')) {
+        // !templateChild.getAttribute('for') && !templateChild.getAttribute('for-child')
+        if (evalMatches && !toIgnoreIndexList) {
             evalMatches.map((evalMatch: string) => {
-                this.renderEvalInElement(templateChild, evalMatch);
+                //  fix to make ignore index list removable
+                if (evalMatch.indexOf('this') !== -1) {
+
+                    this.renderEvalInElement(templateChild, evalMatch);
+                }
             });
-        } else if (templateChild.getAttribute('for')) {
-            this.addForChildAttributeToEveryChild(templateChild);
+        } else if (toIgnoreIndexList/*templateChild.getAttribute('for')*/) {
+            toIgnoreIndexList.map(i => {
+                this.addChildAttributeToEveryChild(templateChild, ContentBindings.toIgnore[i].attr);
+            });
+
         }
 
     }

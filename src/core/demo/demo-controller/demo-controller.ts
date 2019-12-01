@@ -23,6 +23,8 @@ export class DemoController {
         // console.log('MAIN CONTROLLER INIT');
     }
 
+    plusOne = (value: number) => value + 1;
+
     async buttonClick() {
         console.log('BUTTON CLICK FUNC!!');
         this.showElement = !this.showElement;

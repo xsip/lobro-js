@@ -1,8 +1,8 @@
 <div class="lobroJsWelcome">
     <div class="header">
-        <span class="title">LobroJs Version {{this.version}} {{this.version2}}</span>
+        <span class="title">LobroJs Version {{this.plusOne(this.version)}} {{this.version2}}</span>
         <!--<p for="let user of this.demoJson">Element {{user.id}} ( {{user.title}} </p>!-->
-        <div for="let user of this.demoJson">{{user.completed}}<p class="id">ID {{user.id}} </p>
+        <div for="let user of this.demoJson">{{user.completed}}<p class="id">ID {{this.plusOne(user.id)}} </p>
             <p class="content">{{user.title}}</p></div>
     </div>
     <div class="content">
