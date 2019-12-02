@@ -15,7 +15,9 @@ export class InputBindings implements CBinding {
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
-
+    // TODO: add eventlistener to body and remove emptyInputHookForChangeDetectionTrigger
+    // TODO: when body listener is triggerd check target and input-binding attribute for existence
+    // TODO: when exists => do same as in addEventlistener but resolve evalStr from input-binding attribute
     initBinding(templateChild: HTMLElement, hash: string, evalStr: string): void {
         if (evalStr) {
             const elementHash: string = GeneralUtils.createRandomHash(5);
