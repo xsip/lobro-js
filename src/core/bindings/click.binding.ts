@@ -14,6 +14,10 @@ export class ClickBinding implements CBinding {
 
     }
 
+    // TODO: instead of adding click event listeners to every element, add one Globally,
+    // TODO: and templateChild always to a list of this bindingclass.
+    // TODO: Try to match event.target with one of the lists elements. 
+    // TODO: If there is a match, trigger it's eval resolved by its hash.
     public initBinding(templateChild: HTMLElement, hash: string, evalSt: string) {
         templateChild.addEventListener('click', async () => {
             // added await for try catch block!!
