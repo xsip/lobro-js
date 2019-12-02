@@ -9,10 +9,10 @@ import {Controller} from "../../decorators/controller.decorator";
     stylesheet: 'header-controller/header-controller.scss',
 })
 export class HeaderController {
-    version: any = 1;
-    version2: any = 2;
+    version: number = 1;
+    version2: number = 2;
     showElement = true;
-    versions: any = {
+    versions: {version: number; version2: number;}= {
         version: 1,
         version2: 2,
     };
@@ -25,8 +25,8 @@ export class HeaderController {
         console.log('BUTTON CLICK FUNC!!');
         this.showElement = !this.showElement;
         try {
-            const res: any = await fetch('https://jsonplaceholder.typicode.com/todos');
-            const data: any = await res.json();
+            const res: Response = await fetch('https://jsonplaceholder.typicode.com/todos');
+            const data: {id: number}[] = await res.json();
             console.log(data);
             this.version = data[5].id;
             this.version2 = data[10].id;

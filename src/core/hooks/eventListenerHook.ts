@@ -84,7 +84,7 @@ export class EventListenerHook {
         const oldAddEventListener = EventTarget.prototype.addEventListener;
         const _this = this;
         // @ts-ignore
-        Element.prototype._addEventListener = function (type: any, fn: any, capture: any) {
+        Element.prototype._addEventListener = function (type: string, fn: any, capture: any) {
             this.f = oldAddEventListener;
             this.f(type, (...args) => {
                 window['func'] = fn;
@@ -98,7 +98,7 @@ export class EventListenerHook {
         };
     };
 
-    eventFired = (...args: any[]) => {
+    eventFired = (...args: []) => {
         console.log('event fired: ', args);
     }
 

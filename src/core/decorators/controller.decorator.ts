@@ -13,7 +13,7 @@ export interface ControllerOptions {
 }
 
 interface ExtendedElement extends HTMLElement {
-    getEventListeners: () => { [index: string]: any[] }
+    getEventListeners: () => { [index: string]: [] }
 }
 
 export const CONTROLLER_DECORATOR_KEY = 'ControllerData';
@@ -47,7 +47,7 @@ export class ControllerClass {
 }
 
 export class UpdateScheduler {
-    updateScheduler: any;
+    updateScheduler;
 
     start(todo: () => void) {
         this.updateScheduler = setInterval(() => {

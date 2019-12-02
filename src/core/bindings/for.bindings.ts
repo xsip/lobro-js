@@ -111,7 +111,7 @@ export class ForBindings implements CBinding {
         eval(completeEvalStr);
     }
 
-    evalFromView = (evalStr: any) => {
+    evalFromView = (evalStr: string) => {
         return this.view.evalFromView.bind({...this, ...this.view})(evalStr);
     };
 

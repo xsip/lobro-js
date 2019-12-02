@@ -13,11 +13,11 @@ export class DemoController {
     version: any = 1;
     version2: any = 2;
     showElement = true;
-    versions: any = {
+    versions: { version: number; version2: number; } = {
         version: 1,
         version2: 2,
     };
-    demoJson = demoJson;
+    demoJson: {} = demoJson;
 
     constructor() {
         // console.log('MAIN CONTROLLER INIT');
@@ -30,8 +30,8 @@ export class DemoController {
         console.log('BUTTON CLICK FUNC!!');
         this.showElement = !this.showElement;
         try {
-            const res: any = await fetch('https://jsonplaceholder.typicode.com/todos');
-            const data: any = await res.json();
+            const res: Response = await fetch('https://jsonplaceholder.typicode.com/todos');
+            const data: {id: number;}[] = await res.json();
             this.demoJson = data;
             console.log(data);
             this.version = data[5].id;
