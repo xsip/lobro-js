@@ -98,7 +98,7 @@ export const Binding = (options: BindingOptions): any => {
             }
 
             hasBinding(element: HTMLElement) {
-                return element.getAttribute(this.fixedSelector + '-bind');
+                return element.getAttribute(this.fixedSelector + '-bind') ? true : false;
             }
 
             initBinding(templateChild: HTMLElement): void {

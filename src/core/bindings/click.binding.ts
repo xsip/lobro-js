@@ -16,8 +16,9 @@ export class ClickBinding implements CBinding {
     }
 
     async bodyClickListener(event: Event) {
-        if (event.target.getAttribute('click-binding')) {
-            const hash = event.target.getAttribute('click-binding');
+
+        if ((event.target as HTMLElement).getAttribute('click-bind')) {
+            const hash = (event.target as HTMLElement).getAttribute('click-bind');
             await this.view.evalFromView(this.state.getEvalForHash(hash));
         }
     }

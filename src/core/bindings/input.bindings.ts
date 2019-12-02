@@ -1,4 +1,3 @@
-import {GeneralUtils} from "../../shared/general.utils";
 import {View} from "./interfaces";
 import {BindingState} from "../states/binding.state";
 import {Binding, CBinding, BindingOptions} from "../decorators/binding.decorator";
@@ -7,40 +6,37 @@ import {Binding, CBinding, BindingOptions} from "../decorators/binding.decorator
     selector: 'input'
 })
 export class InputBindings implements CBinding {
+
     state: BindingState = new BindingState();
     bindingKey: string;
     config: BindingOptions;
     selector: string;
+    bodyClickListenerAdded = false;
 
     constructor(public viewElement: HTMLElement, public view: View) {
 
     }
-    // TODO: add eventlistener to body and remove emptyInputHookForChangeDetectionTrigger
-    // TODO: when body listener is triggerd check target and input-binding attribute for existence
-    // TODO: when exists => do same as in addEventlistener but resolve evalStr from input-binding attribute
-    initBinding(templateChild: HTMLElement, hash: string, evalStr: string): void {
-        if (evalStr) {
-            const elementHash: string = GeneralUtils.createRandomHash(5);
-            (templateChild as HTMLInputElement).value = this.view.evalFromView(evalStr);
-            templateChild.addEventListener('input', (/*event: any*/) => {
-                this.view.evalFromView(evalStr + ' = event.target.value;');
-            });
-        } else {
-            // TODO: enable selector bindings and move to selector binding since input
-            // TODO: wont get sharted to this binding after checkup moved to binding decorator
-            this.emptyInputHookForChangeDetectionTrigger(templateChild);
+
+    async bodyClickListener(event: Event) {
+        if ((event.target as HTMLElement).getAttribute('input-bind')) {
+            const hash = (event.target as HTMLElement).getAttribute('input-bind');
+            this.view.evalFromView(this.state.getEvalForHash(hash) + ' = event.target.value;');
         }
     }
 
-    noop() {
+    initBinding(templateChild: HTMLElement, hash: string, evalStr: string): void {
+
+        if (!this.bodyClickListenerAdded) {
+            this.bodyClickListenerAdded = true;
+            document.body.addEventListener('input', this.bodyClickListener.bind(this));
+        }
+
+        if (evalStr) {
+            (templateChild as HTMLInputElement).value = this.view.evalFromView(evalStr);
+        }
+
     }
 
-    private emptyInputHookForChangeDetectionTrigger(element: HTMLElement) {
-        // TODO: add check if there allready is any input listener!!
-        element.addEventListener('input', (/*event: any*/) => {
-            this.noop(); // only for change detection
-        });
-    }
 
     private reavalInputValue(templateChild: HTMLInputElement, hash: string) {
         if (hash && this.state.getEvalForHash(hash)) {
