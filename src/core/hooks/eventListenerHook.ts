@@ -2,6 +2,7 @@ import {LoBroModule} from "../loBroModule";
 
 console.log('polyfills loaded');
 //@ts-ignore
+
 Element.prototype._addEventListener = Element.prototype.addEventListener;
 Element.prototype.addEventListener = function (a, b, c) {
     if (c == undefined)

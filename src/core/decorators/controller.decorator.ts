@@ -69,7 +69,7 @@ export const Controller = (options: ControllerOptions): any => {
             public static options: ControllerOptions = options;
             element: HTMLElement;
             renderer: Renderer;
-
+            t: any = target;
             public static template: string = options.template;
             bindings: typeof DecoratedBinding[] = [];
 

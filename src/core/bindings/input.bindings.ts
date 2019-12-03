@@ -3,7 +3,7 @@ import {BindingState} from "../states/binding.state";
 import {Binding, CBinding, BindingOptions} from "../decorators/binding.decorator";
 
 @Binding({
-    selector: 'input'
+    selector: '[input]'
 })
 export class InputBindings implements CBinding {
 
@@ -47,6 +47,7 @@ export class InputBindings implements CBinding {
     updateElement(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
         this.reavalInputValue(templateChild as HTMLInputElement, hash);
     }
+
 
     lastElementUpdated(): void {
     }
