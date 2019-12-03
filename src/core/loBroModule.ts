@@ -54,7 +54,9 @@ export class LoBroModule {
         this.controllerInstances.map((c: any) => c.renderer.detectChanges());
     }
 
-
+    // TODO: copy this method to the rendering engine and walk through the template to detect controllers by tag
+    // if one controller is detected instanciate within parent controller & execute its change detection within
+    // parents change detection. So, to prepare this we would need to create a list like: {[index: CONTROLLER TAG]: ControllerClass}
     private initController() {
         this.config.controller.map((c: typeof ControllerClass) => {
             const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
