@@ -88,6 +88,7 @@ export class BindingState {
             hashForEval: this.hashForEval,
             lastValueForHash: this.lastValueForHash,
             oldControllerData: this.oldControllerData,
+            customDataForHash: this.customDataForHash,
         }
     }
 
@@ -96,6 +97,7 @@ export class BindingState {
         this.hashForEval = state.hashForEval;
         this.lastValueForHash = state.lastValueForHash;
         this.oldControllerData = state.oldControllerData;
+        this.customDataForHash = state.customDataForHash;
 
     }
 }

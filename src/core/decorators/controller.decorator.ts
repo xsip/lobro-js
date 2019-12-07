@@ -37,6 +37,9 @@ export class ControllerClass {
     public renderTemplate(appendTo: HTMLElement) {
     };
 
+    public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
+    }
+
     public updateTemplate() {
     }
 
@@ -89,6 +92,11 @@ export const Controller = (options: ControllerOptions): any => {
             renderTemplate(appendTo: HTMLElement) {
                 this.element = this.renderer.createElement();
                 this.renderer.renderTemplate(appendTo);
+            }
+
+            public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
+                this.renderer.createInstance(compiledTemplate, appendTo);
+                this.renderer.updateTemplate();
             }
 
             updateTemplate() {

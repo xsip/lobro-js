@@ -12,6 +12,7 @@ export class Instanciator {
         if (compiledTemplate.controllerName === controller.options.name) {
             controller.options.template = compiledTemplate.template;
             instance = new controller(bindings);
+            instance.createInstance(compiledTemplate, appendTo);
             // instance.createInstance(compiledTemplate, appendTo);
         }
 

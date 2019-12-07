@@ -12,6 +12,7 @@ export class Renderer {
 
     config: ControllerOptions;
     bindingInstances: { [index: string]: DecoratedBinding } = {};
+
     constructor(private controller: ControllerClass, private bindings: typeof DecoratedBinding[] = [], private options: ControllerOptions) {
 
     }
@@ -106,13 +107,10 @@ export class Renderer {
 
 
     public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
-
-        // const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
-        // templateContainer.innerHTML = Controller.options.template;
         const templateContainer: HTMLDivElement = document.createElement('div') as HTMLDivElement;
-
         templateContainer.innerHTML = compiledTemplate.template;
         this.element = compiledTemplate.element; // templateContainer.firstChild as any;
+        this.controller.element = compiledTemplate.element; // templateContainer.firstChild as any;
 
         this.setupBindings();
         for (let key in this.bindingInstances) {
@@ -125,9 +123,6 @@ export class Renderer {
         }
 
         let templateChildren = Array.prototype.slice.call(this.element.querySelectorAll('*'));
-
         this.addToDom(this.element, appendTo);
-        // this['afterRender']();
-        // this.detectChanges();
     }
 }

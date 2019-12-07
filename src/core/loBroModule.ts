@@ -80,6 +80,7 @@ export class LoBroModule {
         // this.compilerTest();
 
         this.initController();
+        // this.compilerTest();
         // this.dumpPreCompiled();
     }
 
@@ -98,11 +99,7 @@ export class LoBroModule {
             elements.map(e => {
                 e.id = GeneralUtils.createRandomHash(10);
                 const instance = instanciator.compiledTemplateToInstance(compilatiionResult, c, this.config.bindings, e);
-                window['instance'] = instance;
-                // instance.updateTemplate();
                 console.log(compilatiionResult.controllerName, compilatiionResult);
-                // const instance: ControllerClass = new c(this.config.bindings);
-                // instance.createInstance(res, e);
                 this.controllerInstances.push(instance);
             });
         })
