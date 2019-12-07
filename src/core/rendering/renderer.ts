@@ -3,6 +3,8 @@ import {DecoratedBinding} from "../decorators/binding.decorator";
 import {DomUtils, ExtendedElement} from "../../shared/dom.utils";
 import {CompiledTemplate} from "../build/compiler";
 import {ControllerState} from "../states/controller.state";
+import {LoBroModule} from "../loBroModule";
+import {GeneralUtils} from "../../shared/general.utils";
 
 export class Renderer {
     state: ControllerState = new ControllerState();
@@ -67,7 +69,7 @@ export class Renderer {
     }
 
 
-    renderTemplate(appendTo: HTMLElement) {
+    renderTemplate(appendTo: HTMLElement, module?: LoBroModule) {
 
         console.log('rendering template');
 
@@ -79,6 +81,17 @@ export class Renderer {
                 this.bindingInstances[key].initBinding(templateChild);
             }
         });
+        /*if (module) {
+            module.config.controller.map((c: typeof ControllerClass) => {
+                const res = Array.prototype.slice.call(this.element.querySelectorAll((c as { options: ControllerOptions }).options.name));
+                res.map(e => {
+                    e.id = GeneralUtils.createRandomHash(10);
+                    const instance: ControllerClass = new c(module.config.bindings);
+                    instance.renderTemplate(e);
+                    module.controllerInstances.push(instance);
+                });
+            });
+        }*/
         this.addToDom(this.element, appendTo);
         this.controller['afterRender']();
     }

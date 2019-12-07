@@ -165,15 +165,16 @@ export class ContentBindings implements DecoratedBinding {
     }
 
     replaceHashInDom = (hash: string, newHash: string) => {
-
-        const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
-
-        const hashList = el.getAttribute(this.bindingKey);
-        // console.log(hashList);
-        // const eventListenersBackup = (el as ExtendedElement).getEventListeners();
-        el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
-        el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
-
+        if (this.view.element.querySelector) {
+            const el = this.view.element.querySelector(`[${this.bindingKey}~="${hash}"]`);
+            if (el) {
+                const hashList = el.getAttribute(this.bindingKey);
+                // console.log(hashList);
+                // const eventListenersBackup = (el as ExtendedElement).getEventListeners();
+                el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
+                el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
+            }
+        }
     };
 
     reduceMappings() {

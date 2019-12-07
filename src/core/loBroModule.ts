@@ -31,9 +31,9 @@ export class LoBroModule {
 
     public eventListenerHook: EventListenerHook;
     public promiseHook: PromiseHook;
-    private controllerInstances: any[] = [];
+    public controllerInstances: any[] = [];
 
-    constructor(private config: ModuleConfig) {
+    constructor(public config: ModuleConfig) {
         if (!config.bindings) {
             config.bindings = [];
         }
