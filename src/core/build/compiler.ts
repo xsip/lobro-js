@@ -35,12 +35,6 @@ export class Compiler {
                 bindingsByIndex[key].initBinding(templateChild);
                 bindingsByIndex[key].reduceMappings();
                 compiledTemplate.bindingStates[key] = bindingsByIndex[key].state.getObject();
-                if ((templateChild as any).getEventListeners()) {
-                    const eventListenerHash = GeneralUtils.createRandomHash(10);
-                    templateChild.setAttribute('eventlistener-hash', eventListenerHash);
-                    eventListenerState.saveEvalForHash(eventListenerHash, (templateChild as any).getEventListeners());
-                }
-                // this.bindingsByIndex[key].state;
             }
         });
         compiledTemplate.element = element;

@@ -156,36 +156,10 @@ export class ContentBindings implements DecoratedBinding {
         }
     }
 
-    saveEventListeners() {
-        DomUtils.walkThroughAllChilds(this.view.element, (ele) => {
-            this.eventListeners[DomUtils.createDeepSelectorString(ele)] = (ele as any/*ExtendedElement*/).getEventListeners();
-        });
-        // console.log(this.eventListeners);
-    }
-
-    addEventListeners(ele: any /*E>XTENDED ELEMENT*/, listeners: any) {
-        for (let key in listeners) {
-            listeners[key].map(listener => {
-                // console.log(`Adding ${key} listener to ${ele.nodeName}`);
-                ele.addEventListener(key, listener.listener);
-            });
-        }
-        // console.log(this.eventListeners);
-    }
 
     reRenderElement(el: HTMLElement, hash: string, data: any) {
         if (!el.getAttribute('for')) {
-            const eventListenersBackup = (el as any /*ExtendedElement*/).getEventListeners();
             el.innerHTML = el.innerHTML.replace(new RegExp(`<!--${hash}!-->([^]*?)<!--${hash}!-->`, 'g'), `<!--${hash}!-->` + data + `<!--${hash}!-->`);
-
-            if (eventListenersBackup && !(el as any /*ExtendedElement*/).getEventListeners()) {
-                console.log('had eventlisteners which are missing now!!');
-                this.addEventListeners(el as any /*ExtendedElement*/, eventListenersBackup);
-            } else {
-                // test
-                // console.log(eventListenersBackup);
-                // console.log((el as ExtendedElement).getEventListeners());
-            }
         }
 
     }
@@ -196,16 +170,9 @@ export class ContentBindings implements DecoratedBinding {
 
         const hashList = el.getAttribute(this.bindingKey);
         // console.log(hashList);
-        const eventListenersBackup = (el as ExtendedElement).getEventListeners();
+        // const eventListenersBackup = (el as ExtendedElement).getEventListeners();
         el.innerHTML = el.innerHTML.replace(new RegExp(hash, 'g'), newHash);
         el.setAttribute(this.bindingKey, hashList.replace(hash, newHash));
-        if (eventListenersBackup && !(el as ExtendedElement).getEventListeners()) {
-            console.log('had eventlisteners which are missing now!!');
-            this.addEventListeners(el as ExtendedElement, eventListenersBackup);
-        } else {
-            // console.log(eventListenersBackup);
-            // console.log((el as ExtendedElement).getEventListeners());
-        }
 
     };
 

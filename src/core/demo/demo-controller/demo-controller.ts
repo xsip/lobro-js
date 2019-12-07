@@ -45,7 +45,6 @@ export class DemoController {
 
     afterRender = () => {
         console.log('after render called');
-        // this.addEventListeners();
         // this.buttonClick();
     };
 

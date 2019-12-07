@@ -8,16 +8,6 @@ export class DomUtils {
         return DomUtils.getSelectorList(ele).join(' > ');
     }
 
-    public static addEventListeners(ele: any, listeners: any) {
-        for (let key in listeners) {
-            listeners[key].map(listener => {
-                // console.log(`Adding ${key} listener to ${ele.nodeName}`);
-                ele.addEventListener(key, listener.listener);
-            });
-        }
-        // console.log(this.eventListeners);
-    }
-
     public static getSelectorList = (ele: HTMLElement, list: string[] = [], resolvedOneClassName: boolean = false) => {
         const selector: string = DomUtils.getSelector(ele);
         list.push(selector);

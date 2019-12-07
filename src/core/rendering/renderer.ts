@@ -104,13 +104,6 @@ export class Renderer {
         });
     }
 
-    addEventListeners(ele: ExtendedElement, listeners: any) {
-        for (let key in listeners) {
-            listeners[key].map(listener => {
-                ele.addEventListener(key, listener.listener);
-            });
-        }
-    }
 
     public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {
 
@@ -132,13 +125,6 @@ export class Renderer {
         }
 
         let templateChildren = Array.prototype.slice.call(this.element.querySelectorAll('*'));
-
-        templateChildren.map((templateChild: HTMLElement) => {
-            const hash: string = templateChild.getAttribute('eventlistener-hash');
-            if (hash) {
-                this.addEventListeners(templateChild as ExtendedElement, compiledTemplate.eventListenerState.getEvalForHash(hash));
-            }
-        });
 
         this.addToDom(this.element, appendTo);
         // this['afterRender']();

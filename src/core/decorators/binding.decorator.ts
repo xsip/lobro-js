@@ -8,9 +8,6 @@ export interface BindingOptions {
 
 export type Constructor<T = {}> = new(...args: any[]) => T;
 
-interface ExtendedElement extends HTMLElement {
-    getEventListeners: () => { [index: string]: any[] }
-}
 
 export interface DecoratedBindingByIndex {
     [index: string]: DecoratedBinding

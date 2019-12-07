@@ -39,7 +39,6 @@ export class HeaderController {
 
     afterRender = () => {
         console.log('after render called');
-        // this.addEventListeners();
         // this.buttonClick();
     };
 

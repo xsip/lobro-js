@@ -12,10 +12,6 @@ export interface ControllerOptions {
     stylesheet?: string;
 }
 
-interface ExtendedElement extends HTMLElement {
-    getEventListeners: () => { [index: string]: [] }
-}
-
 export const CONTROLLER_DECORATOR_KEY = 'ControllerData';
 
 const newState = (): BindingState => new BindingState();

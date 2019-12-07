@@ -50,6 +50,7 @@ export class LoBroModule {
     }
 
     public triggerAllChangeDetections() {
+        console.log('triggering detectiion..');
         // this.config.controller.map((c: any) => c.detectChanges());
         this.controllerInstances.map((c: any) => c.renderer.detectChanges());
     }
