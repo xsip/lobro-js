@@ -5,7 +5,7 @@ import {HeaderController} from "./core/demo/header-controller/header-controller"
 window.onload = () => {
 
     const module: LoBroModule = new LoBroModule({
-        controller: [DemoController, HeaderController],
+        controller: [HeaderController, DemoController],
     });
     module.bootStrap();
 

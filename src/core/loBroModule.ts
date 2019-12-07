@@ -55,11 +55,35 @@ export class LoBroModule {
         this.controllerInstances.map((c: any) => c.renderer.detectChanges());
     }
 
+    controllerBySelector: { [index: string]: typeof ControllerClass } = {};
+
+    getControllerBySelector(selector: string): typeof ControllerClass {
+        return this.controllerBySelector[selector];
+    }
+
+    mapControllersToIndexList() {
+        this.config.controller.map((c: typeof ControllerClass) => {
+            this.controllerBySelector[(c as { options: ControllerOptions }).options.name] = c;
+        });
+    }
+
     // TODO: copy this method to the rendering engine and walk through the template to detect controllers by tag
     // if one controller is detected instanciate within parent controller & execute its change detection within
     // parents change detection. So, to prepare this we would need to create a list like: {[index: CONTROLLER TAG]: ControllerClass}
     private initController() {
-        this.config.controller.map((c: typeof ControllerClass) => {
+        this.mapControllersToIndexList();
+        const res = Array.prototype.slice.call(document.querySelectorAll('*'));
+        res.map(e => {
+            const c = this.getControllerBySelector(e.nodeName.toLowerCase());
+            if (c) {
+                e.id = GeneralUtils.createRandomHash(10);
+                const instance: ControllerClass = new c(this.config.bindings);
+                instance.renderTemplate(e);
+                this.controllerInstances.push(instance);
+            }
+
+        })
+        /*this.config.controller.map((c: typeof ControllerClass) => {
             const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
             res.map(e => {
                 e.id = GeneralUtils.createRandomHash(10);
@@ -67,7 +91,7 @@ export class LoBroModule {
                 instance.renderTemplate(e);
                 this.controllerInstances.push(instance);
             });
-        });
+        });*/
     }
 
     bootStrap() {
