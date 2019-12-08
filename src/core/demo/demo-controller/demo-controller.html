@@ -1,6 +1,9 @@
 <div class="lobroJsWelcome">
         <div class="add-element-form">
-            <input type="text"/> <a href="#" click="this.addItem($event)" class="add-item">Add Item</a>
+            <input input="this.inputValue" type="text"/> <a href="#" click="this.addItem($event)" class="add-item">Add Item</a>
+        </div>
+        <div for="let item of this.todoItems" class="todo-element">
+            <p>{{item.name}}</p>
         </div>
     <!--<div class="header">
         <h1>{{this.versionPlusVersion(this.version, this.version2)}}</h1>

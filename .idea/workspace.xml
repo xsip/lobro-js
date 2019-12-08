@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7139c180-da86-40b1-b871-87cce26cb1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/bindings/click.binding.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/bindings/click.binding.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -86,7 +83,7 @@
           <entry key="html" value="8" />
           <entry key="js" value="1" />
           <entry key="scss" value="2" />
-          <entry key="ts" value="55" />
+          <entry key="ts" value="57" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -94,7 +91,7 @@
           <entry key="HTML" value="8" />
           <entry key="JavaScript" value="1" />
           <entry key="SCSS" value="2" />
-          <entry key="TypeScript" value="55" />
+          <entry key="TypeScript" value="57" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -104,16 +101,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="620" />
+          <entry key="html" value="716" />
           <entry key="scss" value="63" />
-          <entry key="ts" value="8107" />
+          <entry key="ts" value="8271" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="620" />
+          <entry key="HTML" value="716" />
           <entry key="SCSS" value="63" />
-          <entry key="TypeScript" value="8107" />
+          <entry key="TypeScript" value="8271" />
         </counts>
       </usages-collector>
     </session>
@@ -135,14 +132,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+            <state relative-caret-position="180">
+              <caret line="12" column="51" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="51" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="96" column="106" selection-start-line="96" selection-start-column="106" selection-end-line="96" selection-end-column="106" />
             </state>
           </provider>
         </entry>
@@ -196,19 +202,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/demo/header-controller/header-controller.ts">
+        <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="7" column="28" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="28" />
+            <state relative-caret-position="75">
+              <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demojson.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="65" selection-start-line="2" selection-start-column="65" selection-end-line="2" selection-end-column="71" />
+            <state relative-caret-position="170">
+              <caret line="41" column="18" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -222,23 +228,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/demo/user-element/user-element.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>update</find>
       <find>createInst</find>
       <find>updating tem</find>
       <find>appendCh</find>
@@ -267,6 +260,7 @@
       <find>elementContainer</find>
       <find>renderT</find>
       <find>renderTemplate(</find>
+      <find>todoItems</find>
       <find>renderTemplate</find>
     </findStrings>
     <replaceStrings>
@@ -309,7 +303,6 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demojson.ts" />
         <option value="$PROJECT_DIR$/src/core/bindings/if.bindings.ts" />
-        <option value="$PROJECT_DIR$/src/core/bindings/for.bindings.ts" />
         <option value="$PROJECT_DIR$/src/shared/general.utils.ts" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/core/decorators/binding.decorator.ts" />
@@ -330,8 +323,9 @@
         <option value="$PROJECT_DIR$/src/core/decorators/controller.decorator.ts" />
         <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.scss" />
         <option value="$PROJECT_DIR$/src/core/bindings/click.binding.ts" />
-        <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" />
+        <option value="$PROJECT_DIR$/src/core/bindings/for.bindings.ts" />
         <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html" />
+        <option value="$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts" />
       </list>
     </option>
   </component>
@@ -515,7 +509,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125016000" />
+    <option name="totallyTimeSpent" value="126540000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -653,13 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demojson.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="18" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -697,13 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -857,20 +837,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts">
+    <entry file="file://$PROJECT_DIR$/src/core/bindings/for.bindings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="227">
+          <caret line="96" column="106" selection-start-line="96" selection-start-column="106" selection-end-line="96" selection-end-column="106" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="65" selection-start-line="2" selection-start-column="65" selection-end-line="2" selection-end-column="71" />
+        <state relative-caret-position="75">
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demojson.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/demo/demo-controller/demo-controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="51" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

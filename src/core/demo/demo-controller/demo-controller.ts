@@ -10,14 +10,8 @@ import {demoJson} from "./demojson";
     stylesheet: 'demo-controller/demo-controller.scss',
 })
 export class DemoController {
-    version: any = 1;
-    version2: any = 2;
-    showElement = true;
-    versions: { version: number; version2: number; } = {
-        version: 1,
-        version2: 2,
-    };
-    demoJson: {} = demoJson;
+    todoItems: { name: string }[] = [{name: 'test'}];
+    inputValue: string = '';
 
     constructor() {
         // console.log('MAIN CONTROLLER INIT');
@@ -27,8 +21,8 @@ export class DemoController {
     versionPlusVersion = (v1: number, v2: number) => v1 + v2;
 
     async addItem(event: Event) {
-        console.log('BUTTON CLICK FUNC!!');
-        console.log(event);
+        this.todoItems.push({name: this.inputValue});
+        this.inputValue = '';
     }
 
 
