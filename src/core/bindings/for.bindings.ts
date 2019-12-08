@@ -65,8 +65,38 @@ export class ForBindings implements CBinding {
         }
     }
 
-    initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
+    initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
+        let varName: string = '';
 
+        try {
+            varName = evalStr.match('let (.*?) in (.*?)')[1] + GeneralUtils.createRandomHash(4);
+        } catch (e) {
+            throw Error('Eval doens\'t contain for in at ' + evalStr);
+        }
+        evalStr = this.fixEval(evalStr, varName);
+        const indexKey = evalStr.split(' in')[0].split(' ')[1];
+        const completeEvalStr = `
+        for(${evalStr}) {
+            const cpy = templateChild.cloneNode(true);
+            parent.append(cpy);
+            const forCpy = cpy.getAttribute('for');
+            cpy.removeAttribute('for');
+            cpy.removeAttribute('for-child');
+            cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + ${indexKey} + '].');
+            this.removeForChildAttributeToEveryChild(cpy);
+            this.contentBindings.initBinding(cpy);
+            for( let i = 0; i <= cpy.children.length; i++){
+                if(cpy.children[i]) {
+                    this.contentBindings.initBinding(cpy.children[i], true);
+                }
+            }
+            // this.addForChildAttributeToEveryChild(cpy);
+            // cpy.setAttribute('for', forCpy);
+            
+            // cpy.removeAttribute('for-bind');
+        }`;
+
+        eval(completeEvalStr);
     }
 
     initBindingForOf(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
@@ -107,11 +137,12 @@ export class ForBindings implements CBinding {
         this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
         // const nodeCpy = templateChild.cloneNode(true);
         const parent = templateChild.parentNode;
-
         parent.removeChild(templateChild);
 
         if (evalStr.indexOf(' in ') !== -1) {
             // throw Error('[if] binding doesn\'t support element in at' + evalStr);
+            // new
+            this.initBindingForIn(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
 
         } else if (evalStr.indexOf(' of ') !== -1) {
             this.initBindingForOf(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
