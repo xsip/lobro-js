@@ -26,7 +26,7 @@ export class ControllerClass {
     private state: ControllerState;
     public element: HTMLElement;
 
-    constructor(bindings: typeof DecoratedBinding[], controllerHash: string) {
+    constructor(bindings: typeof DecoratedBinding[], public controllerHash: string) {
 
     }
 

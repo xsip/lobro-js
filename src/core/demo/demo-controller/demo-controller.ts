@@ -26,20 +26,9 @@ export class DemoController {
     plusOne = (value: number) => value + 1;
     versionPlusVersion = (v1: number, v2: number) => v1 + v2;
 
-    async buttonClick() {
+    async addItem(event: Event) {
         console.log('BUTTON CLICK FUNC!!');
-        this.showElement = !this.showElement;
-        try {
-            const res: Response = await fetch('https://jsonplaceholder.typicode.com/todos');
-            const data: {id: number;}[] = await res.json();
-            this.demoJson = data;
-            console.log(data);
-            this.version = data[5].id;
-            this.version2 = data[10].id;
-        } catch (e) {
-            this.version = -1;
-            this.version = -2;
-        }
+        console.log(event);
     }
 
 

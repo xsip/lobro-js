@@ -15,4 +15,16 @@ body {
       font-weight: lighter;
     }
   }
+  .add-element-form {
+    input {
+      border: 0px;
+      padding: 4px;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+      outline: none;
+    }
+  }
 }
