@@ -70,9 +70,6 @@ export class LoBroModule {
         });
     }
 
-    // TODO: copy this method to the rendering engine and walk through the template to detect controllers by tag
-    // if one controller is detected instanciate within parent controller & execute its change detection within
-    // parents change detection. So, to prepare this we would need to create a list like: {[index: CONTROLLER TAG]: ControllerClass}
     private initController(element: HTMLElement = document as any) {
         this.mapControllersToIndexList();
         let foundUnrenderedElements: boolean = false;
