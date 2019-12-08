@@ -24,7 +24,7 @@ export class Renderer {
 
         this.elementContainer.innerHTML = this.options.template;
 
-        this.element = this.elementContainer.firstChild as any;
+        this.element = this.elementContainer as any;
         return this.element;
     };
 
