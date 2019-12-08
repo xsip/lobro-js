@@ -11,6 +11,7 @@ import {demoJson} from "./demojson";
 })
 export class DemoController {
     todoItems: { name: string }[] = [{name: 'test'}];
+    todoItems2: string[] = ['test'];
     inputValue: string = '';
 
     constructor() {
@@ -22,6 +23,7 @@ export class DemoController {
 
     async addItem(event: Event) {
         this.todoItems.push({name: this.inputValue});
+        this.todoItems2.push(this.inputValue);
         this.inputValue = '';
     }
 

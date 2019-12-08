@@ -35,8 +35,7 @@ export class ForBindings implements CBinding {
         // this.initBinding(el, hash, evalStr);
     }
 
-    fixEval(evalStr: string, varName: string): string {
-        this[varName] = this.view.evalFromView(evalStr.split('of ')[1]);
+    fixEval(evalStr: string, varName: string, loopType: 'of' | 'in' = 'of'): string {
         evalStr = evalStr.replace('of', 'in');
         evalStr = evalStr.replace(evalStr.split('in ')[1], 'this.' + varName);
         return evalStr;
@@ -67,35 +66,36 @@ export class ForBindings implements CBinding {
 
     initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
         let varName: string = '';
-
         try {
             varName = evalStr.match('let (.*?) in (.*?)')[1] + GeneralUtils.createRandomHash(4);
         } catch (e) {
             throw Error('Eval doens\'t contain for in at ' + evalStr);
         }
+        this[varName] = this.view.evalFromView(evalStr.split('in')[1]);
         evalStr = this.fixEval(evalStr, varName);
         const indexKey = evalStr.split(' in')[0].split(' ')[1];
+        let i = 0;
         const completeEvalStr = `
         for(${evalStr}) {
             const cpy = templateChild.cloneNode(true);
-            parent.append(cpy);
+            parent.parentNode.insertBefore(cpy, parent);
+            cpy.hidden = false;
             const forCpy = cpy.getAttribute('for');
             cpy.removeAttribute('for');
             cpy.removeAttribute('for-child');
-            cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + ${indexKey} + '].');
+            console.log(cpy.innerHTML);
+            cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + i + ']}');
+            
             this.removeForChildAttributeToEveryChild(cpy);
             this.contentBindings.initBinding(cpy);
+            
             for( let i = 0; i <= cpy.children.length; i++){
                 if(cpy.children[i]) {
                     this.contentBindings.initBinding(cpy.children[i], true);
                 }
             }
-            // this.addForChildAttributeToEveryChild(cpy);
-            // cpy.setAttribute('for', forCpy);
-            
-            // cpy.removeAttribute('for-bind');
+            i++;
         }`;
-
         eval(completeEvalStr);
     }
 
@@ -107,12 +107,12 @@ export class ForBindings implements CBinding {
         } catch (e) {
             throw Error('Eval doens\'t contain for of at ' + evalStr);
         }
+        this[varName] = this.view.evalFromView(evalStr.split('of')[1]);
         evalStr = this.fixEval(evalStr, varName);
         const indexKey = evalStr.split(' in')[0].split(' ')[1];
         const completeEvalStr = `
         for(${evalStr}) {
             const cpy = templateChild.cloneNode(true);
-            // parent.append(cpy);
             parent.parentNode.insertBefore(cpy, parent);
             cpy.hidden = false;
             const forCpy = cpy.getAttribute('for');
@@ -126,10 +126,6 @@ export class ForBindings implements CBinding {
                     this.contentBindings.initBinding(cpy.children[i], true);
                 }
             }
-            // this.addForChildAttributeToEveryChild(cpy);
-            // cpy.setAttribute('for', forCpy);
-            
-            // cpy.removeAttribute('for-bind');
         }`;
 
         eval(completeEvalStr);
