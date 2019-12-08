@@ -63,7 +63,15 @@ export class ForBindings implements CBinding {
             }
         }
     }
+    fixAlLAttributes(elem: HTMLElement, itteratorVarName: string, value: string) {
+        for (var i = 0; i < elem.attributes.length; i++) {
+            var attrib = elem.attributes[i];
+            // console.log(attrib.name + " = " + attrib.value);
+            if (attrib.value.indexOf(itteratorVarName) !== -1) {
 
+            }
+        }
+    }
     initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
         let varName: string = '';
         try {
@@ -84,7 +92,7 @@ export class ForBindings implements CBinding {
             cpy.removeAttribute('for');
             cpy.removeAttribute('for-child');
             cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + i + ']}');
-            
+            this.fixAlLAttributes(cpy, ${indexKey},this.${varName}[' + i + ']);
             this.removeForChildAttributeToEveryChild(cpy);
             this.contentBindings.initBinding(cpy);
             

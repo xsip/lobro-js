@@ -41,11 +41,12 @@ export class LoBroModule {
         config.bindings = [
             ...config.bindings,
             // basic bindings, needed to make lobro-js Work
+            ForBindings,
             ContentBindings,
             IfBindings,
             InputBindings,
-            ClickBinding,
-            ForBindings
+
+            ClickBinding
         ] as any;
     }
 

@@ -3,7 +3,7 @@
             <input input="this.inputValue" type="text"/> <a href="#" click="this.addItem($event)" class="add-item">Add Item</a>
         </div>
         <div for="let item in this.todoItems2" class="todo-element">
-            <p>{{item}} {{item}}</p>
+            <p click="console.log({{item}})">{{item}}</p>
         </div>
     <!--<div for="let item of this.todoItems" class="todo-element">
             <p>{{item.name}}</p>
