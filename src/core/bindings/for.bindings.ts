@@ -112,7 +112,9 @@ export class ForBindings implements CBinding {
         const completeEvalStr = `
         for(${evalStr}) {
             const cpy = templateChild.cloneNode(true);
-            parent.append(cpy);
+            // parent.append(cpy);
+            parent.parentNode.insertBefore(cpy, parent);
+            cpy.hidden = false;
             const forCpy = cpy.getAttribute('for');
             cpy.removeAttribute('for');
             cpy.removeAttribute('for-child');
@@ -136,8 +138,9 @@ export class ForBindings implements CBinding {
     initBindingProcedure(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
         this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
         // const nodeCpy = templateChild.cloneNode(true);
-        const parent = templateChild.parentNode;
-        parent.removeChild(templateChild);
+        const parent = templateChild; // .parentNode;
+        templateChild.hidden = true;
+        // parent.removeChild(templateChild);
 
         if (evalStr.indexOf(' in ') !== -1) {
             // throw Error('[if] binding doesn\'t support element in at' + evalStr);
@@ -148,7 +151,6 @@ export class ForBindings implements CBinding {
             this.initBindingForOf(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
             // throw Error('[if] binding doesn\'t contain itteration' + evalStr);
         }
-
     }
 
     evalFromView = (evalStr: string) => {
