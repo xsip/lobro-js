@@ -7,7 +7,7 @@ export class Instanciator {
 
     }
 
-    compiledTemplateToInstance(compiledTemplate: CompiledTemplate, controller: typeof ControllerClass, bindings: typeof DecoratedBinding[], appendTo: HTMLElement): ControllerClass {
+    /*compiledTemplateToInstance(compiledTemplate: CompiledTemplate, controller: typeof ControllerClass, bindings: typeof DecoratedBinding[], appendTo: HTMLElement): ControllerClass {
         let instance: ControllerClass;
         if (compiledTemplate.controllerName === controller.options.name) {
             controller.options.template = compiledTemplate.template;
@@ -18,5 +18,5 @@ export class Instanciator {
 
         return instance;
 
-    }
+    }*/
 }

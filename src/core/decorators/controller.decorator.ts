@@ -20,13 +20,13 @@ type Constructor<T = {}> = new(...args: any[]) => T;
 
 export class ControllerClass {
     public static options: ControllerOptions;
-
+    public renderer: Renderer;
     private renderInElement: HTMLElement;
     // private bindings: DecoratedBinding[];
     private state: ControllerState;
     public element: HTMLElement;
 
-    constructor(bindings: typeof DecoratedBinding[]) {
+    constructor(bindings: typeof DecoratedBinding[], controllerHash: string) {
 
     }
 
@@ -71,10 +71,12 @@ export const Controller = (options: ControllerOptions): any => {
             t: any = target;
             public static template: string = options.template;
             bindings: typeof DecoratedBinding[] = [];
+            controllerHash: string;
 
             constructor(...args: any[]) {
                 super();
                 this.bindings = args[0];
+                this.controllerHash = args[1];
                 this.renderer = new Renderer(this as any, this.bindings, options);
             }
 
@@ -91,7 +93,7 @@ export const Controller = (options: ControllerOptions): any => {
 
             renderTemplate(appendTo: HTMLElement) {
                 this.element = this.renderer.createElement();
-                this.renderer.renderTemplate(appendTo);
+                this.renderer.renderTemplate(appendTo, this.controllerHash);
             }
 
             public createInstance(compiledTemplate: CompiledTemplate, appendTo: HTMLElement): void {

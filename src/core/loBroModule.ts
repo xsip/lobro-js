@@ -31,7 +31,7 @@ export class LoBroModule {
 
     public eventListenerHook: EventListenerHook;
     public promiseHook: PromiseHook;
-    public controllerInstances: any[] = [];
+    public controllerInstances: { [index: string]: ControllerClass } = {};
 
     constructor(public config: ModuleConfig) {
         if (!config.bindings) {
@@ -52,7 +52,10 @@ export class LoBroModule {
     public triggerAllChangeDetections() {
         console.log('triggering detectiion..');
         // this.config.controller.map((c: any) => c.detectChanges());
-        this.controllerInstances.map((c: any) => c.renderer.detectChanges());
+        for (let hash in this.controllerInstances) {
+            this.controllerInstances[hash].renderer.detectChanges();
+        }
+        // this.controllerInstances.map((c: any) => c.renderer.detectChanges());
     }
 
     controllerBySelector: { [index: string]: typeof ControllerClass } = {};
@@ -78,31 +81,31 @@ export class LoBroModule {
             const c = this.getControllerBySelector(e.nodeName.toLowerCase());
 
             if (c && !e.getAttribute('rendered')) {
+                const controllerHash: string = GeneralUtils.createRandomHash();
                 console.log(e.nodeName.toLowerCase(), e);
                 e.setAttribute('rendered', 'true');
                 e.id = GeneralUtils.createRandomHash(10);
-                const instance: ControllerClass = new c(this.config.bindings);
+                const instance: ControllerClass = new c(this.config.bindings, controllerHash);
                 instance.renderTemplate(e);
-                this.controllerInstances.push(instance);
+                this.controllerInstances[controllerHash] = instance;
                 if (e.querySelectorAll(this.controllerNameList.join(','))) {
                     foundUnrenderedElements = true;
                 }
             }
 
-        })
+        });
         if (foundUnrenderedElements) {
             console.log('RE-INIT');
             this.initController(element);
         }
-        /*this.config.controller.map((c: typeof ControllerClass) => {
-            const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
-            res.map(e => {
-                e.id = GeneralUtils.createRandomHash(10);
-                const instance: ControllerClass = new c(this.config.bindings);
-                instance.renderTemplate(e);
-                this.controllerInstances.push(instance);
-            });
-        });*/
+        window['getController'] = (hash: string | HTMLElement) => {
+            if (typeof  hash === "string"){
+                return this.controllerInstances[hash];
+            } else {
+                return this.controllerInstances[hash.getAttribute('controller')];
+            }
+
+        }
     }
 
     bootStrap() {
@@ -119,7 +122,7 @@ export class LoBroModule {
         // this.dumpPreCompiled();
     }
 
-    compilerTest() {
+    /*compilerTest() {
 
         this.config.controller.map((c: typeof ControllerClass) => {
 
@@ -139,13 +142,12 @@ export class LoBroModule {
             });
         })
 
-    }
+    }*/
 
     dumpPreCompiled() {
         console.log('DUMPING');
-        this.controllerInstances.map((c: BasicControllerInstance<any>) => {
-            //console.log(c.bindingInstances);
-            // console.log(c.element.outerHTML);
-        });
+        for (let hash in this.controllerInstances) {
+            // this.controllerInstances[hash].renderer.detectChanges();
+        }
     }
 }

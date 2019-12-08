@@ -69,7 +69,7 @@ export class Renderer {
     }
 
 
-    renderTemplate(appendTo: HTMLElement, module?: LoBroModule) {
+    renderTemplate(appendTo: HTMLElement, controllerHash: string) {
 
         console.log('rendering template');
 
@@ -79,6 +79,10 @@ export class Renderer {
         templateChildren.map((templateChild: HTMLElement) => {
             for (let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
                 this.bindingInstances[key].initBinding(templateChild);
+                if(!templateChild.getAttribute('controller')){
+                    templateChild.setAttribute('controller', controllerHash);
+                }
+
             }
         });
         /*if (module) {
