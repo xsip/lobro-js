@@ -83,7 +83,6 @@ export class ForBindings implements CBinding {
             const forCpy = cpy.getAttribute('for');
             cpy.removeAttribute('for');
             cpy.removeAttribute('for-child');
-            console.log(cpy.innerHTML);
             cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + i + ']}');
             
             this.removeForChildAttributeToEveryChild(cpy);
