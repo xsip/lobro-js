@@ -65,19 +65,11 @@ export class ForBindings implements CBinding {
         }
     }
 
-    initBindingProcedure(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
-        this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
-        // const nodeCpy = templateChild.cloneNode(true);
-        const parent = templateChild.parentNode;
+    initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
 
-        parent.removeChild(templateChild);
+    }
 
-        if (evalStr.indexOf(' in ') !== -1) {
-            throw Error('[if] binding doesn\'t support element in at' + evalStr);
-        } else if (evalStr.indexOf(' of ') === -1) {
-            throw Error('[if] binding doesn\'t contain itteration' + evalStr);
-        }
-
+    initBindingForOf(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
         let varName: string = '';
 
         try {
@@ -109,6 +101,23 @@ export class ForBindings implements CBinding {
         }`;
 
         eval(completeEvalStr);
+    }
+
+    initBindingProcedure(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true): void {
+        this.state.setCustomDataForHash(hash, {original: templateChild, parent: templateChild.parentNode});
+        // const nodeCpy = templateChild.cloneNode(true);
+        const parent = templateChild.parentNode;
+
+        parent.removeChild(templateChild);
+
+        if (evalStr.indexOf(' in ') !== -1) {
+            // throw Error('[if] binding doesn\'t support element in at' + evalStr);
+
+        } else if (evalStr.indexOf(' of ') !== -1) {
+            this.initBindingForOf(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
+            // throw Error('[if] binding doesn\'t contain itteration' + evalStr);
+        }
+
     }
 
     evalFromView = (evalStr: string) => {
