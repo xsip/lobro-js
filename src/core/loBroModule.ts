@@ -61,8 +61,11 @@ export class LoBroModule {
         return this.controllerBySelector[selector];
     }
 
+    controllerNameList: string[] = [];
+
     mapControllersToIndexList() {
         this.config.controller.map((c: typeof ControllerClass) => {
+            this.controllerNameList.push((c as { options: ControllerOptions }).options.name);
             this.controllerBySelector[(c as { options: ControllerOptions }).options.name] = c;
         });
     }
@@ -72,17 +75,28 @@ export class LoBroModule {
     // parents change detection. So, to prepare this we would need to create a list like: {[index: CONTROLLER TAG]: ControllerClass}
     private initController(element: HTMLElement = document as any) {
         this.mapControllersToIndexList();
-        const res = Array.prototype.slice.call(element.querySelectorAll('*'));
+        let foundUnrenderedElements: boolean = false;
+        const res = Array.prototype.slice.call(element.querySelectorAll(this.controllerNameList.join(',')));
         res.map(e => {
             const c = this.getControllerBySelector(e.nodeName.toLowerCase());
-            if (c) {
+
+            if (c && !e.getAttribute('rendered')) {
+                console.log(e.nodeName.toLowerCase(), e);
+                e.setAttribute('rendered', 'true');
                 e.id = GeneralUtils.createRandomHash(10);
                 const instance: ControllerClass = new c(this.config.bindings);
                 instance.renderTemplate(e);
                 this.controllerInstances.push(instance);
+                if (e.querySelectorAll(this.controllerNameList.join(','))) {
+                    foundUnrenderedElements = true;
+                }
             }
 
         })
+        if (foundUnrenderedElements) {
+            console.log('RE-INIT');
+            this.initController(element);
+        }
         /*this.config.controller.map((c: typeof ControllerClass) => {
             const res = Array.prototype.slice.call(document.querySelectorAll((c as { options: ControllerOptions }).options.name));
             res.map(e => {
