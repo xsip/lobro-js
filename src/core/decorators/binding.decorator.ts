@@ -75,6 +75,7 @@ export const Binding = (options: BindingOptions): any => {
 
         class BindingDec extends target implements DecoratedBinding {
             view: View;
+            debug: boolean = true;
             viewElement: HTMLElement;
             state: BindingState;
             config: BindingOptions;
@@ -91,7 +92,6 @@ export const Binding = (options: BindingOptions): any => {
                 this.name = this.fixedSelector;
                 this.bindingKey = this.fixedSelector + '-bind';
                 BindingDec.bindingName = this.fixedSelector;
-
             }
 
             hasBinding(element: HTMLElement) {
@@ -106,7 +106,9 @@ export const Binding = (options: BindingOptions): any => {
                         this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.fixedSelector));
                         super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
                         // TODO: remove on error ases with other bindings!!
-                        templateChild.removeAttribute(this.fixedSelector);
+                        if (!this.debug) {
+                            templateChild.removeAttribute(this.fixedSelector);
+                        }
                     }
                 }
             }
