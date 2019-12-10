@@ -63,15 +63,20 @@ export class ForBindings implements CBinding {
             }
         }
     }
-    fixAlLAttributes(elem: HTMLElement, itteratorVarName: string, value: string) {
-        for (var i = 0; i < elem.attributes.length; i++) {
-            var attrib = elem.attributes[i];
-            // console.log(attrib.name + " = " + attrib.value);
-            if (attrib.value.indexOf(itteratorVarName) !== -1) {
 
+    fixAlLAttributes(element: HTMLElement, itteratorVarName: string, value: string) {
+        Array.prototype.slice.call(element.querySelectorAll('*')).map(elem => {
+
+
+            for (var i = 0; i < elem.attributes.length; i++) {
+                var attrib = elem.attributes[i];
+                // console.log(attrib.name + " = " + attrib.value);
+                if (attrib.value.indexOf(itteratorVarName) !== -1) {
+                }
             }
-        }
+        })
     }
+
     initBindingForIn(templateChild: HTMLElement, hash: string, evalStr: string, setCstmData: boolean = true, parent: HTMLElement): void {
         let varName: string = '';
         try {
