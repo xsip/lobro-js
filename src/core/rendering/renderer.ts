@@ -68,6 +68,22 @@ export class Renderer {
         window['state'] = this.state;
     }
 
+    instanciateChild(templateChild: HTMLElement, additionalCall: () => void, controllerHash?: string) {
+        for (let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
+            // TODO: fix for & click binding issues =>
+            // when for gets triggered, the templatechild element gets invalid, since for spawns a few new elements
+            // to fix that it would be neccesary to first go through for bindings and then the rest OR pass the click
+            // binder instance to for and execute it manually!
+            this.bindingInstances[key].initBinding(templateChild, controllerHash);
+            additionalCall();
+        }
+    }
+
+    setControllerHash(templateChild: HTMLElement, controllerHash: string) {
+        if (!templateChild.getAttribute('controller')) {
+            templateChild.setAttribute('controller', controllerHash);
+        }
+    }
 
     renderTemplate(appendTo: HTMLElement, controllerHash: string) {
 
@@ -77,17 +93,9 @@ export class Renderer {
         let templateChildren = Array.prototype.slice.call(this.elementContainer.querySelectorAll('*'));
 
         templateChildren.map((templateChild: HTMLElement) => {
-            for (let key in this.bindingInstances) { // .map((binding: _BindingClass) => {
-                // TODO: fix for & click binding issues =>
-                // when for gets triggered, the templatechild element gets invalid, since for spawns a few new elements
-                // to fix that it would be neccesary to first go through for bindings and then the rest OR pass the click
-                // binder instance to for and execute it manually!
-                this.bindingInstances[key].initBinding(templateChild);
-                if(!templateChild.getAttribute('controller')){
-                    templateChild.setAttribute('controller', controllerHash);
-                }
-
-            }
+            this.instanciateChild(templateChild, () => {
+                this.setControllerHash(templateChild, controllerHash);
+            });
         });
         /*if (module) {
             module.config.controller.map((c: typeof ControllerClass) => {

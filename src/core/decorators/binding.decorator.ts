@@ -22,7 +22,7 @@ export abstract class DecoratedBinding {
     name: string;
     static bindingName: string;
 
-    public initBinding(templateChild: HTMLElement): void {
+    public initBinding(templateChild: HTMLElement, controllerHash?: string): void {
     };
 
     public updateSchedule(): void {
@@ -46,7 +46,7 @@ export abstract class CBinding {
     config: BindingOptions;
 
 
-    public initBinding(templateChild: HTMLElement, hash?: string, evalStr?: string): void {
+    public initBinding(templateChild: HTMLElement, hash?: string, evalStr?: string, controllerHash?: string): void {
     };
 
     /*public updateSchedule(): void {
@@ -98,13 +98,13 @@ export const Binding = (options: BindingOptions): any => {
                 return element.getAttribute(this.fixedSelector + '-bind') ? true : false;
             }
 
-            initBinding(templateChild: HTMLElement): void {
+            initBinding(templateChild: HTMLElement, controllerHash?: string): void {
                 if (!this.hasBinding(templateChild)) {
                     if (templateChild.matches(this.selector)) {
                         const elementHash: string = GeneralUtils.createRandomHash(5);
                         templateChild.setAttribute(this.bindingKey, elementHash);
                         this.state.saveEvalForHash(elementHash, templateChild.getAttribute(this.fixedSelector));
-                        super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash));
+                        super.initBinding(templateChild, elementHash, this.state.getEvalForHash(elementHash), controllerHash);
                         // TODO: remove on error ases with other bindings!!
                         if (!this.debug) {
                             templateChild.removeAttribute(this.fixedSelector);
