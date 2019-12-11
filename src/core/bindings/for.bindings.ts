@@ -36,7 +36,7 @@ export class ForBindings implements CBinding {
         // this.initBinding(el, hash, evalStr);
     }
 
-    fixEval(evalStr: string, varName: string, loopType: 'of' | 'in' = 'of'): string {
+    fixEval = (evalStr: string, varName: string, loopType: 'of' | 'in' = 'of'): string => {
         evalStr = evalStr.replace('of', 'in');
         evalStr = evalStr.replace(evalStr.split('in ')[1], 'this.view.' + varName);
         return evalStr;
@@ -101,29 +101,28 @@ export class ForBindings implements CBinding {
         evalStr = this.fixEval(evalStr, varName);
         const indexKey = evalStr.split(' in')[0].split(' ')[1];
         this.currentI = 0;
-        const completeEvalStr = `
-        for(${evalStr}) {
-            const cpy = this.currentTemplateChild.cloneNode(true);
+        for (let index in this.view[varName]) {
+            const cpy: HTMLElement = this.currentTemplateChild.cloneNode(true) as any;
             this.currentTemplateChild.parentNode.insertBefore(cpy, this.currentTemplateChild);
             cpy.hidden = false;
             const forCpy = cpy.getAttribute('for');
             cpy.removeAttribute('for');
             cpy.removeAttribute('for-child');
-            cpy.innerHTML = cpy.innerHTML.replace(/${indexKey}\./g, 'this.${varName}[' + this.currentI + ']}');
-            
+            cpy.innerHTML = cpy.innerHTML.replace(new RegExp(indexKey, 'g'), `this.${varName}[${this.currentI}]`);
+
             this.removeForChildAttributeToEveryChild(cpy);
             // this.contentBindings.initBinding(cpy);
-            
-            for( let i = 0; i <= cpy.children.length; i++){
-                if(cpy.children[i]) {
-                this.fixAlLAttributes(cpy.children[i], ${indexKey},'this.${varName}[' + this.currentI + ']}');
-                    this.instanciateChild(cpy.children[i]);
+
+            for (let i = 0; i <= cpy.children.length; i++) {
+                if (cpy.children[i]) {
+                    this.fixAlLAttributes(cpy.children[i] as HTMLElement, indexKey, 'this.${varName}[' + this.currentI + ']}');
+                    this.instanciateChild(cpy.children[i] as HTMLElement);
                     // this.contentBindings.initBinding(cpy.children[i]);
                 }
             }
             this.currentI++;
-        }`;
-        this.evalFromView(completeEvalStr);
+        }
+        ;
     }
 
 
@@ -174,7 +173,7 @@ export class ForBindings implements CBinding {
         if (evalStr.indexOf(' in ') !== -1) {
             // throw Error('[if] binding doesn\'t support element in at' + evalStr);
             // new
-            this.initBindingForIn(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
+            this.initBindingForIn.bind({...this, ...this.view})(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
 
         } else if (evalStr.indexOf(' of ') !== -1) {
             this.initBindingForOf(templateChild, hash, evalStr, setCstmData, parent as HTMLElement);
