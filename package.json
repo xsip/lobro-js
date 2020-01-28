@@ -1,7 +1,7 @@
 {
   "name": "lobroJs",
   "version": "1.0.0",
-  "description": "build api from dev tools scraper",
+  "description": "simple JS framework implementation",
   "module": "es6",
   "main": "index.js",
   "scripts": {
